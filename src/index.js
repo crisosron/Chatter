@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Chatter from './Chatter';
+import Chatter from './client/components/Chatter';
 import * as serviceWorker from './serviceWorker';
 import openSocket from "socket.io-client";
 
