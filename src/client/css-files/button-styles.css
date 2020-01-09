@@ -1,0 +1,23 @@
+button{
+    margin: 0 auto;
+    width: 180px;
+    height: 80px;
+    font-size: 20px;
+    color: white;
+    border:  none;
+    transition-duration: 0.4s;
+}
+
+.generalButton{
+    background-color: #fcd581;
+}
+
+button:hover{
+    filter: brightness(100%);
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+button:focus{
+    outline: none;
+}

@@ -13,9 +13,9 @@ let mainWindow;
 
 function createWindow() {
     // Create the browser window.
-    mainWindow = new BrowserWindow({width: 1500, height: 1000});
+    mainWindow = new BrowserWindow({width: 1500, height: 1000, minWidth: 1000, minHeight: 800});
 
-    // and load the index.html of the app.
+    // and load the React part of the app.
     mainWindow.loadURL('http://localhost:3000');
 
     // Open the DevTools.
