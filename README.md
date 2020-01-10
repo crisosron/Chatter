@@ -1,7 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 # Chatter
-This is a desktop chat application built using the [Electron](https://electronjs.org/) framework which serves as a wrapper for the application. [React](https://electronjs.org/) is used for building the front end, while [Socket.IO](https://socket.io/) is used to achieve communication between clients and the server.
+This is a desktop chat application built using the [Electron](https://electronjs.org/) framework which serves as a wrapper for the application. [React](https://electronjs.org/) is used for building the front end, while [Socket.IO](https://socket.io/) is used to achieve realtime communication between clients and the server, while also enabling the event-based nature of the application. [MongoDB](https://www.mongodb.com/) is also used as the database platform to manage some of the information related to the application, such as registered users and groups.
 
 # Development Notes
 ## Setting up Electron with React
@@ -18,9 +18,8 @@ React router is used to enable the application to be a multi-page application wi
 
 ## Running the application in a development context
 To run the application, run the following commands in **exact order**
- 1. cd src/server
- 2. node server - This will run the server
- 3. (In a new CLI tab) npm start - This will run the start script generated via create-react-app
- 4. (In a new CLI Tab) npm run electron - This will run the electron component of the application
+ 1. `npm run server` - This will start the server, as well as the connection to the MongoDB database
+ 2. (In a new CLI tab) `npm start` - This will run the start script generated via create-react-app
+ 3. (In a new CLI Tab) `npm run electron` - This will run the electron component of the application
 
 
