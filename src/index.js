@@ -5,7 +5,7 @@ import Chatter from './client/components/Chatter';
 import * as serviceWorker from './serviceWorker';
 import openSocket from "socket.io-client";
 
-const socket = openSocket("http://localhost:8000");
+const socket = openSocket("http://localhost:" + process.env.SERVER_PORT);
 export default socket;
 ReactDOM.render(<Chatter />, document.getElementById('root'));
 

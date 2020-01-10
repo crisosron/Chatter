@@ -1,7 +1,8 @@
-const SERVER_PORT_NUM = 8000;
+require("dotenv").config();
+
 let io = require("socket.io")();
-io.listen(SERVER_PORT_NUM);
-console.log("Server listening on port number: ", SERVER_PORT_NUM);
+io.listen(process.env.SERVER_PORT);
+console.log("Server listening on port number: ", process.env.SERVER_PORT);
 
 io.on("connection", clientSocket => {
     console.log("Client connection detected: ", clientSocket.id);
