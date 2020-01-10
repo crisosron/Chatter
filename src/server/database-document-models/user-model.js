@@ -28,4 +28,6 @@ const userSchema = new Schema({
     friends: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
 }, {timestamps: true});
 
-module.exports = userSchema;
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;
