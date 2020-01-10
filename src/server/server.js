@@ -1,5 +1,4 @@
-require("dotenv").config();
-
+require('dotenv/config');
 let io = require("socket.io")();
 io.listen(process.env.SERVER_PORT);
 console.log("Server listening on port number: ", process.env.SERVER_PORT);
