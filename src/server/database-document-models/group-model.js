@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const userSchema = require("./user-model");
+const {userSchema} = require("./user-model");
 const Schema = mongoose.Schema;
 
 const groupSchema = new Schema({
@@ -15,4 +15,4 @@ const groupSchema = new Schema({
 
 const Group = mongoose.model('Group', groupSchema);
 
-module.exports = Group;
+module.exports = {Group, groupSchema};

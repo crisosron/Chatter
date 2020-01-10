@@ -1,4 +1,5 @@
 require('dotenv/config');
+const {User} = require('./database-document-models/user-model');
 const mongoose = require("mongoose");
 
 // Server setup
@@ -8,10 +9,20 @@ console.log("Server listening on port number: ", process.env.SERVER_PORT);
 
 // Establishing connection with mongo db server
 mongoose.connect(process.env.MONGO_DB_URI, {useNewUrlParser: true, useUnifiedTopology: true});
-mongoose.connection.once("open", () => {
+let dbConnection = mongoose.connection;
+dbConnection.once("open", () => {
     console.log("Succesfully established a connection with MongoDB database");
 });
 
 io.on("connection", clientSocket => {
-    console.log("Client connection detected: ", clientSocket.id);
+    clientSocket.on('register-user', (data) => {
+        console.log(`${clientSocket.id} requestd to register a user with the following data: ${data.userName} + ${data.password} + ${data.email}`);
+        let newUser = new User({
+            userName: data.userName,
+            password: data.password,
+            email: data.email
+        });
+        
+        newUser.save();
+    });
 });
