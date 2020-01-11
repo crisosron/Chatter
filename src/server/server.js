@@ -13,6 +13,6 @@ let dbConnection = new DatabaseConnection();
 
 io.on("connection", clientSocket => {
     clientSocket.on(REGISTER_EVENTS.REQUEST_REGISTRATION, data => {
-        RegistrationOperations.registerUser(dbConnection, data);
+        RegistrationOperations.registerUser(clientSocket, dbConnection, data);
     });
 });

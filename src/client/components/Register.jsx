@@ -5,8 +5,22 @@ import REGISTER_EVENTS from "../../events/register-events"
 export default class Register extends Component{
     constructor(props){
         super(props);
+        this.initServerListening();
         this.state = {
+            redirectToChat: false
         }
+    }
+
+    initServerListening(){
+        socket.on(REGISTER_EVENTS.REGISTRATION_DENIED, data => {
+            alert(data.message);
+        });
+
+        socket.on(REGISTER_EVENTS.REGISTRATION_SUCCESSFUL, () => {
+            this.setState({
+                redirectToChat: true
+            });
+        })
     }
 
     handleRegisterClicked = () => {
