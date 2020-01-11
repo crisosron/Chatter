@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../css-files/login-register-styles.css"
 import socket from "../../index"
+import REGISTER_EVENTS from "../../events/register-events"
 export default class Register extends Component{
     constructor(props){
         super(props);
@@ -12,7 +13,7 @@ export default class Register extends Component{
         let userName = document.getElementById("userNameInputField").value;
         let password = document.getElementById("passwordInputField").value;
         let email = document.getElementById("emailInputField").value
-        socket.emit("register-user", {
+        socket.emit(REGISTER_EVENTS.REQUEST_REGISTRATION, {
             userName: userName,
             password: password,
             email: email
