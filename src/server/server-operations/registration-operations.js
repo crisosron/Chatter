@@ -43,6 +43,8 @@ class RegistrationOperations{
 
                 // Storing the new User document to the database
                 newUser.save();
+
+                clientSocket.emit(REGISTER_EVENTS.REGISTRATION_SUCCESSFUL);
             })
         });
     }

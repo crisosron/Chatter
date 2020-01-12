@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "../css-files/login-register-styles.css"
 import socket from "../../index"
+import {store} from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
 import REGISTER_EVENTS from "../../events/register-events"
 export default class Register extends Component{
     constructor(props){
@@ -13,12 +15,36 @@ export default class Register extends Component{
 
     initServerListening(){
         socket.on(REGISTER_EVENTS.REGISTRATION_DENIED, data => {
-            alert(data.message);
+            // TODO: Find a better more reusable way of generating notifications - Generate them in the server then send them here?
+            store.addNotification({
+                title: "Registration Denied",
+                message: data.message,
+                type: "danger",
+                insert: "top",
+                container: "bottom-right",
+                animationIn: ["animated", "fadeIn"],
+                animationOut: ["animated", "fadeOut"],
+                dismiss: {
+                    duration: 5000,
+                },
+            });
         });
 
         socket.on(REGISTER_EVENTS.REGISTRATION_SUCCESSFUL, () => {
-            this.setState({
-                redirectToChat: true
+            store.addNotification({
+                title: "Succesfuly Registered",
+                message: "Please wait to be redirected",
+                type: "success",
+                insert: "top",
+                container: "bottom-right",
+                animationIn: ["animated", "fadeIn"],
+                animationOut: ["animated", "fadeOut"],
+                dismiss: {
+                    duration: 5000,
+                },
+                onRemoval: (id, removedBy) => {
+                    this.setState({redirectToChat: true});
+                }
             });
         })
     }
