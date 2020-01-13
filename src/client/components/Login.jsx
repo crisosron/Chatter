@@ -5,6 +5,7 @@ import socket from "../../index";
 import {store} from "react-notifications-component"
 import "react-notifications-component/dist/theme.css";
 import LOGIN_EVENTS from "../../events/login-events";
+import {Redirect} from "react-router-dom";
 export default class Login extends Component{
     constructor(props){
         super(props);
@@ -40,6 +41,16 @@ export default class Login extends Component{
     }
 
     render(){
+        if(this.state.redirectToChat){
+            return (
+                <Redirect push to={{
+                    pathname: "/chat",
+                    state: {
+                        //TODO: Insert initial state data in here
+                    }
+                }} />
+            );
+        }
         return(
         <div>
             <div id="centerWrapper">

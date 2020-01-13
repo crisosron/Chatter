@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "../css-files/chat-divs.css"
 export default class Chat extends Component{
     constructor(props){
         super(props);
@@ -7,8 +8,11 @@ export default class Chat extends Component{
 
     render(){
         return(
-        <div>
-            <h1>Chat page</h1>
+        <div id="mainWrapper">
+            <div id="sideBar">
+            </div>
+            <div id="chatPane">
+            </div>
         </div>
         );
     }

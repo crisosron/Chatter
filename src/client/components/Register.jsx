@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../css-files/login-register-styles.css"
 import socket from "../../index"
 import {store} from "react-notifications-component";
+import {Redirect} from "react-router-dom";
 import "react-notifications-component/dist/theme.css";
 import REGISTER_EVENTS from "../../events/register-events"
 export default class Register extends Component{
@@ -40,6 +41,16 @@ export default class Register extends Component{
     }
 
     render(){
+        if(this.state.redirectToChat){
+            return (
+                <Redirect push to={{
+                    pathname: "/chat",
+                    state: {
+                        //TODO: Insert initial state data in here
+                    }
+                }} />
+            );
+        }
         return(
         <div>
             <div id="centerWrapper">
