@@ -16,33 +16,14 @@ export default class Register extends Component{
     initServerListening(){
         socket.on(REGISTER_EVENTS.REGISTRATION_DENIED, data => {
             // TODO: Find a better more reusable way of generating notifications - Generate them in the server then send them here?
-            store.addNotification({
-                title: "Registration Denied",
-                message: data.message,
-                type: "danger",
-                insert: "top",
-                container: "bottom-right",
-                animationIn: ["animated", "fadeIn"],
-                animationOut: ["animated", "fadeOut"],
-                dismiss: {
-                    duration: 5000,
-                },
-            });
+            store.addNotification(data.notification);
         });
 
-        socket.on(REGISTER_EVENTS.REGISTRATION_SUCCESSFUL, () => {
+        socket.on(REGISTER_EVENTS.REGISTRATION_SUCCESSFUL, data => {
             store.addNotification({
-                title: "Succesfuly Registered",
-                message: "Please wait to be redirected",
-                type: "success",
-                insert: "top",
-                container: "bottom-right",
-                animationIn: ["animated", "fadeIn"],
-                animationOut: ["animated", "fadeOut"],
-                dismiss: {
-                    duration: 5000,
-                },
+                ...data.notification,
                 onRemoval: (id, removedBy) => {
+                    console.log("Notification removed");
                     this.setState({redirectToChat: true});
                 }
             });
@@ -72,7 +53,7 @@ export default class Register extends Component{
                     <input type="password" placeholder="Password" id="passwordInputField"></input>
                     <input type="text" placeholder="Email" id="emailInputField"></input>
                     <p>Already have an account? <a href="/">Login</a></p>
-                    <button class="generalButton" onClick={this.handleRegisterClicked}>Register</button>
+                    <button className="generalButton" onClick={this.handleRegisterClicked}>Register</button>
                 </div>
 
                 {/* Title Div */}

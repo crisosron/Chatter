@@ -1,4 +1,5 @@
 const {User} = require("../database-document-models/user-model");
+const ServerOperationsUtilities = require("./server-operations-utilities");
 const REGISTER_EVENTS = require("../../events/register-events");
 class RegistrationOperations{
 
@@ -8,7 +9,6 @@ class RegistrationOperations{
      * @param clientSocket {Object} - Socket of the client that requested the registration of a new user
      * @param dbConnection {DatabaseConnection} - Connection to the database
      * @param data {Object} - An object passed through socket.io events. For this method, data should include userName, email and password
-     * 
     */
     static registerUser(clientSocket, dbConnection, data){
 
@@ -19,8 +19,9 @@ class RegistrationOperations{
         // func that is passed in as a parameter can be called within the callback function used inside findOne with the results of the query
         dbConnection.documentExistsInCollection("users", {userName: data.userName}, userNameExists => {
             if(userNameExists) {
+                
                 clientSocket.emit(REGISTER_EVENTS.REGISTRATION_DENIED, {
-                    message: "Username already exists"
+                    notification: ServerOperationsUtilities.createNotification("danger", "Registration Denied", "Username already exists")
                 });
                 return;
             }
@@ -29,7 +30,7 @@ class RegistrationOperations{
             dbConnection.documentExistsInCollection("users", {email: data.email}, emailExists => {
                 if(emailExists){
                     clientSocket.emit(REGISTER_EVENTS.REGISTRATION_DENIED, {
-                        message: "Email already in use"
+                        notification: ServerOperationsUtilities.createNotification("danger", "Registration Denied", "Email is already in use")
                     });
                     return;
                 }
@@ -44,7 +45,9 @@ class RegistrationOperations{
                 // Storing the new User document to the database
                 newUser.save();
 
-                clientSocket.emit(REGISTER_EVENTS.REGISTRATION_SUCCESSFUL);
+                clientSocket.emit(REGISTER_EVENTS.REGISTRATION_SUCCESSFUL, {
+                    notification: ServerOperationsUtilities.createNotification("success", "Registration Succesful", "Please wait to be redirected")
+                });
             })
         });
     }
