@@ -15,7 +15,6 @@ export default class Register extends Component{
 
     initServerListening(){
         socket.on(REGISTER_EVENTS.REGISTRATION_DENIED, data => {
-            // TODO: Find a better more reusable way of generating notifications - Generate them in the server then send them here?
             store.addNotification(data.notification);
         });
 
@@ -23,7 +22,6 @@ export default class Register extends Component{
             store.addNotification({
                 ...data.notification,
                 onRemoval: (id, removedBy) => {
-                    console.log("Notification removed");
                     this.setState({redirectToChat: true});
                 }
             });

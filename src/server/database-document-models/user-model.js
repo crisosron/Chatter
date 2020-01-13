@@ -9,7 +9,7 @@ const userSchema = new Schema({
         required: true,
         type: String,
         trim: true,
-        minlength: 2
+        minlength: 2,
     },
 
     password: {

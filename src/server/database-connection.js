@@ -16,6 +16,7 @@ class DatabaseConnection{
      * @param collectionName {String} - Name of the collection to find the document in
      * @param query {Object} - Query object (using MongoDB)
      * @param cb {Function} - A calllback function that should be called with the results of this function
+     * //TODO: Refactor this to 'findDocumentInCollection'
     */
     documentExistsInCollection(collectionName, query, cb){
         const collection = this._dbConnection.collection(collectionName);
