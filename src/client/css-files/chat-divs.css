@@ -14,3 +14,33 @@
     flex: 5;
     background-color: #fff8e8;
 }
+
+/* TODO: Move these styles into a sidebar.css file */
+#toggleSwitch, #searchBar, #communicationEntities, #settings{
+    width: 100%;
+    margin: auto;
+    margin-bottom: 2%;
+}
+
+#toggleSwitch, #settings{
+    height: 5%;
+}
+
+#toggleSwitch{
+    border: 1px solid black;
+    margin-top: 2%;
+}
+
+#searchBar{
+    height: 3%;
+    border: 1px solid green;
+}
+
+#communicationEntities{
+    height: 83.3%;
+    border: 1px solid red;
+}
+
+#settings{
+    border: 1px solid yellow;
+}

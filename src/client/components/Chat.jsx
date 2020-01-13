@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../css-files/chat-divs.css"
+import SideBar from "./SideBar"
 export default class Chat extends Component{
     constructor(props){
         super(props);
@@ -9,8 +10,7 @@ export default class Chat extends Component{
     render(){
         return(
         <div id="mainWrapper">
-            <div id="sideBar">
-            </div>
+            <SideBar />
             <div id="chatPane">
             </div>
         </div>
