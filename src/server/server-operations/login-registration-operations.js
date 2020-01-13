@@ -1,7 +1,9 @@
 const {User} = require("../database-document-models/user-model");
 const ServerOperationsUtilities = require("./server-operations-utilities");
 const REGISTER_EVENTS = require("../../events/register-events");
-class RegistrationOperations{
+const LOGIN_EVENTS = require("../../events/login-events");
+
+class LoginRegistrationOperations{
 
     /**
      * Registers a new user by adding them to the database. Performs precondition checks on whether or not the supplied details are already
@@ -51,6 +53,28 @@ class RegistrationOperations{
             })
         });
     }
+
+    /**
+     * Logs a client in by checking their supplied details against the database
+     * @param clientSocket {Object} - Socket of the client that issued the login request
+     * @param dbConnection {DatabaseConnection} - Connection to the database
+     * @param data {Object} - Object passed through socket.io events. Should contain userName and password properties
+    */
+    static login(clientSocket, dbConnection, data){
+        dbConnection.documentExistsInCollection("users", {userName: data.userName, password: data.password}, userExists => {
+            if(userExists){
+                clientSocket.emit(LOGIN_EVENTS.LOGIN_SUCCESFUL, {
+                    notification: ServerOperationsUtilities.createNotification("success", "Login Succesful", "Please wait to be redirected")                  
+                });
+                return;
+            }
+
+            clientSocket.emit(LOGIN_EVENTS.LOGIN_DENIED, {
+                notification: ServerOperationsUtilities.createNotification("danger", "Login Denied", "Please check your login credentials")
+            });
+            return;
+        });
+    }
 }
 
-module.exports = RegistrationOperations;
+module.exports = LoginRegistrationOperations;
