@@ -14,7 +14,7 @@ export default function SideBar(props){
     return(
         <div id = "sideBar">
             {/* TODO: Insert actual react components in here instead of just divs */}
-           <ToggleSwitch id="friendGroupToggleSwitch" mainColor="#fcd581" secondaryColor="#454955" borderColor="#454955" style={toggleSwitchStyles} options={["Friends", "Groups"]}/>
+           <ToggleSwitch id="friendGroupToggleSwitch" mainColor="#fff8e8" secondaryColor="#454955" style={toggleSwitchStyles} options={["Friends", "Groups"]}/>
             <div id="searchBar">
             </div>
             <div id="communicationEntities">

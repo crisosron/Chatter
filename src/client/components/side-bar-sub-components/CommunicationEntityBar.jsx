@@ -6,7 +6,7 @@ export default function CommunicationEntityBar(props){
             {/* TODO: Convert to use flexbox for beter resolution scaling? */}
             <div className="displayImageDiv verticallyCenteredRelativeToParent"></div>
             <div className="communicationEntityContentDiv verticallyCenteredRelativeToParent">
-            <h2>{props.children}</h2>
+                <h2>{props.children}</h2>
             </div>
         </div>
     );
