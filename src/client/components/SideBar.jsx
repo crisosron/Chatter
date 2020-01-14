@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react"
 import ToggleSwitch from "./side-bar-sub-components/ToggleSwitch"
+import CommunicationEntityBar from "./side-bar-sub-components/CommunicationEntityBar"
 export default function SideBar(props){
+    const testCommEntities = ["First", "Second", "Third", "Fourth"];
 
     // Custom styling for the toggle switch
     const toggleSwitchStyles = {
@@ -16,6 +18,9 @@ export default function SideBar(props){
             <div id="searchBar">
             </div>
             <div id="communicationEntities">
+                {testCommEntities.map((value, index) => {
+                    return <CommunicationEntityBar key={value.toLowerCase() + "communicationEntityBar"}>{value}</CommunicationEntityBar>
+                })}
             </div>
             <div id="settings">
             </div>
