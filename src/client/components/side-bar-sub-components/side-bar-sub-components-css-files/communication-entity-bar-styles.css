@@ -39,6 +39,9 @@
     transform: translateY(-50%);
 }
 
+.communicationEntityContentDiv h2{
+    font-size: 1vw;
+}
 
 
 
