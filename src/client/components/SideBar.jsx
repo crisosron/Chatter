@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react"
 import ToggleSwitch from "./side-bar-sub-components/ToggleSwitch"
 import CommunicationEntityBar from "./side-bar-sub-components/CommunicationEntityBar"
 export default function SideBar(props){
-    const testCommEntities = ["First", "Second", "Third", "Fourth"];
+    const testCommEntities = ["FirstUsername", "SecondUsername", "ThirdUsername", "FourthUsername"];
 
     // Custom styling for the toggle switch
     const toggleSwitchStyles = {

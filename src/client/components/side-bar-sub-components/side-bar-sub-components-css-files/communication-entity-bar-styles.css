@@ -3,6 +3,7 @@
     height: 10%;
     margin: 0;
     border: 1px solid black;
+    transition: 0.4s linear;
 }
 
 .communicationEntityDiv:hover{
@@ -21,10 +22,12 @@
 }
 
 .communicationEntityContentDiv{
-    border: 1px solid black;
     width: 60%;
     height: 70%;
     float: left;
+    display: flex;
+    justify-content: center ;
+    align-items: center;
 }
 
 /* Vertically centers the div */
