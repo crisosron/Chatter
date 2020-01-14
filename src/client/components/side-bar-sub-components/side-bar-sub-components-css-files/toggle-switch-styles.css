@@ -1,10 +1,10 @@
+/* Rule sets that go here indicate the mandatory styling of each ToggleSwitch component */
 .optionDiv{
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: 0.4s linear;
-    outline: 1px solid black;
 }
 
 .optionDiv:hover{
@@ -18,7 +18,5 @@
 }
 
 .selectedOptionDiv {
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
     box-shadow: 0 0 100px 100px rgba(0, 0, 0, 0.1) inset;
 }

@@ -5,12 +5,15 @@ export default function ToggleSwitch(props){
 
     // TODO: Need to have defaults
     const wrapperDivStyle = {
-        ...props.style,
+        ...props.style, // Can contain width, height and margin styling - If these are not provided, then these rules do not have a value
+        backgroundColor: props.mainColor,
+        color: props.secondaryColor,
         display: "flex", // Flexbox display is mandatory for this component
     };
 
-    const optionBorder = {
-        borderRight: "1px solid black"
+
+    const customOptionDivStyles = {
+        outline: "1px solid " + props.borderColor
     }
     
     return(
@@ -23,7 +26,7 @@ export default function ToggleSwitch(props){
                     key={index} 
                     onClick={() => setSelectedOptionIndex(index)} 
                     className={selectedOptionIndex === index ? "optionDiv selectedOptionDiv" : "optionDiv"}
-                    style={index !== props.options.length - 1 ? optionBorder : {borderRight: "none"}} // Last optionDiv should not have borderRight
+                    style={customOptionDivStyles}
                     >
                         {optionName}
                     </div>
