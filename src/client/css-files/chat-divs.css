@@ -8,7 +8,7 @@
 #sideBar{
     flex: 1;
     background-color: #fff8e8;
-    border-right: 2px solid #454955;
+    border-right: 3px outset #454955;
     border-radius: 10px;
 }
 
