@@ -1,0 +1,24 @@
+.optionDiv{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s linear;
+    outline: 1px solid black;
+}
+
+.optionDiv:hover{
+    cursor: pointer;
+
+    /* Darkens */
+    box-shadow: 0 0 100px 100px rgba(0, 0, 0, 0.1) inset;
+
+    /* Lightens: box-shadow: 0 0 100px 100px rgba(255, 255, 255, 0.1) inset; */
+
+}
+
+.selectedOptionDiv {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    box-shadow: 0 0 100px 100px rgba(0, 0, 0, 0.1) inset;
+}
