@@ -1,10 +1,16 @@
-/* Rule sets that go here indicate the mandatory styling of each ToggleSwitch component */
+.toggleSwitchWrapper{
+    display: flex;
+    background-color: var(--secondary-color);
+}
+
+/* Rule sets that go here indicate the mandatory styling of each ToggleSwitch option */
 .optionDiv{
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: 0.2s linear;
+    font-size: 0.75vmax;
 }
 
 .optionDiv:hover{

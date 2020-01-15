@@ -6,18 +6,10 @@ export default function ToggleSwitch(props){
     // TODO: Need to have defaults
     const wrapperDivStyle = {
         ...props.style, // Can contain width, height and margin styling - If these are not provided, then these rules do not have a value
-        backgroundColor: props.mainColor,
-        color: props.secondaryColor,
-        display: "flex", // Flexbox display is mandatory for this component
     };
-
-
-    const customOptionDivStyles = {
-        outline: "1px solid " + props.borderColor
-    }
     
     return(
-        <div id={props.id} style={wrapperDivStyle}>
+        <div id={props.id} style={wrapperDivStyle} class="toggleSwitchWrapper">
             {props.options.map((optionName, index) => {
 
                 // Each inner div represents an option in the toggleswitch
@@ -26,7 +18,6 @@ export default function ToggleSwitch(props){
                     key={index} 
                     onClick={() => setSelectedOptionIndex(index)} 
                     className={selectedOptionIndex === index ? "optionDiv selectedOptionDiv" : "optionDiv"}
-                    style={customOptionDivStyles}
                     >
                         {optionName}
                     </div>

@@ -3,7 +3,10 @@ import ToggleSwitch from "./side-bar-sub-components/ToggleSwitch";
 import CommunicationEntitiesBar from "./side-bar-sub-components/CommunicationEntityBar";
 import SearchBar from "./side-bar-sub-components/SearchBar"
 export default function SideBar(props){
-    const testCommEntities = ["FirstUsername", "SecondUsername", "ThirdUsername", "FourthUsername"];
+    // const testCommEntities = ["FirstUsername", "SecondUsername", "ThirdUsername", "FourthUsername"];
+    const testCommEntities = [];
+    for(let i = 0; i < 20; i++)
+        testCommEntities.push("SomeUsername");
     const toggleOptions = ["Friends", "Groups"];
     const [selectedMode, setSelectedMode] = useState(toggleOptions[0]);
 
