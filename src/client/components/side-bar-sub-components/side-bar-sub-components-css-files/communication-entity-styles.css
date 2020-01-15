@@ -1,0 +1,49 @@
+.communicationEntityDiv{
+    width: 100%;
+    height: 10%;
+    margin: 0;
+    border-left: 3px solid #fcd581;
+    transition: 0.2s linear;
+}
+
+.communicationEntityDiv:hover, .selectedCommunicationEntity{
+    cursor: pointer;
+    border-radius: 0 20px 20px 0;
+
+    /* Darkens */
+    box-shadow: 0 0 100px 100px rgba(0, 0, 0, 0.1) inset;
+}
+
+.displayImageDiv{
+    border: 1px solid green;
+    width: 20%;
+    height: 70%;
+    margin: 0 5%;
+    float: left; /*Allows elements to be added side by side to this*/
+}
+
+.communicationEntityContentDiv{
+    width: 60%;
+    height: 70%;
+    float: left;
+    display: flex;
+    justify-content: center ;
+    align-items: center;
+}
+
+/* Vertically centers the div */
+.verticallyCenteredRelativeToParent{
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.communicationEntityContentDiv h2{
+    font-size: 1vw;
+}
+
+
+
+
