@@ -1,7 +1,7 @@
 import React, {useState} from "react"
 import CommunicationEntity from "./CommunicationEntity"
-import "./side-bar-sub-components-css-files/communication-entity-bar-styles.css"
-export default function CommunicationEntities(props){
+import "../../css-files/side-bar-sub-divs-styles.css";
+export default function CommunicationEntitiesBar(props){
     const [selectedCommEntityIndex, setSelectedCommEntityIndex] = useState(-1);
 
     function handleCommEntitySelected(selectedIndex){

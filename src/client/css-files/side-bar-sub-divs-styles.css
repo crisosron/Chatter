@@ -1,0 +1,23 @@
+#searchBar, #communicationEntitiesBar, #settings{
+    width: 95%;
+    margin: auto;
+    margin-bottom: 2%;
+}
+
+#toggleSwitch, #settings{
+    height: 5%;
+}
+
+#searchBar{
+    height: 3%;
+    /* border: 1px solid green; */
+}
+
+#communicationEntitiesBar{
+    height: 83.3%;
+    /* border: 1px solid red; */
+}
+
+#settings{
+    /* border: 1px solid yellow; */
+}

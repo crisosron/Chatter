@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react"
 import ToggleSwitch from "./side-bar-sub-components/ToggleSwitch"
-import CommunicationEntityBar from "./side-bar-sub-components/CommunicationEntityBar"
+import CommunicationEntitiesBar from "./side-bar-sub-components/CommunicationEntityBar"
 export default function SideBar(props){
     const [selectedCommEntityBarIndex, setSelectedCommEntityBarIndex] = useState(-1); // No CommunicationEntityBar is initally selected
     const testCommEntities = ["FirstUsername", "SecondUsername", "ThirdUsername", "FourthUsername"];
@@ -23,8 +23,7 @@ export default function SideBar(props){
             <div id="searchBar">
             </div>
 
-            {/* TODO: We can probably decrease coupling of these operations from SideBar by making CommunicationEntites its own component */}
-            <CommunicationEntityBar id="communicationEntityBar" communicationEntities={testCommEntities}/>
+            <CommunicationEntitiesBar id="communicationEntitiesBar" communicationEntities={testCommEntities}/>
 
             <div id="settings">
             </div>
