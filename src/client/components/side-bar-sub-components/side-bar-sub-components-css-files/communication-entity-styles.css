@@ -6,12 +6,16 @@
     transition: 0.2s linear;
 }
 
-.communicationEntityDiv:hover, .selectedCommunicationEntity{
+.communicationEntityDiv:hover{
     cursor: pointer;
+    box-shadow: var(--box-shadow-darken);
+}
+.communicationEntityDiv:hover, .selectedCommunicationEntity{
     border-radius: 0 20px 20px 0;
+}
 
-    /* Darkens */
-    box-shadow: 0 0 100px 100px rgba(0, 0, 0, 0.1) inset;
+.selectedCommunicationEntity{
+    background-color: var(--primary-color);
 }
 
 .displayImageDiv{

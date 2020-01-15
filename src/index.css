@@ -12,3 +12,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Declaring css variables using root selector so they are accessible to every css file in the project */
+:root{
+  --primary-color: #f3eff5;
+  --secondary-color: #fff8e8;
+  --accent-color: #fcd581;
+  --text-color: #454955;
+  --outline-color: #454955;
+  --box-shadow-darken: 0 0 100px 100px rgba(0, 0, 0, 0.1) inset;
+  --bok-shadow-lighten: 0 0 100px 100px rgba(255, 255, 255, 0.1) inset
+}

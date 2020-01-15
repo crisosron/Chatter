@@ -1,9 +1,11 @@
-import React, {useState, useEffect} from "react"
-import ToggleSwitch from "./side-bar-sub-components/ToggleSwitch"
-import CommunicationEntitiesBar from "./side-bar-sub-components/CommunicationEntityBar"
+import React, {useState, useEffect} from "react";
+import ToggleSwitch from "./side-bar-sub-components/ToggleSwitch";
+import CommunicationEntitiesBar from "./side-bar-sub-components/CommunicationEntityBar";
+import SearchBar from "./side-bar-sub-components/SearchBar"
 export default function SideBar(props){
-    const [selectedCommEntityBarIndex, setSelectedCommEntityBarIndex] = useState(-1); // No CommunicationEntityBar is initally selected
     const testCommEntities = ["FirstUsername", "SecondUsername", "ThirdUsername", "FourthUsername"];
+    const toggleOptions = ["Friends", "Groups"];
+    const [selectedMode, setSelectedMode] = useState(toggleOptions[0]);
 
     // Custom styling for the toggle switch
     const toggleSwitchStyles = {
@@ -11,20 +13,13 @@ export default function SideBar(props){
         width: "95%",
         height: "5%",
     }
-
-    const commBarClicked = () => {
-        console.log(`CommEntityBar selected for: ${testCommEntities[selectedCommEntityBarIndex]}`);
-    }
     
     return(
         <div id = "sideBar">
             {/* TODO: Insert actual react components in here instead of just divs */}
-           <ToggleSwitch id="friendGroupToggleSwitch" mainColor="#fff8e8" secondaryColor="#454955" style={toggleSwitchStyles} options={["Friends", "Groups"]}/>
-            <div id="searchBar">
-            </div>
-
+            <ToggleSwitch id="friendGroupToggleSwitch" mainColor="#fff8e8" secondaryColor="#454955" style={toggleSwitchStyles} options={toggleOptions}/>
+            <SearchBar mode={selectedMode} />
             <CommunicationEntitiesBar id="communicationEntitiesBar" communicationEntities={testCommEntities}/>
-
             <div id="settings">
             </div>
         </div>

@@ -11,11 +11,9 @@
     cursor: pointer;
 
     /* Darkens */
-    box-shadow: 0 0 100px 100px rgba(0, 0, 0, 0.1) inset;
-
-    /* Lightens: box-shadow: 0 0 100px 100px rgba(255, 255, 255, 0.1) inset; */
+    box-shadow: var(--box-shadow-darken);
 }
 
 .selectedOptionDiv {
-    box-shadow: 0 0 100px 100px rgba(0, 0, 0, 0.1) inset;
+    background-color: var(--primary-color);
 }

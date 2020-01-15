@@ -9,7 +9,7 @@ button{
 }
 
 .generalButton{
-    background-color: #fcd581;
+    background-color: var(--accent-color);
 }
 
 button:hover{

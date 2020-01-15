@@ -1,10 +1,10 @@
 #centerWrapper{
     width: 50%;
     height: 50%;
-    border: 3px solid #454955;
+    border: 3px solid var(--outline-color);
     display: flex;
     border-radius: 10px;
-    background-color: #fff8e8;
+    background-color: var(--secondary-color);
 
     /* Centers this element relative to its parent container */
     position: fixed;
@@ -19,7 +19,7 @@
 }
 
 #centerWrapper h1, input{
-    color: #454955;
+    color: var(--outline-color);
 }
 
 #titleDiv h1{
@@ -32,7 +32,7 @@
 }
 
 #detailInputDiv{
-    border-right: 1px solid #454955;
+    border-right: 1px solid var(--outline-color);
     border-radius: 0px;
     text-align: center;
 }
@@ -45,7 +45,7 @@ input{
     width: 75%;
     height: 10%;
     border: none;
-    border-bottom: 3px solid #454955;
+    border-bottom: 3px solid var(--outline-color);
     background-color: #fff8e8;
     text-align: center;
     margin-bottom: 5%;
