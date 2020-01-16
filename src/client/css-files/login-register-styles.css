@@ -5,6 +5,7 @@
     display: flex;
     border-radius: 10px;
     background-color: var(--secondary-color);
+    color: var(--light-text-color);
 
     /* Centers this element relative to its parent container */
     position: fixed;
@@ -15,25 +16,25 @@
 
 #centerWrapper div{
     flex: 1;
-    border-radius: 10px;
+    border-width: 5px;
 }
 
 #centerWrapper h1, input{
     color: var(--outline-color);
 }
 
-#titleDiv h1{
-    /* /margin-top: 50%; */
-    text-align: center;
-    font-size: 4vmax;
+#titleDiv{
     display: flex;
     justify-content: center ;
     align-items: center;
 }
 
+#titleDiv h1{
+    font-size: 4vmax;
+}
+
 #detailInputDiv{
-    border-right: 1px solid var(--outline-color);
-    border-radius: 0px;
+    border-right: 1px solid var(--accent-color);
     text-align: center;
 }
 
@@ -41,15 +42,19 @@
     text-align: center;
 }
 
-input{
+#detailInputDiv input{
     width: 75%;
     height: 10%;
     border: none;
-    border-bottom: 3px solid var(--outline-color);
-    background-color: #fff8e8;
+    border-bottom: 3px solid var(--accent-color);
+    background-color: var(--secondary-color);
     text-align: center;
     margin-bottom: 5%;
     font-size: 20px;
+}
+
+#detailInputDiv a{
+    color: var(--accent-color);
 }
 
 /* Removes the default focus effect on input elements */
