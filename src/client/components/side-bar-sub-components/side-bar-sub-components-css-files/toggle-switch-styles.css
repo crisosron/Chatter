@@ -6,11 +6,13 @@
 /* Rule sets that go here indicate the mandatory styling of each ToggleSwitch option */
 .optionDiv{
     flex: 1;
+    transition: 0.2s linear;
+    font-size: 0.75vmax;
+
+    /* Centers content within this div */
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: 0.2s linear;
-    font-size: 0.75vmax;
 }
 
 .optionDiv:hover{

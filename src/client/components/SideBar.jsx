@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from "react";
 import ToggleSwitch from "./side-bar-sub-components/ToggleSwitch";
 import CommunicationEntitiesBar from "./side-bar-sub-components/CommunicationEntityBar";
-import SearchBar from "./side-bar-sub-components/SearchBar"
+import SearchBar from "./side-bar-sub-components/SearchBar";
+import MiscBar from "./side-bar-sub-components/MiscBar";
 export default function SideBar(props){
     // const testCommEntities = ["FirstUsername", "SecondUsername", "ThirdUsername", "FourthUsername"];
     const testCommEntities = [];
@@ -23,8 +24,7 @@ export default function SideBar(props){
             <ToggleSwitch id="friendGroupToggleSwitch" mainColor="#fff8e8" secondaryColor="#454955" style={toggleSwitchStyles} options={toggleOptions}/>
             <SearchBar mode={selectedMode} />
             <CommunicationEntitiesBar id="communicationEntitiesBar" communicationEntities={testCommEntities}/>
-            <div id="settings">
-            </div>
+            <MiscBar />
         </div>
     )
 }

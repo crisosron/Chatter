@@ -1,4 +1,4 @@
-button{
+#detailInputDiv button{
     margin: 0 auto;
     width: 180px;
     height: 80px;
@@ -12,12 +12,12 @@ button{
     background-color: var(--accent-color);
 }
 
-button:hover{
+#detailInputDiv button:hover{
     filter: brightness(100%);
     cursor: pointer;
     border-radius: 15px;
 }
 
-button:focus{
+#detailInputDiv button:focus{
     outline: none;
 }
