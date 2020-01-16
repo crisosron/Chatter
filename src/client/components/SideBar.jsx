@@ -4,10 +4,8 @@ import CommunicationEntitiesBar from "./side-bar-sub-components/CommunicationEnt
 import SearchBar from "./side-bar-sub-components/SearchBar";
 import MiscBar from "./side-bar-sub-components/MiscBar";
 export default function SideBar(props){
-    // const testCommEntities = ["FirstUsername", "SecondUsername", "ThirdUsername", "FourthUsername"];
     const testCommEntities = [];
-    for(let i = 0; i < 20; i++)
-        testCommEntities.push("SomeUsername");
+    for(let i = 0; i < 20; i++) testCommEntities.push("SomeUsername" + i);
     const toggleOptions = ["Friends", "Groups"];
     const [selectedMode, setSelectedMode] = useState(toggleOptions[0]);
 
@@ -17,11 +15,15 @@ export default function SideBar(props){
         width: "95%",
         height: "5%",
     }
+
+    const handleNewSelectedMode = (selectedModeIndex) => {
+        setSelectedMode(toggleOptions[selectedModeIndex]);
+        // TODO: Update testCommEntities content based on selection in here
+    }
     
     return(
         <div id = "sideBar">
-            {/* TODO: Insert actual react components in here instead of just divs */}
-            <ToggleSwitch id="friendGroupToggleSwitch" mainColor="#fff8e8" secondaryColor="#454955" style={toggleSwitchStyles} options={toggleOptions}/>
+            <ToggleSwitch id="friendGroupToggleSwitch" onClick={handleNewSelectedMode} style={toggleSwitchStyles} options={toggleOptions}/>
             <SearchBar mode={selectedMode} />
             <CommunicationEntitiesBar id="communicationEntitiesBar" communicationEntities={testCommEntities}/>
             <MiscBar />
