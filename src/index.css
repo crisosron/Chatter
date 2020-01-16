@@ -16,10 +16,11 @@ code {
 /* Declaring css variables using root selector so they are accessible to every css file in the project */
 :root{
   --primary-color: #f3eff5;
-  --secondary-color: #fff8e8;
-  --accent-color: #fcd581;
-  --text-color: #454955;
-  --outline-color: #454955;
+  --secondary-color: #2d3142;
+  --accent-color: #91b0d1;
+  --light-text-color: #f3eff5; /*Same as primary*/
+  --dark-text-color: #454955;
+  --dark-outline-color: #454955;
   --box-shadow-darken: 0 0 100px 100px rgba(0, 0, 0, 0.1) inset;
-  --bok-shadow-lighten: 0 0 100px 100px rgba(255, 255, 255, 0.1) inset
+  --box-shadow-lighten: 0 0 100px 100px rgba(255, 255, 255, 0.1) inset;
 }

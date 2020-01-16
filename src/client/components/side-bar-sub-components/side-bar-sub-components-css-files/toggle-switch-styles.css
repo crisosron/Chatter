@@ -19,9 +19,9 @@
     cursor: pointer;
 
     /* Darkens */
-    box-shadow: var(--box-shadow-darken);
+    box-shadow: var(--box-shadow-lighten);
 }
 
 .selectedOptionDiv {
-    background-color: var(--primary-color);
+    background-color: var(--accent-color);
 }

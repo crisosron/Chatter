@@ -17,14 +17,14 @@
 
 .communicationEntityDiv:hover{
     cursor: pointer;
-    box-shadow: var(--box-shadow-darken);
+    box-shadow: var(--box-shadow-lighten);
 }
 .communicationEntityDiv:hover, .selectedCommunicationEntity{
     border-radius: 0 20px 20px 0;
 }
 
 .selectedCommunicationEntity{
-    background-color: var(--primary-color);
+    background-color: var(--accent-color);
 }
 
 .displayImageDiv{
