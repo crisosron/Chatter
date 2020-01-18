@@ -59,10 +59,12 @@ export default class Register extends Component{
                 <div id="detailInputDiv">
                     <h1>Register</h1>
                     <input type="text" placeholder="Username" id="userNameInputField"></input>
-                    <input type="password" placeholder="Password" id="passwordInputField"></input>
+                    <input type="password" placeholder="Password (minimum 5 characters)" id="passwordInputField"></input>
                     <input type="text" placeholder="Email" id="emailInputField"></input>
-                    <p>Already have an account? <a href="/">Login</a></p>
                     <button className="generalButton" onClick={this.handleRegisterClicked}>Register</button>
+                    <div id="accountStatusText">
+                        <p>Already have an account? <a href="/">Login</a></p>
+                    </div>
                 </div>
 
                 {/* Title Div */}

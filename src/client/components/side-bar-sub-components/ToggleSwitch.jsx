@@ -20,7 +20,7 @@ export default function ToggleSwitch(props){
 
                 // Each inner div represents an option in the toggleswitch
                 return (
-                    <div id={optionName.toLowerCase() + "Option"} 
+                    <div id={optionName.toLowerCase() + "Option"}
                     key={index} 
                     onClick = {() => {handleOptionPressed(index)}}
                     className={selectedOptionIndex === index ? "optionDiv selectedOptionDiv" : "optionDiv"}

@@ -59,9 +59,14 @@ export default class Login extends Component{
                 <div id="detailInputDiv">
                     <h1>Login</h1>
                     <input type="text" placeholder="Username" id="userNameInputField"></input>
-                    <input type="password" placeholder="Password" id="passwordInputField"></input>
-                    <p>Don't have an account? <a href="/register">Register</a></p>
+                    <input type="password" placeholder="Password (minimum 5 characters)" id="passwordInputField"></input>
                     <button class="generalButton" onClick={this.handleLoginClicked}>Login</button>
+                    <p><a href="/">Forgot Password</a></p>
+
+                    <div id="accountStatusText">
+                        <p>Don't have an account? <a href="/register">Register</a></p>
+                    </div>
+                    
                 </div>
 
                 {/* Title Div */}

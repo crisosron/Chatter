@@ -38,6 +38,17 @@
     text-align: center;
 }
 
+#detailInputDiv p{
+    font-size: 13px;
+}
+
+#accountStatusText{
+    /* The combination of these rules allow the message ot be centered at the bottom of the parent div (detailInputDiv) */
+    position: absolute;
+    width: 50%;
+    bottom: 0;
+}
+
 #detailInputDiv h1{
     text-align: center;
 }
@@ -48,9 +59,10 @@
     border: none;
     border-bottom: 3px solid var(--accent-color);
     background-color: var(--secondary-color);
+    box-shadow: var(--box-shadow-lighten);
     text-align: center;
     margin-bottom: 5%;
-    font-size: 20px;
+    font-size: 1vmax;
 }
 
 #detailInputDiv a{
