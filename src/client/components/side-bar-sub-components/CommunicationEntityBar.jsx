@@ -22,7 +22,7 @@ export default function CommunicationEntitiesBar(props){
                     onClick={(selectedIndex) => handleCommEntitySelected(selectedIndex)}
                     index={index}
                     className={selectedCommEntityIndex === index ? "selectedCommunicationEntity" : ""}
-                    actions={friendModeCommEntityActions}
+                    actions={props.mode === "Friends" ? friendModeCommEntityActions : groupModeCommEntityActions}
                     >{value}</CommunicationEntity>
                 );
             })}

@@ -29,7 +29,7 @@ export default function CommunicationEntity(props){
     return(
         <div id={props.id} className={"communicationEntityActionsDiv"}>
             {props.actions.map((value, index) => {
-                return <div className={"actionDiv " + value.className} onClick={() => {handleActionClicked(value.actionName)}}>{value.actionName}</div>
+                return <div key={value.actionName + index} className={"actionDiv " + value.className} onClick={() => {handleActionClicked(value.actionName)}}>{value.actionName}</div>
             })}
         </div>
     ); 
