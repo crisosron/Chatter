@@ -33,8 +33,6 @@ export default function SideBar(props){
 
         setSelectedMode(toggleOptions[selectedModeIndex]);
         setCommEntities(newCommEntities);
-
-        // TODO: Update testCommEntities content based on selection in here
     }
     
     return(
