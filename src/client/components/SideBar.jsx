@@ -25,6 +25,8 @@ export default function SideBar(props){
         <div id = "sideBar">
             <ToggleSwitch id="friendGroupToggleSwitch" onClick={handleNewSelectedMode} style={toggleSwitchStyles} options={toggleOptions}/>
             <SearchBar mode={selectedMode} />
+
+            {/* TODO: Add an array of potential actions as props */}
             <CommunicationEntitiesBar id="communicationEntitiesBar" communicationEntities={testCommEntities}/>
             <MiscBar />
         </div>

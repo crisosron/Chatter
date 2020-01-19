@@ -3,6 +3,9 @@ import CommunicationEntity from "./CommunicationEntity"
 import "./side-bar-sub-components-css-files/communication-entity-styles.css";
 export default function CommunicationEntitiesBar(props){
     const [selectedCommEntityIndex, setSelectedCommEntityIndex] = useState(-1);
+    const friendModeCommEntityActions = [{actionName: "Add", className: "affirmative"}, {actionName: "Remove", className: "negative"}, {actionName: "Dismiss", className: "neutral"}];
+    const groupModeCommEntityActions = [{actionName: "Join", className: "affirmative"}, {actionName: "Leave", className: "negative"}, {actionName: "Dismiss", className: "neutral"}];
+
 
     function handleCommEntitySelected(selectedIndex){
         setSelectedCommEntityIndex(selectedIndex);
@@ -14,10 +17,12 @@ export default function CommunicationEntitiesBar(props){
             {props.communicationEntities.map((value, index) => {
                 return (
                     <CommunicationEntity
-                    key={value.toLowerCase() + "CommunicationEntity"}
+                    key={"communicationEntity" + index}
+                    id={"communicationEntity" + index}
                     onClick={(selectedIndex) => handleCommEntitySelected(selectedIndex)}
                     index={index}
                     className={selectedCommEntityIndex === index ? "selectedCommunicationEntity" : ""}
+                    actions={friendModeCommEntityActions}
                     >{value}</CommunicationEntity>
                 );
             })}
