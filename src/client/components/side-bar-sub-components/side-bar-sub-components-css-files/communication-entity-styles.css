@@ -71,6 +71,7 @@
     font-size: 0.75vmax;
 }
 
+/*Color indication for actionDivs*/
 .affirmative{
     background-color: var(--affirmative-color);
 }

@@ -4,14 +4,19 @@ import "./side-bar-sub-components-css-files/communication-entity-styles.css";
 export default function CommunicationEntity(props){
     const [showActionMenu, setShowActionMenu] = useState(false);
 
-    function handleMenuItemContextMenu(e){
-        e.preventDefault();
-        setShowActionMenu(!showActionMenu);
+    function handleContextMenu(e){
+        e.preventDefault(); // Hinders the default context menu from appearing
+        setShowActionMenu(!showActionMenu); // Shows the custom action menu
     }
+
+    function handleActionClicked(actionName){
+        alert(`Handle action ${actionName}`);
+        setShowActionMenu(!showActionMenu);
+    }  
 
     if(!showActionMenu){
         return(
-            <div id={props.id} className={"communicationEntityDiv " + props.className} onClick={() => {props.onClick(props.index);}} onContextMenu={handleMenuItemContextMenu}>
+            <div id={props.id} className={"communicationEntityDiv " + props.className} onClick={() => {props.onClick(props.index);}} onContextMenu={handleContextMenu}>
                     <div className="displayImageDiv verticallyCenteredRelativeToParent"></div>
                     <div className="communicationEntityContentDiv verticallyCenteredRelativeToParent">
                         <h2>{props.children}</h2>
@@ -22,9 +27,9 @@ export default function CommunicationEntity(props){
     }
 
     return(
-        <div id={props.id} className={"communicationEntityActionsDiv"} onContextMenu={handleMenuItemContextMenu}>
+        <div id={props.id} className={"communicationEntityActionsDiv"}>
             {props.actions.map((value, index) => {
-                return <div className={"actionDiv " + value.className}>{value.actionName}</div>
+                return <div className={"actionDiv " + value.className} onClick={() => {handleActionClicked(value.actionName)}}>{value.actionName}</div>
             })}
         </div>
     ); 
