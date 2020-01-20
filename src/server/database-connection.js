@@ -37,18 +37,11 @@ class DatabaseConnection{
      * @param cb {Function} - A calllback function that should be called with the results of this function
     */
     findDocumentsInCollection(collectionName, query, cb){
-        console.log("Inside the function findDocumentsInCollection");
-        console.log(`query: ${query}`);
         const collection = this._dbConnection.collection(collectionName);
-        collection.find(query, function(err, results){
+        collection.find(query).toArray((err, results) => {
             if(err){
                 console.log("Error in findDocumentsInCollection(collectionName, query, cb): ", err);
                 return;
-            }
-
-            console.log(`results for query: ${query}`);
-            for(let result in results){
-                console.log(result.userName);
             }
             cb(results);
         });

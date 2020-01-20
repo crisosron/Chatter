@@ -22,7 +22,6 @@ export default function SearchBar(props){
             }
 
             socket.emit(SEARCH_EVENTS.SEARCH_GROUPS, {stringQuery: value});
-
         });
     });
 

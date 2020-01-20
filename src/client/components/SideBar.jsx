@@ -3,10 +3,16 @@ import ToggleSwitch from "./side-bar-sub-components/ToggleSwitch";
 import CommunicationEntitiesBar from "./side-bar-sub-components/CommunicationEntityBar";
 import SearchBar from "./side-bar-sub-components/SearchBar";
 import MiscBar from "./side-bar-sub-components/MiscBar";
+import SEARCH_EVENTS from "../../events/search-events";
+import socket from "../../index";
 
 export default function SideBar(props){
     const toggleOptions = ["Friends", "Groups"];
     const [selectedMode, setSelectedMode] = useState(toggleOptions[0]);
+
+    socket.on(SEARCH_EVENTS.DELIVER_RESULTS, data => {
+        // TODO: Use data.results
+    });
 
     let testCommEntities = [];
     for(let i = 0; i < 20; i++) testCommEntities.push("SomeUsername" + i);
