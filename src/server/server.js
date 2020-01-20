@@ -24,11 +24,11 @@ io.on("connection", clientSocket => {
     });
 
     clientSocket.on(SEARCH_EVENTS.SEARCH_FRIENDS, data => {
-        SearchOperations.searchFriends(clientSocket, dbConnection, data);
+        SearchOperations.search(clientSocket, dbConnection, data, "Friends");
     });
 
     clientSocket.on(SEARCH_EVENTS.SEARCH_GROUPS, data => {
-        SearchOperations.searchGroups(clientSocket, dbConnection, data);
+        SearchOperations.search(clientSocket, dbConnection, data, "Groups");
     });
     
 });

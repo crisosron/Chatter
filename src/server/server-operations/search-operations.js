@@ -1,4 +1,4 @@
-import SEARCH_EVENTS from "../../events/search-events";
+const SEARCH_EVENTS = require("../../events/search-events");
 class SearchOperations{
 
     /**
@@ -24,7 +24,8 @@ class SearchOperations{
 
             const resultingNames = [];
             results.map((value, index) => {
-                resultingNames.push(value.userName);
+                if(mode === "Friends") resultingNames.push(value.userName);
+                else resultingNames.push(value.groupName);
             });
 
             clientSocket.emit(SEARCH_EVENTS.DELIVER_RESULTS, {results: resultingNames});

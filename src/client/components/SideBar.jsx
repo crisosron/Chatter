@@ -10,8 +10,14 @@ export default function SideBar(props){
     const toggleOptions = ["Friends", "Groups"];
     const [selectedMode, setSelectedMode] = useState(toggleOptions[0]);
 
+    socket.on(SEARCH_EVENTS.NO_RESULTS_FOUND, () => {
+        
+    });
+        
     socket.on(SEARCH_EVENTS.DELIVER_RESULTS, data => {
-        // TODO: Use data.results
+        let newCommEntities = [];
+        for(let i = 0; i < data.results.length; i++) newCommEntities.push(data.results[i]);
+        setCommEntities(newCommEntities);
     });
 
     let testCommEntities = [];
@@ -45,8 +51,6 @@ export default function SideBar(props){
         <div id = "sideBar">
             <ToggleSwitch id="friendGroupToggleSwitch" onClick={handleNewSelectedMode} style={toggleSwitchStyles} options={toggleOptions}/>
             <SearchBar mode={selectedMode} />
-
-            {/* TODO: Add an array of potential actions as props */}
             <CommunicationEntitiesBar id="communicationEntitiesBar" communicationEntities={commEntities} mode={selectedMode}/>
             <MiscBar />
         </div>
