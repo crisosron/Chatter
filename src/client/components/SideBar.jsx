@@ -11,7 +11,8 @@ export default function SideBar(props){
     const [selectedMode, setSelectedMode] = useState(toggleOptions[0]);
 
     socket.on(SEARCH_EVENTS.NO_RESULTS_FOUND, () => {
-        
+        // TODO: Set to default CommEntities to display
+        setCommEntities([]);
     });
         
     socket.on(SEARCH_EVENTS.DELIVER_RESULTS, data => {

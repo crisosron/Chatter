@@ -18,7 +18,6 @@ export default function CommunicationEntitiesBar(props){
         setCommEntityShowActionsIndex(index);
     }
 
-
     return(
         <div id={props.id}>
             {props.communicationEntities.map((value, index) => {
