@@ -10,7 +10,6 @@ export default function CommunicationEntitiesBar(props){
     function handleCommEntitySelected(selectedIndex){
         setSelectedCommEntityIndex(selectedIndex);
         setCommEntityShowActionsIndex(-1);
-        console.log("A comm entity was selected: ", selectedIndex);
     }
 
     function handleContextMenu(e, index){

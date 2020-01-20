@@ -2,7 +2,9 @@ require('dotenv/config');
 const DatabaseConnection = require("./database-connection");
 const REGISTER_EVENTS = require("../events/register-events");
 const LOGIN_EVENTS = require("../events/login-events");
+const SEARCH_EVENTS = require("../events/search-events");
 const LoginRegistrationOperations = require("./server-operations/login-registration-operations");
+const SearchOperations = require("./server-operations/search-operations");
 
 // Server setup
 let io = require("socket.io")();
@@ -19,6 +21,14 @@ io.on("connection", clientSocket => {
 
     clientSocket.on(LOGIN_EVENTS.REQUEST_LOGIN, data => {
         LoginRegistrationOperations.login(clientSocket, dbConnection, data);
+    });
+
+    clientSocket.on(SEARCH_EVENTS.SEARCH_FRIENDS, data => {
+        SearchOperations.searchFriends(clientSocket, dbConnection, data);
+    });
+
+    clientSocket.on(SEARCH_EVENTS.SEARCH_GROUPS, data => {
+        SearchOperations.searchGroups(clientSocket, dbConnection, data);
     });
     
 });

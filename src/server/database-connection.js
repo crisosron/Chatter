@@ -17,16 +17,40 @@ class DatabaseConnection{
      * @param query {Object} - Query object (using MongoDB)
      * @param cb {Function} - A calllback function that should be called with the results of this function
     */
-    findDocumentInCollection(collectionName, query, cb){
+    singleDocumentExistsInCollection(collectionName, query, cb){
         const collection = this._dbConnection.collection(collectionName);
         collection.findOne(query, function(err, result){
             if(err){
-                console.log("Error in documentExistsInCollection(collectionName, query, cb): ", err);
+                console.log("Error in singleDocumentExistsInCollection(collectionName, query, cb): ", err);
                 return;
             }
             
             // Calling the callback function that needs to use the result of this async callback function
             cb(result !== null);
+        });
+    }
+
+    /**
+     * Finds all documents in a given collection with the matching query
+     * @param collectionName {String} - Name of the collection to find the documents in
+     * @param query {Object} - Query object (using MongoDB)
+     * @param cb {Function} - A calllback function that should be called with the results of this function
+    */
+    findDocumentsInCollection(collectionName, query, cb){
+        console.log("Inside the function findDocumentsInCollection");
+        console.log(`query: ${query}`);
+        const collection = this._dbConnection.collection(collectionName);
+        collection.find(query, function(err, results){
+            if(err){
+                console.log("Error in findDocumentsInCollection(collectionName, query, cb): ", err);
+                return;
+            }
+
+            console.log(`results for query: ${query}`);
+            for(let result in results){
+                console.log(result.userName);
+            }
+            cb(results);
         });
     }
 }
