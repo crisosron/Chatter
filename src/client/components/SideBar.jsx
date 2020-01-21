@@ -17,6 +17,7 @@ export default function SideBar(props){
         height: "5%",
     }
 
+    // TODO: Cohesion can be further increased if updateCommEntities and ressetDefaultCommEntities were located in CommunicaionEntitiesBar?
     const updateCommEntities = (newCommEntities) => {
         setCommEntities(newCommEntities);
     }
