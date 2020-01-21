@@ -1,4 +1,5 @@
 const SEARCH_EVENTS = require("../../events/search-events");
+const ServerOperationsUtilities = require("../server-operations/server-operations-utilities");
 class SearchOperations{
 
     /**
@@ -9,6 +10,12 @@ class SearchOperations{
      * @param mode {String} - Indicates whether we are searching for "Friends" or "Groups"
     */
     static search(clientSocket, dbConnection, data, mode){
+        console.log("Inside search method");
+        // TODO: Should this precondition be handled in SearchBar.jsx, that way, invalid input will not propagate outside of the frontend
+        if(data.stringQuery === "") {
+            clientSocket.emit(SEARCH_EVENTS.NO_RESULTS_FOUND);
+            return;
+        }
 
         // Notice the usage of RegExp - This is so we can do a substring search when looking for the docs in the database
         // (Similar to doing LIKE data.stringQuery% in SQL but case insensitive)

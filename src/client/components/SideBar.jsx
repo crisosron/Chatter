@@ -8,11 +8,13 @@ import socket from "../../index";
 
 export default function SideBar(props){
     const toggleOptions = ["Friends", "Groups"];
+    const defaultCommEntities = ["First comm entity", "Second Comm entity", "Third Comm entity"];
+    const [commEntities, setCommEntities] = useState(defaultCommEntities);
     const [selectedMode, setSelectedMode] = useState(toggleOptions[0]);
 
     socket.on(SEARCH_EVENTS.NO_RESULTS_FOUND, () => {
         // TODO: Set to default CommEntities to display
-        setCommEntities([]);
+        setCommEntities(defaultCommEntities);
     });
         
     socket.on(SEARCH_EVENTS.DELIVER_RESULTS, data => {
@@ -20,10 +22,6 @@ export default function SideBar(props){
         for(let i = 0; i < data.results.length; i++) newCommEntities.push(data.results[i]);
         setCommEntities(newCommEntities);
     });
-
-    let testCommEntities = [];
-    for(let i = 0; i < 20; i++) testCommEntities.push("SomeUsername" + i);
-    const [commEntities, setCommEntities] = useState(testCommEntities);
     
     // Custom styling for the toggle switch
     const toggleSwitchStyles = {
