@@ -2,9 +2,6 @@ import React, {useEffect, useState} from "react";
 import "./side-bar-sub-components-css-files/communication-entity-styles.css";
 
 export default function CommunicationEntity(props){
-    function handleActionClicked(actionName){
-        alert(`Handle action ${actionName}`);        
-    }  
 
     if(!props.showActionMenu){
         return(
@@ -24,7 +21,7 @@ export default function CommunicationEntity(props){
                 return <div 
                 key={value.actionName + index} 
                 className={"actionDiv " + value.className} 
-                onClick={() => {handleActionClicked(value.actionName)}}>{value.actionName}</div>
+                onClick={() => {props.handleActionPressed(value.actionName, index)}}>{value.actionName}</div>
             })}
         </div>
     ); 
