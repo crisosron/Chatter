@@ -13,7 +13,9 @@ class SearchOperations{
         console.log("Inside search method");
         // TODO: Should this precondition be handled in SearchBar.jsx, that way, invalid input will not propagate outside of the frontend
         if(data.stringQuery === "") {
-            clientSocket.emit(SEARCH_EVENTS.NO_RESULTS_FOUND);
+            clientSocket.emit(SEARCH_EVENTS.NO_RESULTS_FOUND, {
+                notification: ServerOperationsUtilities.createNotification("warning", "Empty Search Value", "Please enter characters into the search bar to conduct a valid search")
+            });
             return;
         }
 
@@ -25,7 +27,9 @@ class SearchOperations{
         dbConnection.findDocumentsInCollection(mode === "Friends" ? "users" : "groups", query, (results) => {
             if(results.length === 0){
                 console.log("No results found as a result of the query for SEARCH_EVENTS.SEARCH_FRIENDS");
-                clientSocket.emit(SEARCH_EVENTS.NO_RESULTS_FOUND);
+                clientSocket.emit(SEARCH_EVENTS.NO_RESULTS_FOUND, {
+                    notification: ServerOperationsUtilities.createNotification("danger", "No results found", `No results for '${data.stringQuery}'`)
+                });
                 return;
             }
 

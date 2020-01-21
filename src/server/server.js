@@ -5,6 +5,7 @@ const LOGIN_EVENTS = require("../events/login-events");
 const SEARCH_EVENTS = require("../events/search-events");
 const LoginRegistrationOperations = require("./server-operations/login-registration-operations");
 const SearchOperations = require("./server-operations/search-operations");
+const ServerOperationsUtilities = require("./server-operations/server-operations-utilities");
 
 // Server setup
 let io = require("socket.io")();
@@ -29,6 +30,12 @@ io.on("connection", clientSocket => {
 
     clientSocket.on(SEARCH_EVENTS.SEARCH_GROUPS, data => {
         SearchOperations.search(clientSocket, dbConnection, data, "Groups");
+    });
+
+    clientSocket.on(SEARCH_EVENTS.INVALID_SEARCH_STRING, () => {
+        clientSocket.emit(SEARCH_EVENTS.INVALID_SEARCH_STRING, {
+            notification: ServerOperationsUtilities.createNotification("danger", "Invalid Search Value", "Please enter a valid search keyword", 3000)
+        });
     });
     
 });

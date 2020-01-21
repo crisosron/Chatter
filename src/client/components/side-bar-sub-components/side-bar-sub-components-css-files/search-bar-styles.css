@@ -6,8 +6,8 @@
     /* border: 1px solid green; */
 }
 
-#searchBarInput{
-    width: 100%;
+#searchBarInput, #searchBarClearButton{
+    width: 75%;
     height: 100%;
     border-radius: 50px;
     background-color: var(--secondary-color);
@@ -17,10 +17,29 @@
     text-align: center;
 }
 
-#searchBarInput:hover{
+#searchBarInput:hover, #searchBarClearButton:hover{
     box-shadow: var(--box-shadow-lighten);
 }
 
 #searchBarInput:focus{
+    background-color: var(--accent-color);
+}
+
+#searchBarClearButton{
+    width: 20%;
+    border: none;
+    outline: none;
+    text-align: center;
+    border-radius: 0px;
+    color: var(--primary-color);
+    margin-left: 2%;
+}
+
+
+#searchBarClearButton:hover{
+    border-radius: 10px;
+}
+
+#searchBarClearButton:active{
     background-color: var(--accent-color);
 }

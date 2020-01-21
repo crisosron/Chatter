@@ -1,3 +1,4 @@
+let store = require("react-notifications-component");
 class ServerOperationsUtilities{
 
     /**
@@ -6,7 +7,7 @@ class ServerOperationsUtilities{
      * @param title {string} - The title of the notification
      * @param message {string} - The message to be displayed on the notificaption
     */
-    static createNotification(type, title, message){
+    static createNotification(type, title, message, duration = 5000){
         return {
             title: title,
             message: message,
@@ -16,8 +17,11 @@ class ServerOperationsUtilities{
             animationIn: ["animated", "fadeIn"],
             animationOut: ["animated", "fadeOut"],
             dismiss: {
-                duration: 5000,
+                duration: duration,
             },
+            onRemoval: (id, removedBy) => {
+                store.removeNotification(id);
+            }
         }
     }
 }
