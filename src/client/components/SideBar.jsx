@@ -21,6 +21,11 @@ export default function SideBar(props){
         setCommEntities(newCommEntities);
     }
 
+    // Resets the current displayed communication entities to the default comm entities to display
+    const resetDefaultCommEntities = () => {
+        setCommEntities(defaultCommEntities);
+    }
+
     const handleNewSelectedMode = (selectedModeIndex) => {
 
         let newCommEntities = [];
@@ -40,7 +45,7 @@ export default function SideBar(props){
     return(
         <div id = "sideBar">
             <ToggleSwitch id="friendGroupToggleSwitch" onClick={handleNewSelectedMode} style={toggleSwitchStyles} options={toggleOptions}/>
-            <SearchBar mode={selectedMode} updateCommEntities={updateCommEntities}/>
+            <SearchBar mode={selectedMode} updateCommEntities={updateCommEntities} resetDefaultCommEntities={resetDefaultCommEntities}/>
             <CommunicationEntitiesBar id="communicationEntitiesBar" communicationEntities={commEntities} mode={selectedMode}/>
             <MiscBar />
         </div>

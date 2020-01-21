@@ -4,13 +4,17 @@ import socket from "../../../index";
 import {store} from "react-notifications-component";
 import "./side-bar-sub-components-css-files/search-bar-styles.css";
 export default function SearchBar(props){
-    console.log(`SearchBar props: ${props}`)
+
+    const handleClearButtonClicked = () => {
+        document.getElementById("searchBarInput").value = "";
+        props.resetDefaultCommEntities();
+    }
+
     useEffect(() => {
         const searchBarInput = document.getElementById("searchBarInput");
         searchBarInput.addEventListener("keydown", (e) => {
-            console.log("Handling keydown");
             if(e.keyCode === 8 && searchBarInput.value.length === 1){
-                // TODO: Invoke clear button press here
+                props.resetDefaultCommEntities();
             }
 
             // If not enter key pressed, exit the method
@@ -21,7 +25,7 @@ export default function SearchBar(props){
             // CommunicationEntities can be updated
 
             if(searchBarInput.value === ""){
-                // socket.emit(SEARCH_EVENTS.INVALID_SEARCH_STRING)
+                props.resetDefaultCommEntities();
                 return;
             }
 
@@ -49,7 +53,7 @@ export default function SearchBar(props){
     return(
         <div id="searchBar">
             <input id="searchBarInput" type="text" placeholder={"Search " + props.mode}></input>
-            <button id="searchBarClearButton">Clear</button>
+            <button id="searchBarClearButton" onClick={handleClearButtonClicked}>Clear</button>
         </div>
     );
 }
