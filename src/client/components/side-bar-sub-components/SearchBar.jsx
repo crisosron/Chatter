@@ -22,7 +22,7 @@ export default class SearchBar extends React.Component{
 
             if(this.props.mode === "Friends") socket.emit(SEARCH_EVENTS.SEARCH_FRIENDS, {stringQuery: searchBarInput.value});
             else if(this.props.mode === "Groups") socket.emit(SEARCH_EVENTS.SEARCH_GROUPS, {stringQuery: searchBarInput.value});
-            else socket.emit(SEARCH_EVENTS.SEARCH_UNKNOWN_USERS_AND_GROUPS, {stringQuery: searchBarInput.value});
+            else socket.emit(SEARCH_EVENTS.PERFORM_GENERAL_SEARCH, {stringQuery: searchBarInput.value});
             
         });
 

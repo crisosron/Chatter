@@ -10,14 +10,6 @@ class SearchOperations{
      * @param mode {String} - Indicates whether we are searching for "Friends" or "Groups"
     */
     static search(clientSocket, dbConnection, data, mode){
-        console.log("Inside search method");
-        // TODO: Should this precondition be handled in SearchBar.jsx, that way, invalid input will not propagate outside of the frontend
-        if(data.stringQuery === "") {
-            clientSocket.emit(SEARCH_EVENTS.NO_RESULTS_FOUND, {
-                notification: ServerOperationsUtilities.createNotification("warning", "Empty Search Value", "Please enter characters into the search bar to conduct a valid search")
-            });
-            return;
-        }
 
         // Notice the usage of RegExp - This is so we can do a substring search when looking for the docs in the database
         // (Similar to doing LIKE data.stringQuery% in SQL but case insensitive)
@@ -34,13 +26,45 @@ class SearchOperations{
             }
 
             const resultingNames = [];
-            results.map((value, index) => {
-                if(mode === "Friends") resultingNames.push(value.userName);
-                else resultingNames.push(value.groupName);
+
+            results.forEach(element => {
+                if(mode === "Friends") resultingNames.push(element.userName);
+                else resultingNames.push(element.groupName);
             });
 
             clientSocket.emit(SEARCH_EVENTS.DELIVER_RESULTS, {results: resultingNames});
         });
+    }
+
+    /**
+     * Performs a search for both usernames and groupnames for a given string
+     * @param clientSocket {Socket} - Socket object of the client that issued the general search 
+     * @param dbConnection {DatabaseConnection} - {@link DatabaseConnection} object to perform the query with the database
+     * @param data {Object} - Object passed through socket.io events. In this case, it should contain stringQuery
+    */
+    static generalSearch(clientSocket, dbConnection, data){
+        const userNameQuery = {userName: new RegExp(data.stringQuery, 'i')}
+        const groupNameQuery = {groupName: new RegExp(data.stringQuery, 'i')}
+        const resultingUserNames = [];
+        const resultingGroupNames = [];
+
+        dbConnection.findDocumentsInCollection("users", userNameQuery, (results) => {
+            results.forEach(element => {
+                resultingUserNames.push(element.userName);
+            });
+        });
+
+        dbConnection.findDocumentsInCollection("groups", groupNameQuery, (results) => {
+            results.forEach(element => {
+                resultingGroupNames.push(element.groupName);
+            });
+        });
+        
+        clientSocket.emit(SEARCH_EVENTS.DELIVER_GENERAL_SEARCH_RESULTS, {
+            resultingUserNames: resultingUserNames,
+            resultingGroupNames: resultingGroupNames
+        });
+
     }
 
 }

@@ -32,16 +32,9 @@ io.on("connection", clientSocket => {
         SearchOperations.search(clientSocket, dbConnection, data, "Groups");
     });
 
-    clientSocket.on(SEARCH_EVENTS.SEARCH_UNKNOWN_USERS_AND_GROUPS, data => {
-        console.log("Need to perform general search");
+    clientSocket.on(SEARCH_EVENTS.PERFORM_GENERAL_SEARCH, data => {
+        SearchOperations.generalSearch(clientSocket, dbConnection, data);
     });
-
-    // clientSocket.on(SEARCH_EVENTS.PERFORM_SEARCH, data => {
-
-    //     //TODO: Use enums for search mode - Think carefully about having to use the same enum between backend and frontend (See sidebar and searchbar components)
-    //     if(data.searchMode === "Users and Groups")SearchOperations.generalSearch(clientSocket, dbConnection, data);
-    //     else SearchOperations.search(clientSocket, dbConnection, data, data.searchMode);
-    // });
 
     clientSocket.on(SEARCH_EVENTS.INVALID_SEARCH_STRING, () => {
         clientSocket.emit(SEARCH_EVENTS.INVALID_SEARCH_STRING, {
