@@ -1,0 +1,30 @@
+#searchResultsBar{
+    width: 95%;
+    height: 83.3%;
+    margin: auto;
+    margin-bottom: 2%;
+    display: flex;
+    flex-direction: column;
+}
+
+#searchResultsBar > div{
+    flex: 1;
+}
+
+#searchResultsBar, #searchResultsBar > div{
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.resultsTitleDiv{
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    text-align: left;
+    width: 100%;
+    height: 5%
+}
+
+.resultsTitleDiv > h3{
+    font-size: 0.75vmax;
+    margin-left: 3%;
+}
