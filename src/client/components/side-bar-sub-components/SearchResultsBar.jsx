@@ -1,5 +1,4 @@
 import React from "react";
-import shortid from "shortid";
 import "./side-bar-sub-components-css-files/search-results-bar-styles.css"
 import CommunicationEntity from "./CommunicationEntity";
 export default function SearchResultsBar(props){

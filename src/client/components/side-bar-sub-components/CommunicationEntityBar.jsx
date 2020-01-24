@@ -17,13 +17,11 @@ export default function CommunicationEntitiesBar(props){
     // TODO: Cannot add someone already added! Cannot join a group already joined (Introduce a search mode/boolean so we can easily differentiate between
     // known comm entities and unknown comm entities?)
     const friendModeCommEntityActions = [
-        {actionName: COMM_ENTITY_ACTIONS.ADD, className: "affirmative"}, 
         {actionName: COMM_ENTITY_ACTIONS.REMOVE, className: "negative"}, 
         {actionName: COMM_ENTITY_ACTIONS.DISMISS, className: "neutral"}
     ];
 
     const groupModeCommEntityActions = [
-        {actionName: COMM_ENTITY_ACTIONS.JOIN, className: "affirmative"}, 
         {actionName: COMM_ENTITY_ACTIONS.LEAVE, className: "negative"}, 
         {actionName: COMM_ENTITY_ACTIONS.DISMISS, className: "neutral"}
     ];
