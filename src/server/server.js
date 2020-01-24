@@ -3,8 +3,12 @@ const DatabaseConnection = require("./database-connection");
 const REGISTER_EVENTS = require("../events/register-events");
 const LOGIN_EVENTS = require("../events/login-events");
 const SEARCH_EVENTS = require("../events/search-events");
+const USER_ACTION_EVENTS = require("../events/user-action-events");
+
+// Singleton classes for their static methods
 const LoginRegistrationOperations = require("./server-operations/login-registration-operations");
 const SearchOperations = require("./server-operations/search-operations");
+const UserActionOperations = require("./server-operations/user-action-operations");
 const ServerOperationsUtilities = require("./server-operations/server-operations-utilities");
 
 // Server setup
@@ -34,6 +38,10 @@ io.on("connection", clientSocket => {
 
     clientSocket.on(SEARCH_EVENTS.PERFORM_GENERAL_SEARCH, data => {
         SearchOperations.generalSearch(clientSocket, dbConnection, data);
+    });
+
+    clientSocket.on(USER_ACTION_EVENTS.CREATE_GROUP, data => {
+        UserActionOperations.createGroup(clientSocket, dbConnection, data);
     });
 
     clientSocket.on(SEARCH_EVENTS.INVALID_SEARCH_STRING, () => {
