@@ -1,5 +1,6 @@
 const SEARCH_EVENTS = require("../../events/search-events");
 const ServerOperationsUtilities = require("../server-operations/server-operations-utilities");
+const CommunicationEntity = require("./communication-entity");
 class SearchOperations{
 
     /**
@@ -25,14 +26,14 @@ class SearchOperations{
                 return;
             }
 
-            const resultingNames = [];
+            const resultingCommEntities = [];
 
             results.forEach(element => {
-                if(mode === "Friends") resultingNames.push(element.userName);
-                else resultingNames.push(element.groupName);
+                if(mode === "Friends") resultingCommEntities.push(new CommunicationEntity(element.userName, element._id));
+                else resultingCommEntities.push(new CommunicationEntity(element.userName, element._id));
             });
 
-            clientSocket.emit(SEARCH_EVENTS.DELIVER_RESULTS, {results: resultingNames});
+            clientSocket.emit(SEARCH_EVENTS.DELIVER_RESULTS, {results: resultingCommEntities});
         });
     }
 
@@ -45,24 +46,24 @@ class SearchOperations{
     static generalSearch(clientSocket, dbConnection, data){
         const userNameQuery = {userName: new RegExp(data.stringQuery, 'i')}
         const groupNameQuery = {groupName: new RegExp(data.stringQuery, 'i')}
-        const resultingUserNames = [];
-        const resultingGroupNames = [];
+        const resultingUserCommEntities = [];
+        const resultingGroupCommEntities = [];
 
         dbConnection.findDocumentsInCollection("users", userNameQuery, (results) => {
             results.forEach(element => {
-                resultingUserNames.push(element.userName);
+                resultingUserCommEntities.push(new CommunicationEntity(element.userName, element._id));
             });
         });
 
         dbConnection.findDocumentsInCollection("groups", groupNameQuery, (results) => {
             results.forEach(element => {
-                resultingGroupNames.push(element.groupName);
+                resultingGroupCommEntities.push(new CommunicationEntity(element.groupName, element._id));
             });
         });
         
         clientSocket.emit(SEARCH_EVENTS.DELIVER_GENERAL_SEARCH_RESULTS, {
-            resultingUserNames: resultingUserNames,
-            resultingGroupNames: resultingGroupNames
+            resultingUserCommEntities: resultingUserCommEntities,
+            resultingGroupCommEntities: resultingGroupCommEntities
         });
 
     }

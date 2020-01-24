@@ -68,8 +68,7 @@ export default function CommunicationEntitiesBar(props){
             {props.communicationEntities.map((value, index) => {
                 return (
                     <CommunicationEntity
-                    key={"communicationEntity" + index}
-                    id={"communicationEntity" + index}
+                    key={"communicationEntity" + value._id}
                     onClick={(selectedIndex) => handleCommEntitySelected(selectedIndex)}
                     onContextMenu={(e, index) => {handleContextMenu(e,index)}}
                     index={index}
@@ -77,7 +76,7 @@ export default function CommunicationEntitiesBar(props){
                     actions={props.mode === "Friends" ? friendModeCommEntityActions : groupModeCommEntityActions}
                     showActionMenu={commEntityShowActionsIndex === index}
                     handleActionPressed={handleActionPressed}
-                    >{value}</CommunicationEntity>
+                    >{value._name}</CommunicationEntity>
                 );
             })}
         </div>

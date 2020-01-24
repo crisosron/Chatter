@@ -28,9 +28,12 @@ export default class SearchBar extends React.Component{
 
         // Setting up socket.io event listeners for SEARCH_EVENT responses from server
         socket.on(SEARCH_EVENTS.DELIVER_RESULTS, data => {
-            let newCommEntities = [];
-            for(let i = 0; i < data.results.length; i++) newCommEntities.push(data.results[i]);
-            this.props.updateCommEntities(newCommEntities);
+            this.props.updateCommEntities(data.results);
+        });
+
+        socket.on(SEARCH_EVENTS.DELIVER_GENERAL_SEARCH_RESULTS, data => {
+            this.props.updateGeneralSearchEntities(data.resultingUserCommEntities, data.resultingGroupCommEntities);
+            
         });
 
         socket.on(SEARCH_EVENTS.NO_RESULTS_FOUND, data => {

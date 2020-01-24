@@ -8,9 +8,17 @@ import MiscBar from "./side-bar-sub-components/MiscBar";
 export default function SideBar(props){
     const toggleOptions = ["Friends", "Groups", "Search"];
     const searchModes = ["Friends", "Groups", "Users and Groups"];
-    const defaultCommEntities = ["First comm entity", "Second Comm entity", "Third Comm entity"];
-    const [commEntities, setCommEntities] = useState(defaultCommEntities);
+    // const defaultCommEntities = ["First comm entity", "Second Comm entity", "Third Comm entity"];
+    const [commEntities, setCommEntities] = useState([]);
+
+    // These are the communication entities that are shown in the search 
+    const [generalSearchUserCommEntities, setGeneralSearchUserCommEntities] = useState([]);
+    const [generalSearchGroupCommEntities, setGeneralSearchGroupCommEntities] = useState([]);
+
+    // Keeps track of the current mode that this SideBar component adheres to
     const [selectedMode, setSelectedMode] = useState(toggleOptions[0]);
+
+    // Keeps track of the searching mode, (possible modes are: search friends, search known groups, search unknown users and groups)
     const [searchMode, setSearchMode] = useState(searchModes[0]);
     
     // Custom styling for the toggle switch
@@ -25,9 +33,14 @@ export default function SideBar(props){
         setCommEntities(newCommEntities);
     }
 
+    const updateGeneralSearchEntities = (userNames, groupNames) => {
+        setGeneralSearchUserCommEntities(userNames);
+        setGeneralSearchGroupCommEntities(groupNames);
+    }
+
     // Resets the current displayed communication entities to the default comm entities to display
     const resetDefaultCommEntities = () => {
-        setCommEntities(defaultCommEntities);
+        setCommEntities([]);
     }
 
     const handleToggleSwitchPressed = (selectedOptionIndex) => {
@@ -71,8 +84,8 @@ export default function SideBar(props){
         return(
             <div id="sideBar">
                 <ToggleSwitch id="friendGroupToggleSwitch" onClick={handleToggleSwitchPressed} style={toggleSwitchStyles} options={toggleOptions}/>    
-                <SearchBar mode={searchMode} updateCommEntities={updateCommEntities} resetDefaultCommEntities={resetDefaultCommEntities}/>
-                <SearchResultsBar></SearchResultsBar>
+                <SearchBar mode={searchMode} updateGeneralSearchEntities={updateGeneralSearchEntities} resetDefaultCommEntities={resetDefaultCommEntities}/>
+                <SearchResultsBar groupCommunicationEntities={generalSearchGroupCommEntities} userCommunicationEntities={generalSearchUserCommEntities} />
                 <MiscBar />
             </div>
         );
