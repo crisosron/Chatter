@@ -46,49 +46,30 @@ class SearchOperations{
         console.log("Inside generalSearch method. Querying for string: ", data.stringQuery);
         const userNameQuery = {userName: new RegExp(data.stringQuery, 'i')}
         const groupNameQuery = {groupName: new RegExp(data.stringQuery, 'i')}
-        const resultingUserCommEntities = [];
-        const resultingGroupCommEntities = [];
 
+        // Obtaining users with a username that is around the same as data.stringQuery and emitting it to frontend
         dbConnection.findDocumentsInCollection("users", userNameQuery, (results) => {
-            for(let result in results){
-                resultingUserCommEntities.push(new CommunicationEntity(result.userName, result._id));
-            }
-        });
-        console.log("Ended first findDocumentsInCollection call. resultingUserCommEntities.length: ", resultingUserCommEntities.length);
+            const resultingUserCommEntities = [];
+            results.forEach(element => {
+                resultingUserCommEntities.push(new CommunicationEntity(element.userName, element._id));
+            });
 
+            clientSocket.emit(SEARCH_EVENTS.DELIVER_GENERAL_SEARCH_USER_RESULTS, {
+                resultingUserCommEntities: resultingUserCommEntities
+            });
+        });
+
+        // Obtaining groups with a groupName that is around the same as data.stringQuery and emitting it to backend
         dbConnection.findDocumentsInCollection("groups", groupNameQuery, results => {
-            for(let result in results){
-                resultingGroupCommEntities.push(new CommunicationEntity(result.groupName, result._id));
-            }
+            const resultingGroupCommEntities = [];
+            results.forEach(element => {
+                resultingGroupCommEntities.push(new CommunicationEntity(element.groupName, element._id));
+            });
+
+            clientSocket.emit(SEARCH_EVENTS.DELIVER_GENERAL_SEARCH_GROUP_RESULTS, {
+                resultingGroupCommEntities: resultingGroupCommEntities
+            });
         });
-        console.log("Ended first findDocumentsInCollection call. resultingUserCommEntities.length: ", resultingUserCommEntities.length);
-
-
-        // dbConnection.findDocumentsInCollection("users", userNameQuery, (results) => {
-        //     if(results.length === 0) console.log("No results found for users");
-        //     results.forEach(element => {
-        //         console.log(`Adding user ${element.userName} to resultingUserCommEntities`);
-        //         resultingUserCommEntities.push(new CommunicationEntity(element.userName, element._id));
-        //         console.log("resultingUserCommEntites.length: ", 1);
-        //     });
-
-        //     dbConnection.findDocumentsInCollection("groups", groupNameQuery, (results) => {
-        //         if(results.length === 0) console.log("No results found for users");
-        //         results.forEach(element => {
-        //             console.log(`Adding group ${element.groupName} to resultingGroupCommEntities`);
-        //             resultingGroupCommEntities.push(new CommunicationEntity(element.groupName, element._id));
-        //             console.log("resultingGroupCommEntites.length: ", 1);
-        //         });
-        //     });
-
-        //     clientSocket.emit(SEARCH_EVENTS.DELIVER_GENERAL_SEARCH_RESULTS, {
-        //         resultingUserCommEntities: resultingUserCommEntities,
-        //         resultingGroupCommEntities: resultingGroupCommEntities
-        //     });
-    
-        // });
-        
-
     }
 
 }

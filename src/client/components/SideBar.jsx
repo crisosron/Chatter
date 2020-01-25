@@ -33,9 +33,12 @@ export default function SideBar(props){
         setCommEntities(newCommEntities);
     }
 
-    const updateGeneralSearchEntities = (userNames, groupNames) => {
-        setGeneralSearchUserCommEntities(userNames);
-        setGeneralSearchGroupCommEntities(groupNames);
+    const updateGeneralSearchUserEntities = (userCommEntities) => {
+        setGeneralSearchUserCommEntities(userCommEntities);
+    }
+
+    const updateGeneralSearchGroupEntities = groupCommEntities => {
+        setGeneralSearchGroupCommEntities(groupCommEntities);
     }
 
     // Resets the current displayed communication entities to the default comm entities to display
@@ -84,7 +87,7 @@ export default function SideBar(props){
         return(
             <div id="sideBar">
                 <ToggleSwitch id="friendGroupToggleSwitch" onClick={handleToggleSwitchPressed} style={toggleSwitchStyles} options={toggleOptions}/>    
-                <SearchBar mode={searchMode} updateGeneralSearchEntities={updateGeneralSearchEntities} resetDefaultCommEntities={resetDefaultCommEntities}/>
+                <SearchBar mode={searchMode} updateGeneralSearchUserEntities={updateGeneralSearchUserEntities} updateGeneralSearchGroupEntities={updateGeneralSearchGroupEntities} resetDefaultCommEntities={resetDefaultCommEntities}/>
                 <SearchResultsBar groupCommunicationEntities={generalSearchGroupCommEntities} userCommunicationEntities={generalSearchUserCommEntities} />
                 <MiscBar />
             </div>
