@@ -1,15 +1,8 @@
 import React, {useState} from "react"
 import CommunicationEntity from "./CommunicationEntity"
 import "./side-bar-sub-components-css-files/communication-entity-styles.css";
+import COMM_ENTITY_ACTIONS from "./comm-entity-actions";
 export default function CommunicationEntitiesBar(props){
-    const COMM_ENTITY_ACTIONS = {
-        ADD: "Add",
-        REMOVE: "Remove",
-        JOIN: "Join",
-        LEAVE: "Leave",
-        DISMISS: "Dismiss"
-    }
-
     const [selectedCommEntityIndex, setSelectedCommEntityIndex] = useState(-1);
     const [commEntityShowActionsIndex, setCommEntityShowActionsIndex] = useState(-1);
 
@@ -37,7 +30,7 @@ export default function CommunicationEntitiesBar(props){
         setCommEntityShowActionsIndex(index);
     }
 
-    function handleActionPressed(action, index){
+    function handleActionClicked(action, index){
         switch(action){
             case COMM_ENTITY_ACTIONS.DISMISS:
                 setSelectedCommEntityIndex(-1);
@@ -73,7 +66,7 @@ export default function CommunicationEntitiesBar(props){
                     className={selectedCommEntityIndex === index ? "selectedCommunicationEntity" : ""}
                     actions={props.mode === "Friends" ? friendModeCommEntityActions : groupModeCommEntityActions}
                     showActionMenu={commEntityShowActionsIndex === index}
-                    handleActionPressed={handleActionPressed}
+                    handleActionClicked={handleActionClicked}
                     >{value._name}</CommunicationEntity>
                 );
             })}

@@ -21,7 +21,7 @@ export default function CommunicationEntity(props){
                 return <div 
                 key={value.actionName + index} 
                 className={"actionDiv " + value.className} 
-                onClick={() => {props.handleActionPressed(value.actionName, index)}}>{value.actionName}</div>
+                onClick={() => {props.handleActionClicked(value.actionName, index)}}>{value.actionName}</div>
             })}
         </div>
     ); 

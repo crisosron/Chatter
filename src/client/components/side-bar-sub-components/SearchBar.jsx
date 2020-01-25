@@ -32,6 +32,9 @@ export default class SearchBar extends React.Component{
         });
 
         socket.on(SEARCH_EVENTS.DELIVER_GENERAL_SEARCH_RESULTS, data => {
+            console.log("Received event DELIVER_GENERAL_RESULTS");
+            console.log(`ddata.resultingUserCommEntities.length: ${data.resultingUserCommEntities.length}`);
+            console.log(`ddata.resultingGroupCommEntities.length: ${data.resultingGroupCommEntities.length}`);
             this.props.updateGeneralSearchEntities(data.resultingUserCommEntities, data.resultingGroupCommEntities);
             
         });
