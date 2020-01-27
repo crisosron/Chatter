@@ -22,10 +22,15 @@ export default class Login extends Component{
 
         socket.on(LOGIN_EVENTS.LOGIN_SUCCESFUL, data => {
             // TODO: Make input fields readonly
+            console.log("Received event login succesful");
+            console.log(data.thisUser);
             store.addNotification({
                 ...data.notification,
                 onRemoval: (id, removedBy) => {
-                    this.setState({redirectToChat: true});
+                    this.setState({
+                        redirectToChat: true,
+                        thisUser: data.thisUser
+                    });
                 }
             });
         })
@@ -46,7 +51,7 @@ export default class Login extends Component{
                 <Redirect push to={{
                     pathname: "/chat",
                     state: {
-                        //TODO: Insert initial state data in here
+                        thisUser: this.state.thisUser
                     }
                 }} />
             );

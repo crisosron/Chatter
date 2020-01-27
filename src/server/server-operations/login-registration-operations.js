@@ -19,8 +19,8 @@ class LoginRegistrationOperations{
         // also uses a callback function to determine whether or not there is a result with the given query. The callback function
         // is asynchronous and cannot return a value, therefore we must pass a callback function to documentExistsInCollection so that the callback
         // func that is passed in as a parameter can be called within the callback function used inside findOne with the results of the query
-        dbConnection.singleDocumentExistsInCollection("users", {userName: data.userName}, userNameExists => {
-            if(userNameExists) {
+        dbConnection.findSingleDocument("users", {userName: data.userName}, result => {
+            if(result !== null) {
                 
                 clientSocket.emit(REGISTER_EVENTS.REGISTRATION_DENIED, {
                     notification: ServerOperationsUtilities.createNotification("danger", "Registration Denied", "Username already exists")
@@ -29,8 +29,8 @@ class LoginRegistrationOperations{
             }
 
             // Inner documentExistsInCollection call checks if the email is already in use
-            dbConnection.singleDocumentExistsInCollection("users", {email: data.email}, emailExists => {
-                if(emailExists){
+            dbConnection.findSingleDocument("users", {email: data.email}, result => {
+                if(result !== null){
                     clientSocket.emit(REGISTER_EVENTS.REGISTRATION_DENIED, {
                         notification: ServerOperationsUtilities.createNotification("danger", "Registration Denied", "Email is already in use")
                     });
@@ -48,7 +48,7 @@ class LoginRegistrationOperations{
                 newUser.save();
 
                 clientSocket.emit(REGISTER_EVENTS.REGISTRATION_SUCCESSFUL, {
-                    notification: ServerOperationsUtilities.createNotification("success", "Registration Succesful", "Please wait to be redirected")
+                    notification: ServerOperationsUtilities.createNotification("success", "Registration Succesful", "Please wait to be redirected to login page"),
                 });
             })
         });
@@ -61,10 +61,13 @@ class LoginRegistrationOperations{
      * @param data {Object} - Object passed through socket.io events. Should contain userName and password properties
     */
     static login(clientSocket, dbConnection, data){
-        dbConnection.singleDocumentExistsInCollection("users", {userName: data.userName, password: data.password}, userExists => {
-            if(userExists){
+        dbConnection.findSingleDocument("users", {userName: data.userName, password: data.password}, result => {
+            if(result){
                 clientSocket.emit(LOGIN_EVENTS.LOGIN_SUCCESFUL, {
-                    notification: ServerOperationsUtilities.createNotification("success", "Login Succesful", "Please wait to be redirected")                  
+                    notification: ServerOperationsUtilities.createNotification("success", "Login Succesful", "Please wait to be redirected")                  ,
+                    thisUser: {
+                        id: result._id, // Id of document in the database
+                    }
                 });
                 return;
             }

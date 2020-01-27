@@ -10,7 +10,7 @@ export default class Chat extends Component{
     render(){
         return(
         <div id="mainWrapper">
-            <SideBar />
+            <SideBar thisUser={this.props.location.state.thisUser}/>
             <div id="chatPane">
             </div>
         </div>

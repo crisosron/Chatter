@@ -17,7 +17,7 @@ class DatabaseConnection{
      * @param query {Object} - Query object (using MongoDB)
      * @param cb {Function} - A calllback function that should be called with the results of this function
     */
-    singleDocumentExistsInCollection(collectionName, query, cb){
+    findSingleDocument(collectionName, query, cb){
         const collection = this._dbConnection.collection(collectionName);
         collection.findOne(query, function(err, result){
             if(err){
@@ -26,7 +26,7 @@ class DatabaseConnection{
             }
             
             // Calling the callback function that needs to use the result of this async callback function
-            cb(result !== null);
+            cb(result);
         });
     }
 

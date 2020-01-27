@@ -44,10 +44,7 @@ export default class Register extends Component{
         if(this.state.redirectToChat){
             return (
                 <Redirect push to={{
-                    pathname: "/chat",
-                    state: {
-                        //TODO: Insert initial state data in here
-                    }
+                    pathname: "/",
                 }} />
             );
         }

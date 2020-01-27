@@ -5,10 +5,7 @@ import COMM_ENTITY_ACTIONS from "./comm-entity-actions";
 export default function CommunicationEntitiesBar(props){
     const [selectedCommEntityIndex, setSelectedCommEntityIndex] = useState(-1);
     const [commEntityShowActionsIndex, setCommEntityShowActionsIndex] = useState(-1);
-
-    // TODO: Need a way of filtering out some of these actions! Eg - cannot remove a user who is not your friend! Can't leave a group we are not in!
-    // TODO: Cannot add someone already added! Cannot join a group already joined (Introduce a search mode/boolean so we can easily differentiate between
-    // known comm entities and unknown comm entities?)
+    
     const friendModeCommEntityActions = [
         {actionName: COMM_ENTITY_ACTIONS.REMOVE, className: "negative"}, 
         {actionName: COMM_ENTITY_ACTIONS.DISMISS, className: "neutral"}
