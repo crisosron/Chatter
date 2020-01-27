@@ -1,5 +1,7 @@
 require('dotenv/config');
 const DatabaseConnection = require("./database-connection");
+
+// Importing event enums
 const REGISTER_EVENTS = require("../events/register-events");
 const LOGIN_EVENTS = require("../events/login-events");
 const SEARCH_EVENTS = require("../events/search-events");
@@ -42,6 +44,10 @@ io.on("connection", clientSocket => {
 
     clientSocket.on(USER_ACTION_EVENTS.CREATE_GROUP, data => {
         UserActionOperations.createGroup(clientSocket, dbConnection, data);
+    });
+
+    clientSocket.on(USER_ACTION_EVENTS.ADD_FRIEND, data => {
+        UserActionOperations.
     });
 
     clientSocket.on(SEARCH_EVENTS.INVALID_SEARCH_STRING, () => {

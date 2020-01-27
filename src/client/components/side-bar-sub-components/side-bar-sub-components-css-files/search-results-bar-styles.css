@@ -11,6 +11,10 @@
     height: 20%;
 }
 
+#searchResultsBar > div > .communicationEntityActionsDiv{
+    height: 20%;
+}
+
 #searchResultsBar > div{
     flex: 1;
 }

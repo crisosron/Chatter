@@ -5,7 +5,7 @@ import COMM_ENTITY_ACTIONS from "./comm-entity-actions";
 export default function CommunicationEntitiesBar(props){
     const [selectedCommEntityIndex, setSelectedCommEntityIndex] = useState(-1);
     const [commEntityShowActionsIndex, setCommEntityShowActionsIndex] = useState(-1);
-    
+
     const friendModeCommEntityActions = [
         {actionName: COMM_ENTITY_ACTIONS.REMOVE, className: "negative"}, 
         {actionName: COMM_ENTITY_ACTIONS.DISMISS, className: "neutral"}
@@ -27,19 +27,13 @@ export default function CommunicationEntitiesBar(props){
         setCommEntityShowActionsIndex(index);
     }
 
-    function handleActionClicked(action, index){
+    function handleActionClicked(action, commEntityID){
         switch(action){
             case COMM_ENTITY_ACTIONS.DISMISS:
                 setSelectedCommEntityIndex(-1);
                 setCommEntityShowActionsIndex(-1);
                 break;
-            case COMM_ENTITY_ACTIONS.ADD:
-                alert("HANDLE Add")
-                break;
             case COMM_ENTITY_ACTIONS.REMOVE:
-                alert("HANDLE Remove");
-                break;
-            case COMM_ENTITY_ACTIONS.JOIN:
                 alert("HANDLE Remove");
                 break;
             case COMM_ENTITY_ACTIONS.LEAVE:
@@ -60,6 +54,7 @@ export default function CommunicationEntitiesBar(props){
                     onClick={(selectedIndex) => handleCommEntitySelected(selectedIndex)}
                     onContextMenu={(e, index) => {handleContextMenu(e,index)}}
                     index={index}
+                    commEntityID={value._id}
                     className={selectedCommEntityIndex === index ? "selectedCommunicationEntity" : ""}
                     actions={props.mode === "Friends" ? friendModeCommEntityActions : groupModeCommEntityActions}
                     showActionMenu={commEntityShowActionsIndex === index}

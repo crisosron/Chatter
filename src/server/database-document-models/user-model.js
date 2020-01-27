@@ -27,7 +27,9 @@ const userSchema = new Schema({
 
     groups: [{type: mongoose.Schema.Types.ObjectId, ref: 'Group'}],
 
-    friends: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
+    friends: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+
+    pendingFriendRequests: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
     
 }, {timestamps: true});
 

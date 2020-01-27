@@ -13,7 +13,7 @@ class UserActionOperations{
     */
     static createGroup(clientSocket, dbConnection, data){
 
-        dbConnection.singleDocumentExistsInCollection("groups", {groupName: data.groupName}, groupExists => {
+        dbConnection.findSingleDocument("groups", {groupName: data.groupName}, groupExists => {
             if(groupExists){
                 clientSocket.emit(USER_ACTION_EVENTS.CREATE_GROUP_DENIED, {
                     notification: ServerOperationsUtilities.createNotification("danger", "Group Creation Denied", "Groupname is already in use by another group")
@@ -33,6 +33,16 @@ class UserActionOperations{
                 });
             }
         });
+    }
+
+    /**
+     * Adds a user to another user's friends list
+     * @param clientSocket {Socket} - Socket object of the client that issued the add request
+     * @param dbConnection {DatabaseConnection} - {@link DatabaseConnection} instance to manipulate the database
+     * @param data {Object} - Object passed through socket io events, should contain `addingUserID` and `userToAddID`
+    */
+    static addFriend(clientSocket, dbConnection, data){
+        
     }
 }
 
