@@ -65,7 +65,7 @@ export default function SearchResultsBar(props){
                     onClick={(selectedIndex) => {handleUserCommEntitySelected(selectedIndex)}}
                     onContextMenu={(e, index) => {handleUserOnContextMenu(e, index)}}
                     index={index}
-                    className={selectedUserCommEntityIndex === index ? "selectedCommunicationEntity" : ""}
+                    className={selectedUserCommEntityIndex === index ? "searchResultCommEntity selectedCommunicationEntity" : "searchResultCommEntity"}
                     actions={userCommEntityActions}
                     showActionMenu={userCommEntityShowActionsIndex === index}
                     handleActionPressed={handleActionClicked}
@@ -86,7 +86,7 @@ export default function SearchResultsBar(props){
                         onClick={(selectedIndex) => {handleGroupCommEntitySelected(selectedIndex)}}
                         onContextMenu={(e, index) => {handleGroupOnContextMenu(e, index)}}
                         index={index}
-                        className={selectedGroupCommEntityIndex === index ? "selectedCommunicationEntity" : ""}
+                        className={selectedGroupCommEntityIndex === index ? "searchResultCommEntity selectedCommunicationEntity" : "searchResultCommEntity"}
                         actions={groupCommEntityActions}
                         showActionMenu={groupCommEntityShowActionsIndex === index}
                         handleActionPressed={handleActionClicked}

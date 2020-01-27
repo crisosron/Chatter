@@ -22,8 +22,6 @@ export default class Login extends Component{
 
         socket.on(LOGIN_EVENTS.LOGIN_SUCCESFUL, data => {
             // TODO: Make input fields readonly
-            console.log("Received event login succesful");
-            console.log(data.thisUser);
             store.addNotification({
                 ...data.notification,
                 onRemoval: (id, removedBy) => {

@@ -7,6 +7,10 @@
     flex-direction: column;
 }
 
+.searchResultCommEntity{
+    height: 20%;
+}
+
 #searchResultsBar > div{
     flex: 1;
 }
