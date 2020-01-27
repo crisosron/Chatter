@@ -47,7 +47,8 @@ io.on("connection", clientSocket => {
     });
 
     clientSocket.on(USER_ACTION_EVENTS.ADD_FRIEND, data => {
-        UserActionOperations.
+        console.log("Received event USER_ACTION_EVENTS.ADD_FRIEND");
+        UserActionOperations.addFriend(clientSocket, dbConnection, data);
     });
 
     clientSocket.on(SEARCH_EVENTS.INVALID_SEARCH_STRING, () => {

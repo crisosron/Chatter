@@ -13,8 +13,8 @@ class UserActionOperations{
     */
     static createGroup(clientSocket, dbConnection, data){
 
-        dbConnection.findSingleDocument("groups", {groupName: data.groupName}, groupExists => {
-            if(groupExists){
+        dbConnection.findSingleDocument("groups", {groupName: data.groupName}, group => {
+            if(group){
                 clientSocket.emit(USER_ACTION_EVENTS.CREATE_GROUP_DENIED, {
                     notification: ServerOperationsUtilities.createNotification("danger", "Group Creation Denied", "Groupname is already in use by another group")
                 });
@@ -42,7 +42,38 @@ class UserActionOperations{
      * @param data {Object} - Object passed through socket io events, should contain `addingUserID` and `userToAddID`
     */
     static addFriend(clientSocket, dbConnection, data){
-        
+        User.findOne({_id: data.addingUserID}, (err, addingUser) => {
+            console.log("In findOne cb for addingUser. addinguser.pendingFrienRequests.length: ", addingUser.pendingFriendRequests.length);
+            if(err){
+                console.log("Error detected with findOne: ", err);
+                return;
+            }
+            addingUser.pendingFriendRequests.push(data.userToAddID);
+            // console.log(addingUser);
+            // console.log(addingUser.pendingFriendRequests.length);
+        });
+
+        User.findOne({_id: data.userToAddID}, (err, userToAdd) => {
+            console.log("In findOne cb for userToAdd. addinguser.pendingFrienRequests.length: ", userToAdd.pendingFriendRequests.length);
+            if(err){
+                console.log("Error detected with findOne: ", err);
+                return;
+            }
+            userToAdd.pendingFriendRequests.push(data.addingUserID);
+            // console.log(userToAdd);
+            // console.log(userToAdd.pendingFriendRequests.length);
+        });
+
+        User.findOne({_id: data.addingUserID}, (err, addingUser) => {
+            console.log("------------ ADDING USER DETAILS -------------");
+            console.log(addingUser);
+        });
+
+        User.findOne({_id: data.userToAddID}, (err, userToAdd) => {
+            console.log("------------ USER TO ADD DETAILS -------------");
+            console.log(userToAdd);
+        });
+
     }
 }
 

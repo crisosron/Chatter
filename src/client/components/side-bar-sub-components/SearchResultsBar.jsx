@@ -44,7 +44,6 @@ export default function SearchResultsBar(props){
     
     const handleUserOnContextMenu = (e, index) => {
         e.preventDefault();
-        console.log("Hnalde user on context menu");
         setUserCommEntityShowActionsIndex(index);
         setGroupCommEntityShowActionsIndex(-1);
         deselectAll();
@@ -64,6 +63,7 @@ export default function SearchResultsBar(props){
                     addingUserID: props.thisUser.id,
                     userToAddID: commEntityID
                 });
+                deselectAllContext();
                 break;
             case COMM_ENTITY_ACTIONS.DISMISS:
                 deselectAll();
