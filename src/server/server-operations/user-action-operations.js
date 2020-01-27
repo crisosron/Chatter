@@ -11,10 +11,9 @@ class UserActionOperations{
      * @param data {Object} - Data passed through socket io events. In this method, data should contain groupName 
      * 
     */
-    static createGroup(clientSocket, dbConnection, data){
-
-        dbConnection.findSingleDocument("groups", {groupName: data.groupName}, group => {
-            if(group){
+    static createGroup(clientSocket, data){
+        Group.findOne({groupName: data.groupName}, (err, res) => {
+            if(res){
                 clientSocket.emit(USER_ACTION_EVENTS.CREATE_GROUP_DENIED, {
                     notification: ServerOperationsUtilities.createNotification("danger", "Group Creation Denied", "Groupname is already in use by another group")
                 });

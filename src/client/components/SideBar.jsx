@@ -87,7 +87,7 @@ export default function SideBar(props){
         return(
             <div id="sideBar">
                 <ToggleSwitch id="friendGroupToggleSwitch" onClick={handleToggleSwitchPressed} style={toggleSwitchStyles} options={toggleOptions}/>    
-                <SearchBar mode={searchMode} updateGeneralSearchUserEntities={updateGeneralSearchUserEntities} updateGeneralSearchGroupEntities={updateGeneralSearchGroupEntities} resetDefaultCommEntities={resetDefaultCommEntities}/>
+                <SearchBar thisUser={props.thisUser} mode={searchMode} updateGeneralSearchUserEntities={updateGeneralSearchUserEntities} updateGeneralSearchGroupEntities={updateGeneralSearchGroupEntities} resetDefaultCommEntities={resetDefaultCommEntities}/>
                 <SearchResultsBar groupCommunicationEntities={generalSearchGroupCommEntities} userCommunicationEntities={generalSearchUserCommEntities} thisUser={props.thisUser}/>
                 <MiscBar />
             </div>
@@ -97,7 +97,7 @@ export default function SideBar(props){
     return(
         <div id = "sideBar">
             <ToggleSwitch id="friendGroupToggleSwitch" onClick={handleToggleSwitchPressed} style={toggleSwitchStyles} options={toggleOptions}/>
-            <SearchBar mode={selectedMode} updateCommEntities={updateCommEntities} resetDefaultCommEntities={resetDefaultCommEntities}/>
+            <SearchBar thisUser={props.thisUser} mode={selectedMode} updateCommEntities={updateCommEntities} resetDefaultCommEntities={resetDefaultCommEntities}/>
             <CommunicationEntitiesBar id="communicationEntitiesBar" communicationEntities={commEntities} mode={selectedMode} thisUser={props.thisUser}/>
             <MiscBar />
         </div>

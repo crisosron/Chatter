@@ -12,25 +12,29 @@ class LoginRegistrationOperations{
      * @param dbConnection {DatabaseConnection} - Connection to the database
      * @param data {Object} - An object passed through socket.io events. For this method, data should include userName, email and password
     */
-    static registerUser(clientSocket, dbConnection, data){
+    static registerUser(clientSocket, data){
+        User.findOne({userName: data.userName}, (err, res) => {
+            if(err){
+                console.log(`Error in LoginRegistrationOperations.registerUser with userName query: ${err}`);
+                return;
+            }
 
-        // Outer documentExistsInCollection call checks if the username is already in use
-        // Note that a callback function is required since documentExistsInCollection uses findOne native MongoDB method, which in turn,
-        // also uses a callback function to determine whether or not there is a result with the given query. The callback function
-        // is asynchronous and cannot return a value, therefore we must pass a callback function to documentExistsInCollection so that the callback
-        // func that is passed in as a parameter can be called within the callback function used inside findOne with the results of the query
-        dbConnection.findSingleDocument("users", {userName: data.userName}, result => {
-            if(result !== null) {
-                
+            // If the given username is already registered, deny registration
+            if(res !== null){
                 clientSocket.emit(REGISTER_EVENTS.REGISTRATION_DENIED, {
                     notification: ServerOperationsUtilities.createNotification("danger", "Registration Denied", "Username already exists")
                 });
                 return;
             }
 
-            // Inner documentExistsInCollection call checks if the email is already in use
-            dbConnection.findSingleDocument("users", {email: data.email}, result => {
-                if(result !== null){
+            User.findOne({email: data.email}, (err, res) => {
+                if(err){
+                    console.log(`Error in LoginRegistrationOperations.registerUser with email query: ${err}`);
+                    return;
+                }
+
+                // If the given email is already in use, deny registration
+                if(res !== null){
                     clientSocket.emit(REGISTER_EVENTS.REGISTRATION_DENIED, {
                         notification: ServerOperationsUtilities.createNotification("danger", "Registration Denied", "Email is already in use")
                     });
@@ -50,7 +54,7 @@ class LoginRegistrationOperations{
                 clientSocket.emit(REGISTER_EVENTS.REGISTRATION_SUCCESSFUL, {
                     notification: ServerOperationsUtilities.createNotification("success", "Registration Succesful", "Please wait to be redirected to login page"),
                 });
-            })
+            });
         });
     }
 
@@ -60,8 +64,13 @@ class LoginRegistrationOperations{
      * @param dbConnection {DatabaseConnection} - Connection to the database
      * @param data {Object} - Object passed through socket.io events. Should contain userName and password properties
     */
-    static login(clientSocket, dbConnection, data){
-        dbConnection.findSingleDocument("users", {userName: data.userName, password: data.password}, result => {
+    static login(clientSocket, data){
+        User.findOne({userName: data.userName, password: data.password}, (err, result) => {
+            if(err){
+                console.log(`Error in LoginRegistrationOperations.login: ${err}`);
+                return;
+            }
+
             if(result){
                 clientSocket.emit(LOGIN_EVENTS.LOGIN_SUCCESFUL, {
                     notification: ServerOperationsUtilities.createNotification("success", "Login Succesful", "Please wait to be redirected")                  ,
@@ -74,8 +83,7 @@ class LoginRegistrationOperations{
 
             clientSocket.emit(LOGIN_EVENTS.LOGIN_DENIED, {
                 notification: ServerOperationsUtilities.createNotification("danger", "Login Denied", "Please check your login credentials")
-            });
-            return;
+            });    
         });
     }
 }

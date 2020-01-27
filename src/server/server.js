@@ -23,32 +23,32 @@ let dbConnection = new DatabaseConnection();
 
 io.on("connection", clientSocket => {
     clientSocket.on(REGISTER_EVENTS.REQUEST_REGISTRATION, data => {
-        LoginRegistrationOperations.registerUser(clientSocket, dbConnection, data);
+        LoginRegistrationOperations.registerUser(clientSocket, data);
     });
 
     clientSocket.on(LOGIN_EVENTS.REQUEST_LOGIN, data => {
-        LoginRegistrationOperations.login(clientSocket, dbConnection, data);
+        LoginRegistrationOperations.login(clientSocket, data);
     });
 
     clientSocket.on(SEARCH_EVENTS.SEARCH_FRIENDS, data => {
-        SearchOperations.search(clientSocket, dbConnection, data, "Friends");
+        SearchOperations.search(clientSocket, data, "Friends");
     });
 
     clientSocket.on(SEARCH_EVENTS.SEARCH_GROUPS, data => {
-        SearchOperations.search(clientSocket, dbConnection, data, "Groups");
+        SearchOperations.search(clientSocket, data, "Groups");
     });
 
     clientSocket.on(SEARCH_EVENTS.PERFORM_GENERAL_SEARCH, data => {
-        SearchOperations.generalSearch(clientSocket, dbConnection, data);
+        SearchOperations.generalSearch(clientSocket, data);
     });
 
     clientSocket.on(USER_ACTION_EVENTS.CREATE_GROUP, data => {
-        UserActionOperations.createGroup(clientSocket, dbConnection, data);
+        UserActionOperations.createGroup(clientSocket, data);
     });
 
     clientSocket.on(USER_ACTION_EVENTS.ADD_FRIEND, data => {
         console.log("Received event USER_ACTION_EVENTS.ADD_FRIEND");
-        UserActionOperations.addFriend(clientSocket, dbConnection, data);
+        UserActionOperations.addFriend(clientSocket, data);
     });
 
     clientSocket.on(SEARCH_EVENTS.INVALID_SEARCH_STRING, () => {
