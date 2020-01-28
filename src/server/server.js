@@ -48,12 +48,6 @@ io.on("connection", clientSocket => {
 
     clientSocket.on(USER_ACTION_EVENTS.ADD_FRIEND, data => {
         UserActionOperations.addFriend(clientSocket, data);
-
-        // console.log("------- ADDING USER DETAILS ------------");
-        // ServerOperationsUtilities.printUser(data.addingUserID);
-
-        // console.log("------- USER TO ADD DETAILS ------------);
-        // ServerOperationsUtilities.printUser(data.userToAddID);
     });
 
     clientSocket.on(SEARCH_EVENTS.INVALID_SEARCH_STRING, () => {
