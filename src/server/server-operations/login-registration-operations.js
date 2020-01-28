@@ -9,7 +9,6 @@ class LoginRegistrationOperations{
      * Registers a new user by adding them to the database. Performs precondition checks on whether or not the supplied details are already
      * in use by another user
      * @param clientSocket {Object} - Socket of the client that requested the registration of a new user
-     * @param dbConnection {DatabaseConnection} - Connection to the database
      * @param data {Object} - An object passed through socket.io events. For this method, data should include userName, email and password
     */
     static registerUser(clientSocket, data){
@@ -61,7 +60,6 @@ class LoginRegistrationOperations{
     /**
      * Logs a client in by checking their supplied details against the database
      * @param clientSocket {Object} - Socket of the client that issued the login request
-     * @param dbConnection {DatabaseConnection} - Connection to the database
      * @param data {Object} - Object passed through socket.io events. Should contain userName and password properties
     */
     static login(clientSocket, data){

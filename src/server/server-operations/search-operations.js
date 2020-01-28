@@ -8,7 +8,6 @@ class SearchOperations{
     /**
      * Performs a search through the database based on some string query
      * @param clientSocket {Socket} - Socket object of the client that requested the search
-     * @param dbConnection {DatabaseConnection} - DatabaseConnection object to perform the query with the databse
      * @param data {Object} - Object passed through socket io events. In this case, it should contain stringQuery which is the value to be searched for in the collections 
      * @param mode {String} - Indicates whether we are searching for "Friends" or "Groups"
     */
@@ -47,7 +46,6 @@ class SearchOperations{
     /**
      * Performs a search for both usernames and groupnames for a given string
      * @param clientSocket {Socket} - Socket object of the client that issued the general search 
-     * @param dbConnection {DatabaseConnection} - {@link DatabaseConnection} object to perform the query with the database
      * @param data {Object} - Object passed through socket.io events. In this case, it should contain stringQuery
     */
     static generalSearch(clientSocket, data){

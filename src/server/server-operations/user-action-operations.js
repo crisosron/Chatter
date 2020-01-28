@@ -2,12 +2,12 @@ const {User} = require("../database-document-models/user-model");
 const {Group} = require("../database-document-models/group-model");
 const ServerOperationsUtilities = require("./server-operations-utilities");
 const USER_ACTION_EVENTS = require("../../events/user-action-events");
+const mongoose = require("mongoose");
 class UserActionOperations{
 
     /**
      * Creates a group and saves it into the database
      * @param clientSocket {Socket} - The socket of the group creator
-     * @param dbConnection {DatabaseConnection} - {@link DatabaseConnection} instance so that the database can be manipulated
      * @param data {Object} - Data passed through socket io events. In this method, data should contain groupName 
      * 
     */
@@ -37,42 +37,21 @@ class UserActionOperations{
     /**
      * Adds a user to another user's friends list
      * @param clientSocket {Socket} - Socket object of the client that issued the add request
-     * @param dbConnection {DatabaseConnection} - {@link DatabaseConnection} instance to manipulate the database
      * @param data {Object} - Object passed through socket io events, should contain `addingUserID` and `userToAddID`
     */
-    static addFriend(clientSocket, dbConnection, data){
-        User.findOne({_id: data.addingUserID}, (err, addingUser) => {
-            console.log("In findOne cb for addingUser. addinguser.pendingFrienRequests.length: ", addingUser.pendingFriendRequests.length);
-            if(err){
-                console.log("Error detected with findOne: ", err);
-                return;
-            }
-            addingUser.pendingFriendRequests.push(data.userToAddID);
-            // console.log(addingUser);
-            // console.log(addingUser.pendingFriendRequests.length);
-        });
+    static addFriend(clientSocket, data){
 
-        User.findOne({_id: data.userToAddID}, (err, userToAdd) => {
-            console.log("In findOne cb for userToAdd. addinguser.pendingFrienRequests.length: ", userToAdd.pendingFriendRequests.length);
-            if(err){
-                console.log("Error detected with findOne: ", err);
-                return;
-            }
-            userToAdd.pendingFriendRequests.push(data.addingUserID);
-            // console.log(userToAdd);
-            // console.log(userToAdd.pendingFriendRequests.length);
-        });
-
-        User.findOne({_id: data.addingUserID}, (err, addingUser) => {
-            console.log("------------ ADDING USER DETAILS -------------");
-            console.log(addingUser);
-        });
-
-        User.findOne({_id: data.userToAddID}, (err, userToAdd) => {
-            console.log("------------ USER TO ADD DETAILS -------------");
-            console.log(userToAdd);
-        });
-
+        // Adding ObjectID of userToAdd into pendingFriendRequests of addingUser
+        User.findOneAndUpdate(
+            {_id: data.addingUserID}, // Condition
+            {$addToSet: {pendingFriendRequests: mongoose.Types.ObjectId(data.userToAddID)}}, // Update query
+        );
+        
+        // Adding ObjectID of addingUser into pendingFriendRequests of userToAdd
+        User.findOneAndUpdate(
+            {_id: data.userToAddID}, // Condition
+            {$addToSet: {pendingFriendRequests: mongoose.Types.ObjectId(data.addingUserID)}}, // Update query
+        );
     }
 }
 

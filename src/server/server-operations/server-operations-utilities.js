@@ -1,4 +1,5 @@
 let store = require("react-notifications-component");
+const {User} = require("../database-document-models/user-model");
 class ServerOperationsUtilities{
 
     /**
@@ -23,6 +24,16 @@ class ServerOperationsUtilities{
                 store.removeNotification(id);
             }
         }
+    }
+
+    static printUser(id){
+        User.findById(id, (err, res) => {
+            if(err){
+                console.log("Error in ServerOperationsUtilities.printUser: ", err);
+                return;
+            }
+            console.log(res);
+        });
     }
 }
 
