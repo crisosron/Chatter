@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import "../css-files/login-register-styles.css";
 import "../css-files/button-styles.css";
 import socket from "../../index";
-import {store} from "react-notifications-component"
-import "react-notifications-component/dist/theme.css";
+// import {store} from "react-notifications-component"
+// import "react-notifications-component/dist/theme.css";
 import LOGIN_EVENTS from "../../events/login-events";
+import NotificationHandler from "../notification-handler";
 import {Redirect} from "react-router-dom";
 export default class Login extends Component{
     constructor(props){
@@ -16,21 +17,18 @@ export default class Login extends Component{
     }
 
     initServerListening(){
-        socket.on(LOGIN_EVENTS.LOGIN_DENIED, data => {
-            store.addNotification(data.notification);
+        socket.on(LOGIN_EVENTS.LOGIN_DENIED, () => {
+            NotificationHandler.createNotification("danger", "Login Denied", "Please check your login credentials");
         })
 
         socket.on(LOGIN_EVENTS.LOGIN_SUCCESFUL, data => {
-            // TODO: Make input fields readonly
-            store.addNotification({
-                ...data.notification,
-                onRemoval: (id, removedBy) => {
-                    this.setState({
-                        redirectToChat: true,
-                        thisUser: data.thisUser
-                    });
-                }
+            NotificationHandler.createNotification("success", "Login Successful", "Please wait to be redirected", 3000, (id, removedBy) => {
+                this.setState({
+                    redirectToChat: true,
+                    thisUser: data.thisUser
+                });
             });
+            // TODO: Make input fields readonly
         })
     }
 

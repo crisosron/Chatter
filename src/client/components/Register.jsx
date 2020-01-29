@@ -1,30 +1,26 @@
 import React, { Component } from "react";
 import "../css-files/login-register-styles.css"
 import socket from "../../index"
-import {store} from "react-notifications-component";
 import {Redirect} from "react-router-dom";
-import "react-notifications-component/dist/theme.css";
+import NotificationHandler from "../notification-handler";
 import REGISTER_EVENTS from "../../events/register-events"
 export default class Register extends Component{
     constructor(props){
         super(props);
         this.initServerListening();
         this.state = {
-            redirectToChat: false
+            redirectToLogin: false
         }
     }
 
     initServerListening(){
         socket.on(REGISTER_EVENTS.REGISTRATION_DENIED, data => {
-            store.addNotification(data.notification);
+            NotificationHandler.createNotification("danger", "Registration Denied", data.reason);
         });
 
         socket.on(REGISTER_EVENTS.REGISTRATION_SUCCESSFUL, data => {
-            store.addNotification({
-                ...data.notification,
-                onRemoval: (id, removedBy) => {
-                    this.setState({redirectToChat: true});
-                }
+            NotificationHandler.createNotification("success", "Registration Successful", "Please wait to be redirected to login", 3000, (id, removedBy) => {
+                this.setState({redirectToLogin: true});                
             });
         })
     }
@@ -41,7 +37,7 @@ export default class Register extends Component{
     }
 
     render(){
-        if(this.state.redirectToChat){
+        if(this.state.redirectToLogin){
             return (
                 <Redirect push to={{
                     pathname: "/",

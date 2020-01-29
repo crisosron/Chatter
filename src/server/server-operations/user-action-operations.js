@@ -1,6 +1,5 @@
 const {User} = require("../database-document-models/user-model");
 const {Group} = require("../database-document-models/group-model");
-const ServerOperationsUtilities = require("./server-operations-utilities");
 const USER_ACTION_EVENTS = require("../../events/user-action-events");
 const mongoose = require("mongoose");
 class UserActionOperations{
@@ -14,9 +13,7 @@ class UserActionOperations{
     static createGroup(clientSocket, data){
         Group.findOne({groupName: data.groupName}, (err, res) => {
             if(res){
-                clientSocket.emit(USER_ACTION_EVENTS.CREATE_GROUP_DENIED, {
-                    notification: ServerOperationsUtilities.createNotification("danger", "Group Creation Denied", "Groupname is already in use by another group")
-                });
+                clientSocket.emit(USER_ACTION_EVENTS.CREATE_GROUP_DENIED); // TODO: Create notification for this in the front end. Failure reason is that the groupname is already in use
 
             }else{
                 let newGroup = new Group({
@@ -27,9 +24,7 @@ class UserActionOperations{
         
                 newGroup.save();
 
-                clientSocket.emit(USER_ACTION_EVENTS.CREATE_GROUP_DENIED, {
-                    notification: ServerOperationsUtilities.createNotification("success", "Group Creation Success", "Your group has been created and is ready for use")
-                });
+                clientSocket.emit(USER_ACTION_EVENTS.CREATE_GROUP_SUCCESS); // TODO: Create notification for this in the front end.
             }
         });
     }
@@ -49,14 +44,14 @@ class UserActionOperations{
 
             if(addingUser.pendingFriendRequests.includes(userToAddObjectID)){ // If the request has already been sent previously
                 clientSocket.emit(USER_ACTION_EVENTS.ADD_FRIEND_DENIED, {
-                    notification: ServerOperationsUtilities.createNotification("warning", "Cannot add friend", "A friend request has already been sent to this user")
+                    reason: "A friend request has already been sent to this user"
                 });                
                 return;
 
             }else if(addingUser.friends.includes(userToAddObjectID)){ // If they are already friends
                 clientSocket.emit(USER_ACTION_EVENTS.ADD_FRIEND_DENIED, {
-                    notification: ServerOperationsUtilities.createNotification("warning", "Cannot add friend", "This user has already been added"),
-                });                
+                    reason: "This user has already been added"
+                });
                 return;
             }
 
@@ -72,10 +67,13 @@ class UserActionOperations{
                 {$addToSet: {pendingFriendRequests: mongoose.Types.ObjectId(data.addingUserID)}}, // Update query
             );
 
-            clientSocket.emit(USER_ACTION_EVENTS.ADD_FRIEND_SENT, {
-                notification: ServerOperationsUtilities.createNotification("success", "Friend Request Sent", "A friend request was succesfully sent"),
-            });
+            clientSocket.emit(USER_ACTION_EVENTS.ADD_FRIEND_SENT);
+                
         });
+    }
+
+    static confirmFriendRequest(clientSocket, data){
+
     }
 }
 

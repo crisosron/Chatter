@@ -4,7 +4,7 @@ import CommunicationEntity from "./CommunicationEntity";
 import COMM_ENTITY_ACTIONS from "./comm-entity-actions";
 import socket from "../../../index";
 import USER_ACTION_EVENTS from "../../../events/user-action-events";
-import {store} from "react-notifications-component";
+import NotificationHandler from "../../notification-handler";
 export default function SearchResultsBar(props){
     const [selectedUserCommEntityIndex, setSelectedUserCommEntityIndex] = useState(-1);
     const [selectedGroupCommEntityIndex, setSelectedGroupCommEntityIndex] = useState(-1);
@@ -77,11 +77,11 @@ export default function SearchResultsBar(props){
     }
 
     socket.on(USER_ACTION_EVENTS.ADD_FRIEND_SENT, data => {
-        store.addNotification(data.notification);
+        NotificationHandler.createNotification("success", "Friend Request Sent", "A friend request has been succesfully sent to the user");
     });
 
     socket.on(USER_ACTION_EVENTS.ADD_FRIEND_DENIED, data => {
-        store.addNotification(data.notification);
+        NotificationHandler.createNotification("danger", "Cannot Send Friend Request", data.reason);
     });
 
     return(

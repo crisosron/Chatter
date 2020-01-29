@@ -1,5 +1,4 @@
 const {User} = require("../database-document-models/user-model");
-const ServerOperationsUtilities = require("./server-operations-utilities");
 const REGISTER_EVENTS = require("../../events/register-events");
 const LOGIN_EVENTS = require("../../events/login-events");
 
@@ -21,7 +20,7 @@ class LoginRegistrationOperations{
             // If the given username is already registered, deny registration
             if(res !== null){
                 clientSocket.emit(REGISTER_EVENTS.REGISTRATION_DENIED, {
-                    notification: ServerOperationsUtilities.createNotification("danger", "Registration Denied", "Username already exists")
+                    reason: "Username has already been registered"
                 });
                 return;
             }
@@ -35,7 +34,7 @@ class LoginRegistrationOperations{
                 // If the given email is already in use, deny registration
                 if(res !== null){
                     clientSocket.emit(REGISTER_EVENTS.REGISTRATION_DENIED, {
-                        notification: ServerOperationsUtilities.createNotification("danger", "Registration Denied", "Email is already in use")
+                        reason: "Email is already in use"
                     });
                     return;
                 }
@@ -50,9 +49,7 @@ class LoginRegistrationOperations{
                 // Storing the new User document to the database
                 newUser.save();
 
-                clientSocket.emit(REGISTER_EVENTS.REGISTRATION_SUCCESSFUL, {
-                    notification: ServerOperationsUtilities.createNotification("success", "Registration Succesful", "Please wait to be redirected to login page"),
-                });
+                clientSocket.emit(REGISTER_EVENTS.REGISTRATION_SUCCESSFUL);
             });
         });
     }
@@ -71,7 +68,6 @@ class LoginRegistrationOperations{
 
             if(result){
                 clientSocket.emit(LOGIN_EVENTS.LOGIN_SUCCESFUL, {
-                    notification: ServerOperationsUtilities.createNotification("success", "Login Succesful", "Please wait to be redirected")                  ,
                     thisUser: {
                         id: result._id, // Id of document in the database
                     }
@@ -79,9 +75,7 @@ class LoginRegistrationOperations{
                 return;
             }
 
-            clientSocket.emit(LOGIN_EVENTS.LOGIN_DENIED, {
-                notification: ServerOperationsUtilities.createNotification("danger", "Login Denied", "Please check your login credentials")
-            });    
+            clientSocket.emit(LOGIN_EVENTS.LOGIN_DENIED);
         });
     }
 }
