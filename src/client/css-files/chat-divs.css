@@ -12,7 +12,7 @@
     color: var(--light-text-color);
 }
 
-#chatPane{
+#mainView{
     flex: 5;
     background-color: var(--primary-color);
 }
