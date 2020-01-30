@@ -5,25 +5,31 @@
     margin: auto;
 }
 
-#miscBar > button{
-    flex: 1;
-    background-color: var(--secondary-color);
-    color: var(--light-text-color);
+#miscBar > .react-contextmenu-wrapper{
+    flex:1;
     display: flex;
-    justify-content: center;
-    align-items: center;
     transition: 0.2s linear;
-    font-size: 0.75vmax;
-    outline: none;
-    border: none;
-    margin-right: 10px;
 }
 
-#miscBar > button:hover{
+#miscBar > .react-contextmenu-wrapper:hover{
     box-shadow: var(--box-shadow-lighten);
     border-radius: 15px;
 }
 
-#miscBar > button:active{
-    background-color: var(--accent-color);
+.miscBarMenuItem{
+    font-size: 0.75vmax;
+    transition: 0.2s linear;
+}
+
+.miscBarMenuItem:hover{
+    box-shadow: var(--box-shadow-lighten);
+}
+
+#settingsDiv{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s linear;
+    font-size: 0.75vmax
 }
