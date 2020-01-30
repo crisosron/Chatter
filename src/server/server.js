@@ -11,7 +11,6 @@ const USER_ACTION_EVENTS = require("../events/user-action-events");
 const LoginRegistrationOperations = require("./server-operations/login-registration-operations");
 const SearchOperations = require("./server-operations/search-operations");
 const UserActionOperations = require("./server-operations/user-action-operations");
-const ServerOperationsUtilities = require("./server-operations/server-operations-utilities");
 
 // Server setup
 let io = require("socket.io")();
@@ -22,6 +21,7 @@ console.log("Server listening on port number: ", process.env.SERVER_PORT);
 let dbConnection = new DatabaseConnection();
 
 io.on("connection", clientSocket => {
+    console.log("New client connected: ", clientSocket.id);
     clientSocket.on(REGISTER_EVENTS.REQUEST_REGISTRATION, data => {
         LoginRegistrationOperations.registerUser(clientSocket, data);
     });
@@ -49,11 +49,4 @@ io.on("connection", clientSocket => {
     clientSocket.on(USER_ACTION_EVENTS.ADD_FRIEND, data => {
         UserActionOperations.addFriend(clientSocket, data);
     });
-
-    clientSocket.on(SEARCH_EVENTS.INVALID_SEARCH_STRING, () => {
-        clientSocket.emit(SEARCH_EVENTS.INVALID_SEARCH_STRING, {
-            notification: ServerOperationsUtilities.createNotification("danger", "Invalid Search Value", "Please enter a valid search keyword", 3000)
-        });
-    });
-    
 });

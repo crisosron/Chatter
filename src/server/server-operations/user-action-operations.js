@@ -39,6 +39,11 @@ class UserActionOperations{
         // Outer findByID allows us to check validity of preconditions
         User.findById(data.addingUserID, (err, addingUser) => {
 
+            if(err){
+                console.log("Error in UserActionOperations.addFriend: ", err);
+                return;
+            }
+
             // Checking if the addingUser already has the userToAdd in pendingFriendRequests, or if they are already a friend
             const userToAddObjectID = mongoose.Types.ObjectId(data.userToAddID);
 
@@ -66,7 +71,7 @@ class UserActionOperations{
                 {_id: data.userToAddID}, // Condition
                 {$addToSet: {pendingFriendRequests: mongoose.Types.ObjectId(data.addingUserID)}}, // Update query
             );
-
+            
             clientSocket.emit(USER_ACTION_EVENTS.ADD_FRIEND_SENT);
                 
         });

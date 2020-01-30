@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import "./side-bar-sub-components-css-files/search-results-bar-styles.css"
 import CommunicationEntity from "./CommunicationEntity";
 import COMM_ENTITY_ACTIONS from "./comm-entity-actions";
@@ -58,6 +58,7 @@ export default function SearchResultsBar(props){
     }
 
     const handleActionPressed = (action, commEntityID) => {
+        console.log("Action Pressed");
         switch(action){
             case COMM_ENTITY_ACTIONS.ADD:
                 socket.emit(USER_ACTION_EVENTS.ADD_FRIEND, {
@@ -76,13 +77,15 @@ export default function SearchResultsBar(props){
         }
     }
 
-    socket.on(USER_ACTION_EVENTS.ADD_FRIEND_SENT, data => {
-        NotificationHandler.createNotification("success", "Friend Request Sent", "A friend request has been succesfully sent to the user");
-    });
-
-    socket.on(USER_ACTION_EVENTS.ADD_FRIEND_DENIED, data => {
-        NotificationHandler.createNotification("danger", "Cannot Send Friend Request", data.reason);
-    });
+    useEffect(() => {
+        socket.on(USER_ACTION_EVENTS.ADD_FRIEND_SENT, () => {
+            NotificationHandler.createNotification("success", "Friend Request Sent", "A friend request has been succesfully sent to the user");
+        });
+    
+        socket.on(USER_ACTION_EVENTS.ADD_FRIEND_DENIED, data => {
+            NotificationHandler.createNotification("danger", "Cannot Send Friend Request", data.reason);
+        });
+    }, []);
 
     return(
         <div id="searchResultsBar">
@@ -125,7 +128,7 @@ export default function SearchResultsBar(props){
                         handleActionPressed={handleActionPressed}
                         commEntityID={groupCommEntity._id}
                         >{groupCommEntity._name}</CommunicationEntity>
-                        );
+                    );
                 })}
 
             </div>

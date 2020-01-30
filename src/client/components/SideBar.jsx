@@ -11,7 +11,7 @@ export default function SideBar(props){
     // const defaultCommEntities = ["First comm entity", "Second Comm entity", "Third Comm entity"];
     const [commEntities, setCommEntities] = useState([]);
 
-    // These are the communication entities that are shown in the search 
+    // These are the communication entities that are shown in the search (for known comm entities)
     const [generalSearchUserCommEntities, setGeneralSearchUserCommEntities] = useState([]);
     const [generalSearchGroupCommEntities, setGeneralSearchGroupCommEntities] = useState([]);
 
@@ -45,7 +45,7 @@ export default function SideBar(props){
     const resetDefaultCommEntities = () => {
         setCommEntities([]);
     }
-
+    
     const handleToggleSwitchPressed = (selectedOptionIndex) => {
         let selectedOption = toggleOptions[selectedOptionIndex];
         if(selectedOption === "Friends"){
