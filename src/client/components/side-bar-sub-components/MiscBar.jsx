@@ -5,9 +5,10 @@ import USER_ACTION_EVENTS from "../../../events/user-action-events";
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 export default function MiscBar(props){
 
-    const handleClick = () => {
-        // TODO: Clicking settings will create a group - THIS IS TEMPORARY!
-        // socket.emit(USER_ACTION_EVENTS.CREATE_GROUP, {groupName: "TestGroup"});
+    const handleMenuOptionClicked = (e, data) => {
+        console.log(`MenuOption clicked: ${data}`);
+        if(data.action === "Create Group") props.changeDisplayedView("createGroup");
+        else if(data.action === "View Profile") props.changeDisplayedView("profile");
     }
 
     return(
@@ -17,8 +18,9 @@ export default function MiscBar(props){
             </ContextMenuTrigger>
 
             <ContextMenu id="settingsContextMenu">
-                <MenuItem className="miscBarMenuItem">Create Group</MenuItem>
-                <MenuItem className="miscBarMenuItem">Logout</MenuItem>
+                <MenuItem className="miscBarMenuItem" data={{action: "Create Group"}} onClick={handleMenuOptionClicked}>Create Group</MenuItem>
+                <MenuItem className="miscBarMenuItem" data={{action: "View Profile"}} onClick={handleMenuOptionClicked}>Profile</MenuItem>
+                <MenuItem className="miscBarMenuItem" data={{action: "Logout"}} onClick={handleMenuOptionClicked}>Logout</MenuItem>
             </ContextMenu>
 
         </div>

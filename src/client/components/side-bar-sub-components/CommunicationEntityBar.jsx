@@ -19,6 +19,7 @@ export default function CommunicationEntitiesBar(props){
     function handleCommEntitySelected(selectedIndex){
         setSelectedCommEntityIndex(selectedIndex);
         setCommEntityShowActionsIndex(-1);
+        props.changeDisplayedView("communicationEntity")
     }
 
     function handleContextMenu(e, index){

@@ -35,11 +35,13 @@ export default function SearchResultsBar(props){
         setSelectedUserCommEntityIndex(index);
         setSelectedGroupCommEntityIndex(-1); // A -1 means deselection
         deselectAllContext();
+        props.changeDisplayedView("communicationEntity");
     }
 
     const handleGroupCommEntitySelected = index => {
         setSelectedGroupCommEntityIndex(index);
         setSelectedUserCommEntityIndex(-1);
+        props.changeDisplayedView("communicationEntity");
         deselectAllContext();
     }
     

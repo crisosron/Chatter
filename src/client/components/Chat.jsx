@@ -12,6 +12,11 @@ export default class Chat extends Component{
         this.state = {}
     }
 
+    changeDisplayedView = (newDisplayedView) => {
+        console.log("Need to change displayed view");
+        this.setState({displayedView: newDisplayedView});
+    }
+
     render(){
         let displayedViewComponent;
         switch(this.state.displayedView){
@@ -23,7 +28,7 @@ export default class Chat extends Component{
 
         return(
             <div id="mainWrapper">
-                <SideBar thisUser={this.props.location.state.thisUser}/>
+                <SideBar thisUser={this.props.location.state.thisUser} changeDisplayedView={this.changeDisplayedView}/>
                 <div id="mainView">
                     {displayedViewComponent}
                 </div>
