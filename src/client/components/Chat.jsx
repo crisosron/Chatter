@@ -15,10 +15,10 @@ export default class Chat extends Component{
     render(){
         let displayedViewComponent;
         switch(this.state.displayedView){
-            default: displayedViewComponent = DefaultDisplayView; break;
-            case "communicationEntity": displayedViewComponent = CommunicationEntityDisplayView; break;
-            case "profile": displayedViewComponent = displayedViewComponent = ProfileDisplayView; break;
-            case "createGroup": displayedViewComponent = CreateGroupDisplayView; break;
+            default: displayedViewComponent = <DefaultDisplayView />; break;
+            case "communicationEntity": displayedViewComponent = <CommunicationEntityDisplayView />; break;
+            case "profile": displayedViewComponent = displayedViewComponent = <ProfileDisplayView />; break;
+            case "createGroup": displayedViewComponent = <CreateGroupDisplayView />; break;
         }
 
         return(
