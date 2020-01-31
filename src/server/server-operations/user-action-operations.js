@@ -2,6 +2,7 @@ const {User} = require("../database-document-models/user-model");
 const {Group} = require("../database-document-models/group-model");
 const USER_ACTION_EVENTS = require("../../events/user-action-events");
 const mongoose = require("mongoose");
+const shortid = require("shortid");
 class UserActionOperations{
 
     /**
@@ -12,19 +13,30 @@ class UserActionOperations{
     */
     static createGroup(clientSocket, data){
         Group.findOne({groupName: data.groupName}, (err, res) => {
-            if(res){
-                clientSocket.emit(USER_ACTION_EVENTS.CREATE_GROUP_DENIED); // TODO: Create notification for this in the front end. Failure reason is that the groupname is already in use
 
+            // If a group with the given name already exists, deny the group creation
+            if(res){
+                clientSocket.emit(USER_ACTION_EVENTS.CREATE_GROUP_DENIED, {
+                    reason: `A group with the name ${data.groupName} already exists`
+                });
+            } else if(data.groupName.length < 2){
+                clientSocket.emit(USER_ACTION_EVENTS.CREATE_GROUP_DENIED, {
+                    reason: `A group name must have at least 2 characters`
+                });
+            
             }else{
                 let newGroup = new Group({
                     groupName: data.groupName,
-                    members: [], // TODO: Need to put creator in here
-                    description: "This is a test group" // TODO: Temporary
+                    members: [mongoose.Types.ObjectId(data.creatorID)],
+                    description: data.groupDescription,
+                    joinCode: data.joinCode
                 });
         
                 newGroup.save();
 
-                clientSocket.emit(USER_ACTION_EVENTS.CREATE_GROUP_SUCCESS); // TODO: Create notification for this in the front end.
+                // TODO: Fix this, the group._id is not being added to the array of groups that the creator is associated with
+                User.findOneAndUpdate({_id: data.creatorID}, {$addToSet: {groups: newGroup._id}});
+                clientSocket.emit(USER_ACTION_EVENTS.CREATE_GROUP_SUCCESS);
             }
         });
     }
@@ -77,8 +89,13 @@ class UserActionOperations{
         });
     }
 
-    static confirmFriendRequest(clientSocket, data){
+    static generateGroupCode(clientSocket){
+        clientSocket.emit(USER_ACTION_EVENTS.DELIVER_JOIN_CODE, {
+            generatedJoinCode: shortid.generate()
+        });
+    }
 
+    static confirmFriendRequest(clientSocket, data){
     }
 }
 

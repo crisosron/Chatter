@@ -18,6 +18,12 @@ const groupSchema = new Schema({
         type: String,
         required: false,
         maxlength: 200
+    },
+
+    joinCode: {
+        type: String,
+        required: true,
+        unique: true
     }
 
 }, {timestamps: true});

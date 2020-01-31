@@ -46,6 +46,10 @@ io.on("connection", clientSocket => {
         UserActionOperations.createGroup(clientSocket, data);
     });
 
+    clientSocket.on(USER_ACTION_EVENTS.GENERATE_JOIN_CODE, () => {
+        UserActionOperations.generateGroupCode(clientSocket);
+    });
+
     clientSocket.on(USER_ACTION_EVENTS.ADD_FRIEND, data => {
         UserActionOperations.addFriend(clientSocket, data);
     });

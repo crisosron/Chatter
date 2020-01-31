@@ -13,7 +13,6 @@ export default class Chat extends Component{
     }
 
     changeDisplayedView = (newDisplayedView) => {
-        console.log("Need to change displayed view");
         this.setState({displayedView: newDisplayedView});
     }
 
@@ -21,9 +20,9 @@ export default class Chat extends Component{
         let displayedViewComponent;
         switch(this.state.displayedView){
             default: displayedViewComponent = <DefaultDisplayView />; break;
-            case "communicationEntity": displayedViewComponent = <CommunicationEntityDisplayView />; break;
-            case "profile": displayedViewComponent = displayedViewComponent = <ProfileDisplayView />; break;
-            case "createGroup": displayedViewComponent = <CreateGroupDisplayView />; break;
+            case "communicationEntity": displayedViewComponent = <CommunicationEntityDisplayView thisUser={this.props.location.state.thisUser} />; break;
+            case "profile": displayedViewComponent = displayedViewComponent = <ProfileDisplayView thisUser={this.props.location.state.thisUser} />; break;
+            case "createGroup": displayedViewComponent = <CreateGroupDisplayView thisUser={this.props.location.state.thisUser} />; break;
         }
 
         return(
