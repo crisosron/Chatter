@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import "./side-bar-sub-components-css-files/toggle-switch-styles.css"
 export default function ToggleSwitch(props){
-    const [selectedOptionIndex, setSelectedOptionIndex] = useState(0);
+    const [selectedOptionIndex, setSelectedOptionIndex] = useState(-1);
 
     // TODO: Need to have defaults
     const wrapperDivStyle = {
