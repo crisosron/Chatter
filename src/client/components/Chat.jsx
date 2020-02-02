@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import "../css-files/chat-divs.css"
 import SideBar from "./SideBar"
-import DefaultDisplayView from "./displayable-views/DefaultDisplayView";
-import CommunicationEntityDisplayView from "./displayable-views/CommunicationEntityDisplayView";
-import ProfileDisplayView from "./displayable-views/ProfileDisplayView";
-import CreateGroupDisplayView from "./displayable-views/CreateGroupDisplayView";
+import DefaultView from "./views/DefaultView";
+import ProfileView from "./views/ProfileView";
+import CreateGroupView from "./views/CreateGroupView";
+import IndividualChatView from "./views/IndividualChatView";
 
 export default class Chat extends Component{
     constructor(props){
@@ -19,10 +19,10 @@ export default class Chat extends Component{
     render(){
         let displayedViewComponent;
         switch(this.state.displayedView){
-            default: displayedViewComponent = <DefaultDisplayView />; break;
-            case "communicationEntity": displayedViewComponent = <CommunicationEntityDisplayView thisUser={this.props.location.state.thisUser} />; break;
-            case "profile": displayedViewComponent = displayedViewComponent = <ProfileDisplayView thisUser={this.props.location.state.thisUser} />; break;
-            case "createGroup": displayedViewComponent = <CreateGroupDisplayView thisUser={this.props.location.state.thisUser} />; break;
+            default: displayedViewComponent = <DefaultView />; break;
+            case "profile": displayedViewComponent = displayedViewComponent = <ProfileView thisUser={this.props.location.state.thisUser} />; break;
+            case "createGroup": displayedViewComponent = <CreateGroupView thisUser={this.props.location.state.thisUser} />; break;
+            case "individualChat": displayedViewComponent = <IndividualChatView thisUser={this.props.location.state.thisUser} />; break;
         }
 
         return(

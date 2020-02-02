@@ -8,6 +8,11 @@ export default function SideBar(props){
 
     const handleToggleSwitchPressed = (selectedOptionIndex) => {
         console.log(`Selected option: ${toggleSwitchOptions[selectedOptionIndex]}`);
+        let selectedOption = toggleSwitchOptions[selectedOptionIndex];
+        if(selectedOption === "Friends") props.changeDisplayedView("individualChat");
+        else if(selectedOption === "Groups") props.changeDisplayedView("groupChat");
+        else if(selectedOption === "Search") props.changeDisplayedView("searchUsers");
+        else props.changeDisplayedView("profile");
     }
 
     const handleSettingsContextMenuOptionClicked = (e, data) => {

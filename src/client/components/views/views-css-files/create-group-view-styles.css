@@ -1,4 +1,4 @@
-#createGroupDisplayView{
+#createGroupViewWrapper{
     height: 100%;
     display: flex;
     justify-content: center;
@@ -6,13 +6,13 @@
     color: var(--dark-text-color);
 }
 
-#createGroupDisplayViewContent{
+#createGroupViewContent{
     width: 30%;
     height: 40%;
     margin-top: -10%;
 }
 
-#createGroupDisplayViewContent > h1{
+#createGroupViewContent > h1{
     font-size: 2vmax;
     margin-bottom: 1%;
 }

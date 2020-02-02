@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import "./displayable-views-css-files/create-group-displayble-view-styles.css";
+import "./views-css-files/create-group-view-styles.css";
 import USER_ACTION_EVENTS from "../../../events/user-action-events";
 import NotificationHandler from "../../notification-handler";
 import socket from "../../../index";
@@ -35,8 +35,8 @@ export default function CreateGroupDisplayView(props){
     }, []);
 
     return(
-        <div id="createGroupDisplayView">
-            <div id="createGroupDisplayViewContent">
+        <div id="createGroupViewWrapper">
+            <div id="createGroupViewContent">
                 <h1>Create a Group</h1>
                 <div id="groupDetailsInput">
                     <h2 className="groupDetailsInputLabel">Group Name</h2>
