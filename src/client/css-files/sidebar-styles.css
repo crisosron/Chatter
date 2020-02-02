@@ -21,9 +21,24 @@
     box-shadow: var(--box-shadow-lighten);
     margin-bottom: 5%;
     transition: 0.2s linear;
+    text-align: center;
 }
 
 #settingsDiv:hover{
     cursor: pointer;
     border-radius: 10px;
+}
+
+.settingsMenuItem{
+    font-size: 0.75vmax;
+    transition: 0.2s linear;
+}
+
+.settingsMenuItem:hover{
+    box-shadow: var(--box-shadow-lighten);
+}
+
+#settingsDiv > .react-contextmenu-wrapper{
+    flex:1;
+    transition: 0.2s linear;
 }

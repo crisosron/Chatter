@@ -1,15 +1,17 @@
 import React, {useState} from "react";
 import ToggleSwitch from "./side-bar-sub-components/ToggleSwitch";
-// import CommunicationEntitiesBar from "./side-bar-sub-components/CommunicationEntityBar";
-// import SearchResultsBar from "./side-bar-sub-components/SearchResultsBar";
-// import SearchBar from "./side-bar-sub-components/SearchBar";
-// import MiscBar from "./side-bar-sub-components/MiscBar";
 import "../css-files/sidebar-styles.css";
+import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 
 export default function SideBar(props){
     const toggleSwitchOptions = ["Friends", "Groups", "Search", "Profile"];
+
     const handleToggleSwitchPressed = (selectedOptionIndex) => {
         console.log(`Selected option: ${toggleSwitchOptions[selectedOptionIndex]}`);
+    }
+
+    const handlSettingsContextMenuOptionClicked = (e, data) => {
+
     }
 
     return(
@@ -22,9 +24,18 @@ export default function SideBar(props){
                 <ToggleSwitch onClick={handleToggleSwitchPressed} options={toggleSwitchOptions}/>
             </div>
 
-            <div id="settingsDiv">
-                <h2>Settings</h2>
-            </div>
+            <ContextMenuTrigger id="settingsContextMenu" holdToDisplay={1}>
+                <div id="settingsDiv">
+                    <h2>Settings</h2>
+                </div>
+            </ContextMenuTrigger>
+
+            <ContextMenu id="settingsContextMenu">
+                <MenuItem className="settingsMenuItem" data={{action: "Create Group"}} onClick={handlSettingsContextMenuOptionClicked}>Create Group</MenuItem>
+                <MenuItem className="settingsMenuItem" data={{action: "View Profile"}} onClick={handlSettingsContextMenuOptionClicked}>Profile</MenuItem>
+                <MenuItem className="settingsMenuItem" data={{action: "Logout"}} onClick={handlSettingsContextMenuOptionClicked}>Logout</MenuItem>
+            </ContextMenu>
+
 
 
         </div>
