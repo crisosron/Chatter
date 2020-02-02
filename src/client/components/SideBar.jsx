@@ -10,7 +10,7 @@ export default function SideBar(props){
         console.log(`Selected option: ${toggleSwitchOptions[selectedOptionIndex]}`);
     }
 
-    const handlSettingsContextMenuOptionClicked = (e, data) => {
+    const handleSettingsContextMenuOptionClicked = (e, data) => {
 
     }
 
@@ -31,12 +31,10 @@ export default function SideBar(props){
             </ContextMenuTrigger>
 
             <ContextMenu id="settingsContextMenu">
-                <MenuItem className="settingsMenuItem" data={{action: "Create Group"}} onClick={handlSettingsContextMenuOptionClicked}>Create Group</MenuItem>
-                <MenuItem className="settingsMenuItem" data={{action: "View Profile"}} onClick={handlSettingsContextMenuOptionClicked}>Profile</MenuItem>
-                <MenuItem className="settingsMenuItem" data={{action: "Logout"}} onClick={handlSettingsContextMenuOptionClicked}>Logout</MenuItem>
+                <MenuItem className="settingsMenuItem" data={{action: "Create Group"}} onClick={handleSettingsContextMenuOptionClicked}>Create Group</MenuItem>
+                <MenuItem className="settingsMenuItem" data={{action: "View Profile"}} onClick={handleSettingsContextMenuOptionClicked}>Profile</MenuItem>
+                <MenuItem className="settingsMenuItem" data={{action: "Logout"}} onClick={handleSettingsContextMenuOptionClicked}>Logout</MenuItem>
             </ContextMenu>
-
-
 
         </div>
     )
