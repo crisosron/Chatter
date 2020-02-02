@@ -1,6 +1,6 @@
 import React from "react";
-import SEARCH_EVENTS from "../../../events/search-events";
-import socket from "../../../index";
+import SEARCH_EVENTS from "../../../../../events/search-events";
+import socket from "../../../../../index";
 import {store} from "react-notifications-component";
 import "./side-bar-sub-components-css-files/search-bar-styles.css";
 

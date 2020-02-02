@@ -11,7 +11,9 @@ export default function SideBar(props){
     }
 
     const handleSettingsContextMenuOptionClicked = (e, data) => {
-
+        console.log(`MenuOption clicked: ${data}`);
+        if(data.action === "Create Group") props.changeDisplayedView("createGroup");
+        else if(data.action === "View Profile") props.changeDisplayedView("profile");
     }
 
     return(
