@@ -41,7 +41,6 @@ export default class SearchBar extends React.Component{
                     thisUser: this.props.thisUser
                 });
             }
-            
         });
 
         // Setting up socket.io event listeners for SEARCH_EVENT responses from server
@@ -63,16 +62,10 @@ export default class SearchBar extends React.Component{
         });
     }
 
-    handleClearButtonClicked = () => {
-        document.getElementById("searchBarInput").value = "";
-        this.props.resetCommEntities();
-    }
-
     render(){
         return(
             <div id="searchBar">
                 <input id="searchBarInput" type="text" placeholder={"Search " + this.props.mode}></input>
-                <button id="searchBarClearButton" onClick={this.handleClearButtonClicked}>Clear</button>
             </div>
         );
     }

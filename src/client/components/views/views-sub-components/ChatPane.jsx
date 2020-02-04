@@ -8,7 +8,6 @@ export default function ChatPane(props){
             if(e.keyCode === 13 && messageInputField.value !== ""){
                 // TODO: Send message
             }
-
         });
         
         // TODO: Fetch past messages between thisUser and props.selectedCommEntity

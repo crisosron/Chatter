@@ -5,8 +5,8 @@
     align-items: center;
 }
 
-#searchBarInput, #searchBarClearButton{
-    width: 75%;
+#searchBarInput{
+    width: 100%;
     height: 50%;
     border-radius: 50px;
     background-color: var(--primary-color);
@@ -16,29 +16,6 @@
     text-align: center;
 }
 
-#searchBarClearButton:hover{
-    box-shadow: var(--box-shadow-darken);
-}
-
 #searchBarInput:focus{
     box-shadow: var(--box-shadow-darken);
-}
-
-#searchBarClearButton{
-    width: 20%;
-    border: none;
-    outline: none;
-    text-align: center;
-    border-radius: 0px;
-    color: var(--secondary-color);
-    margin-left: 2%;
-}
-
-
-#searchBarClearButton:hover{
-    border-radius: 10px;
-}
-
-#searchBarClearButton:active{
-    background-color: var(--accent-color);
 }
