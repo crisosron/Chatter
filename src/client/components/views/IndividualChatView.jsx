@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import CommunicationEntityBar from "./views-sub-components/CommunicationEntityBar";
 import SearchBar from "./views-sub-components/SearchBar";
 import ChatPane from "./views-sub-components/ChatPane";
-import "./views-css-files/individual-chat-view-styles.css";
+import "./views-css-files/communication-view-styles.css";
 export default function IndividualChatDisplayView(props){
     let [friendCommEntities, setFriendCommEntities] = useState([]); // TODO: Fetch all friends of thisUser from db
     let [selectedCommEntity, setSelectedCommEntity] = useState(null); // The selectedCommEntity will be the comm entity that thisUser will be communicating with
@@ -21,8 +21,8 @@ export default function IndividualChatDisplayView(props){
     }
 
     return (
-        <div id="individualChatViewWrapper">
-            <div id="individualChatSideBarWrapper">
+        <div id="communicationViewWrapper">
+            <div id="communicationViewSideBarWrapper">
                 <SearchBar mode="Friends" updateCommEntities={updateCommEntities} resetCommEntities={resetCommEntities}/>
                 <CommunicationEntityBar mode="Friends" changeChatPane={changeChatPane} communicationEntities={friendCommEntities}></CommunicationEntityBar>
             </div>

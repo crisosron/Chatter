@@ -45,7 +45,6 @@
     background-color: var(--accent-color);
     border: none;
     outline: none;
-
 }
 
 #sendMessageButton:hover{

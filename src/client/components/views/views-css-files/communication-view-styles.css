@@ -1,14 +1,14 @@
-#individualChatViewWrapper{
+#communicationViewWrapper{
     display: flex;
     width: 100%;
     height: 100%;
 }
 
-#individualChatViewWrapper > div {
+#communicationViewWrapper > div {
     margin: 1%;
 }
 
-#individualChatSideBarWrapper{
+#communicationViewSideBarWrapper{
     display: flex;
     flex-direction: column;
     flex: 1;
