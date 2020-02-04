@@ -1,8 +1,8 @@
 import React from "react";
-import SEARCH_EVENTS from "../../../../../events/search-events";
-import socket from "../../../../../index";
+import SEARCH_EVENTS from "../../../../events/search-events";
+import socket from "../../../../index";
 import {store} from "react-notifications-component";
-import "./side-bar-sub-components-css-files/search-bar-styles.css";
+import "./views-sub-components-css-files/search-bar-styles.css";
 
 export default class SearchBar extends React.Component{
     componentDidMount(){
@@ -71,7 +71,7 @@ export default class SearchBar extends React.Component{
     render(){
         return(
             <div id="searchBar">
-                <input id="searchBarInput" type="text" placeholder={"Search"}></input>
+                <input id="searchBarInput" type="text" placeholder={"Search " + this.props.mode}></input>
                 <button id="searchBarClearButton" onClick={this.handleClearButtonClicked}>Clear</button>
             </div>
         );

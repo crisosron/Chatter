@@ -46,7 +46,7 @@ export default function CreateGroupDisplayView(props){
                     <input className="groupDetailsInputField" id="groupDescriptionInputField" type="text" />
 
                     <h2 className="groupDetailsInputLabel">Generated Group Code</h2>
-                    <input className="groupDetailsInputField disabledInputField" type="text" placeholder={joinCode} disabled />
+                    <input className="groupDetailsInputField disabledInputField" type="text" value={joinCode} disabled />
 
                     <button id="createGroupButton" onClick={handleCreateGroupPressed}>Create Group</button>
                 </div>

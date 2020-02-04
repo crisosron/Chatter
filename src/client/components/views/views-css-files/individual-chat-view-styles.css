@@ -1,0 +1,15 @@
+#individualChatViewWrapper{
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+#individualChatViewWrapper > div {
+    margin: 1%;
+}
+
+#individualChatSideBarWrapper{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}

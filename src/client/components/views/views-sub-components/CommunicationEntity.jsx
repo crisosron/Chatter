@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import "./side-bar-sub-components-css-files/communication-entity-styles.css";
+import "./views-sub-components-css-files/communication-entity-styles.css";
 
 export default function CommunicationEntity(props){
 

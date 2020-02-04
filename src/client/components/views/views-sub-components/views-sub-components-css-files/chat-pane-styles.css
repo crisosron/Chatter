@@ -1,0 +1,16 @@
+#chatPaneWrapper{
+    flex: 3;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+/* chatTitle and chatView flex values based of ratios between SearchBar and CommunicationEntityBar flex values*/
+#chatBar{
+    flex: 1;
+    border-bottom: 1px solid var(--secondary-color);
+}
+
+#chatView{
+    flex: 12;
+}

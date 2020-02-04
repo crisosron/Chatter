@@ -1,10 +1,10 @@
 #communicationEntitiesBar{
-    width: 95%;
-    height: 83.3%;
     overflow-y: auto;
     overflow-x: hidden;
-    margin: auto;
-    margin-bottom: 2%;
+    flex: 12;
+    color: var(--secondary-color);
+    /* TODO: TEMP */
+    border: 1px solid black; 
 }
 
 .communicationEntityDiv, .communicationEntityActionsDiv{
@@ -17,7 +17,7 @@
 
 .communicationEntityDiv:hover, .actionDiv:hover{
     cursor: pointer;
-    box-shadow: var(--box-shadow-lighten);
+    box-shadow: var(--box-shadow-darken);
 }
 
 .communicationEntityDiv:hover, .selectedCommunicationEntity{
@@ -25,7 +25,7 @@
 }
 
 .selectedCommunicationEntity{
-    background-color: var(--accent-color);
+    box-shadow: var(--box-shadow-darken);
 }
 
 .displayImageDiv{
