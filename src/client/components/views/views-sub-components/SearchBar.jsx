@@ -1,8 +1,8 @@
 import React from "react";
 import SEARCH_EVENTS from "../../../../events/search-events";
 import socket from "../../../../index";
-import {store} from "react-notifications-component";
 import "./views-sub-components-css-files/search-bar-styles.css";
+import NotificationHandler from "../../../notification-handler";
 
 export default class SearchBar extends React.Component{
     componentDidMount(){
@@ -59,7 +59,7 @@ export default class SearchBar extends React.Component{
         });
 
         socket.on(SEARCH_EVENTS.NO_RESULTS_FOUND, data => {
-            store.addNotification(data.notification);
+            NotificationHandler.createNotification("danger", "No results found", data.message);
         });
     }
 

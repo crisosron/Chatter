@@ -3,6 +3,14 @@ import "./views-sub-components-css-files/chat-pane-styles.css";
 export default function ChatPane(props){
 
     useEffect(() => {
+        const messageInputField = document.getElementById("messageInput");
+        messageInputField.addEventListener('keydown', (e) => {
+            if(e.keyCode === 13 && messageInputField.value !== ""){
+                // TODO: Send message
+            }
+
+        });
+        
         // TODO: Fetch past messages between thisUser and props.selectedCommEntity
     }, []);
 

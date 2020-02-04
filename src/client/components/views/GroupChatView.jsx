@@ -23,8 +23,8 @@ export default function GroupChatView(props){
     return (
         <div id="communicationViewWrapper">
             <div id="communicationViewSideBarWrapper">
-                <SearchBar mode="Friends" updateCommEntities={updateCommEntities} resetCommEntities={resetCommEntities}/>
-                <CommunicationEntityBar mode="Friends" changeChatPane={changeChatPane} communicationEntities={groupCommEntities}></CommunicationEntityBar>
+                <SearchBar mode="Groups" updateCommEntities={updateCommEntities} resetCommEntities={resetCommEntities}/>
+                <CommunicationEntityBar mode="Groups" changeChatPane={changeChatPane} communicationEntities={groupCommEntities}></CommunicationEntityBar>
             </div>
             <ChatPane selectedCommEntity={selectedCommEntity}></ChatPane>
         </div>

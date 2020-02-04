@@ -26,7 +26,7 @@ class SearchOperations{
 
             if(res.length === 0){
                 clientSocket.emit(SEARCH_EVENTS.NO_RESULTS_FOUND, {
-                    notification: ServerOperationsUtilities.createNotification("danger", "No results found", `No results for '${data.stringQuery}'`)
+                    message: `No results for: ${data.stringQuery}`
                 });
                 return;
             }
