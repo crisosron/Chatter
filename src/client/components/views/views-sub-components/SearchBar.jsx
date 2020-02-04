@@ -9,14 +9,14 @@ export default class SearchBar extends React.Component{
         const searchBarInput = document.getElementById("searchBarInput");
         searchBarInput.addEventListener("keydown", (e) => {
             if(e.keyCode === 8 && searchBarInput.value.length === 1){
-                this.props.resetDefaultCommEntities();
+                this.props.resetCommEntities();
             }
 
             // If not enter key pressed, exit the method
             if(e.keyCode !== 13) return; 
 
             if(searchBarInput.value === ""){
-                this.props.resetDefaultCommEntities();
+                this.props.resetCommEntities();
                 return;
             }
 
@@ -65,7 +65,7 @@ export default class SearchBar extends React.Component{
 
     handleClearButtonClicked = () => {
         document.getElementById("searchBarInput").value = "";
-        this.props.resetDefaultCommEntities();
+        this.props.resetCommEntities();
     }
 
     render(){

@@ -20,10 +20,6 @@
     box-shadow: var(--box-shadow-darken);
 }
 
-.communicationEntityDiv:hover, .selectedCommunicationEntity{
-    border-radius: 0 20px 20px 0;
-}
-
 .selectedCommunicationEntity{
     box-shadow: var(--box-shadow-darken);
 }

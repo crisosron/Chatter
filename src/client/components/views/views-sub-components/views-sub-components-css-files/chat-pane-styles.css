@@ -13,4 +13,51 @@
 
 #chatView{
     flex: 12;
+    display: flex;
+    flex-direction: column;
+}
+
+#messagesDiv{
+    flex: 11;
+}
+
+#messageInputDiv{
+    flex: 1;
+    border: 1px solid var(--grey-border-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#messageInput{
+    width: 75%;
+    height: 40%;
+    border: 1px solid var(--grey-border-color);
+    background-color: var(--primary-color);
+    padding: 5px;
+
+}
+
+#sendMessageButton{
+    margin-left: 3%;
+    height: 50%;
+    width: 15%;
+    background-color: var(--accent-color);
+    border: none;
+    outline: none;
+
+}
+
+#sendMessageButton:hover{
+    box-shadow: var(--box-shadow-lighten);
+}
+
+#messageInput:focus{
+    box-shadow: var(--box-shadow-darken);
+}
+
+#messageInput, #sendMessageButton{
+    font-size: 0.90vmax;
+    transition: 0.2s linear;
+    border-radius: 20px;
 }

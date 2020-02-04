@@ -4,15 +4,29 @@ import SearchBar from "./views-sub-components/SearchBar";
 import ChatPane from "./views-sub-components/ChatPane";
 import "./views-css-files/individual-chat-view-styles.css";
 export default function IndividualChatDisplayView(props){
-    let friendCommEntities = useState([]); // TODO: Fetch all friends of thisUser from db
+    let [friendCommEntities, setFriendCommEntities] = useState([]); // TODO: Fetch all friends of thisUser from db
+    let [selectedCommEntity, setSelectedCommEntity] = useState(null); // The selectedCommEntity will be the comm entity that thisUser will be communicating with
+    const updateCommEntities = (friendCommEntities) => {
+        console.log(`Called updateCommEntities: ${friendCommEntities}`);
+        setFriendCommEntities(friendCommEntities);
+    }
+
+    const resetCommEntities = () => {
+        setFriendCommEntities([]);
+    }
+
+    const changeChatPane = (selectedCommEntity) => {
+        // Reminder that the contents of selectedCommEntity: selectedCommEntity._id, selectedCommEntity._name
+        setSelectedCommEntity(selectedCommEntity);
+    }
+
     return (
         <div id="individualChatViewWrapper">
             <div id="individualChatSideBarWrapper">
-                <SearchBar mode="Friends" />
-                <CommunicationEntityBar mode="Friends" communicationEntities={friendCommEntities}></CommunicationEntityBar>
+                <SearchBar mode="Friends" updateCommEntities={updateCommEntities} resetCommEntities={resetCommEntities}/>
+                <CommunicationEntityBar mode="Friends" changeChatPane={changeChatPane} communicationEntities={friendCommEntities}></CommunicationEntityBar>
             </div>
-            <ChatPane></ChatPane>
+            <ChatPane selectedCommEntity={selectedCommEntity}></ChatPane>
         </div>
-
     );
 }
