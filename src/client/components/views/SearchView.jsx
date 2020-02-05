@@ -23,7 +23,7 @@ export default function SearchView(props){
             <div id="searchViewContent">
                 <div id="topBarDiv">
                     <div id="searchModeToggleWrapper">
-                        <div id="userToggleDiv" className={"toggleDiv centeredContent " + (currentSearchMode === "Friends" ? "selectedToggleDiv":"")} onClick={() => {handleTogglePressed("Friends")}}>Users</div>
+                        <div id="userToggleDiv" className={"toggleDiv centeredContent " + (currentSearchMode === "Users" ? "selectedToggleDiv":"")} onClick={() => {handleTogglePressed("Users")}}>Users</div>
                         <div id="groupToggleDiv" className={"toggleDiv centeredContent " + (currentSearchMode === "Groups" ? "selectedToggleDiv":"")} onClick={() => {handleTogglePressed("Groups")}}>Groups</div>
                     </div>
                     <div id="searchBarWrapper" className="centeredContent">
