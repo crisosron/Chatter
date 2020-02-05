@@ -7,11 +7,18 @@
 #searchViewWrapper{
     width: 100%;
     height: 100%;
+    color: var(--secondary-color);
 }
 
 #searchViewContent{
     width: 60%;
     height: 70%;
+    margin-top: -10%;
+}
+
+#searchViewContent h1{
+    font-size: 2vmax;
+    margin-bottom: 1%;
 }
 
 #topBarDiv{
@@ -19,18 +26,21 @@
     height: 10%;
     display: flex;
     font-size: 1vmax;
-    color: var(--secondary-color);
+    border-top: 10px solid var(--accent-color);
 }
 
 #resultsDiv{
     width: 100%;
     height: 90%;
     border: 3px solid var(--grey-border-color);
+    overflow-x: auto;
 }
 
 .toggleDiv{
     flex: 1;
-    border: 1px solid var(--accent-color);
+    border: none;
+    border-right: 3px solid var(--accent-color);
+    border-left: 3px solid var(--accent-color);
     transition: 0.2s linear;
 }
 

@@ -16,17 +16,21 @@ export default function SearchView(props){
 
     const handleTogglePressed = (selectedMode) => {
         setCurrentSearchMode(selectedMode);
+        document.getElementById("searchInput").value = "";
+        setCommEntities([]);
     }
 
     return(
         <div id="searchViewWrapper" className="centeredContent">
             <div id="searchViewContent">
+                <h1>Search for Users/Groups</h1>
+
                 <div id="topBarDiv">
                     <div id="searchModeToggleWrapper">
                         <div id="userToggleDiv" className={"toggleDiv centeredContent " + (currentSearchMode === "Users" ? "selectedToggleDiv":"")} onClick={() => {handleTogglePressed("Users")}}>Users</div>
                         <div id="groupToggleDiv" className={"toggleDiv centeredContent " + (currentSearchMode === "Groups" ? "selectedToggleDiv":"")} onClick={() => {handleTogglePressed("Groups")}}>Groups</div>
                     </div>
-                    <SearchBar mode={currentSearchMode} style={{width: "75%"}} updateCommEntities={updateCommEntities} resetCommEntities={resetCommEntities}/>
+                    <SearchBar id="searchInput" mode={currentSearchMode} style={{width: "75%"}} updateCommEntities={updateCommEntities} resetCommEntities={resetCommEntities}/>
                 </div>
                 <div id="resultsDiv"></div>
             </div>
