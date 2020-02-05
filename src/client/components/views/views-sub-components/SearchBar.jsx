@@ -6,7 +6,7 @@ import NotificationHandler from "../../../notification-handler";
 
 export default class SearchBar extends React.Component{
     componentDidMount(){
-        const searchBarInput = document.getElementById("searchBarInput");
+        const searchBarInput = document.getElementById(this.props.id === undefined ? "searchBarInput":this.props.id);
         searchBarInput.addEventListener("keydown", (e) => {
             if(e.keyCode === 8 && searchBarInput.value.length === 1){
                 this.props.resetCommEntities();
@@ -68,8 +68,8 @@ export default class SearchBar extends React.Component{
 
     render(){
         return(
-            <div id="searchBar">
-                <input id="searchBarInput" type="text" placeholder={"Search " + this.props.mode}></input>
+            <div class="searchBarWrapper"> {/*Using class here for better reusability of this component (same with input elem below)*/}
+                <input id={this.props.id === undefined ? "searchBarInput" : this.props.id} className="searchBarInputField" type="text" placeholder={"Search " + this.props.mode}></input>
             </div>
         );
     }

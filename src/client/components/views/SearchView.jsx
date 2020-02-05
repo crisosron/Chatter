@@ -1,50 +1,36 @@
-import React from "react"
+import React, {useState, useEffect} from "react"
 import "./views-css-files/search-view-styles.css";
 import SearchBar from "./views-sub-components/SearchBar";
+import CommunicationEntityBar from "./views-sub-components/CommunicationEntityBar"
 export default function SearchView(props){
-
-    const updateUserCommEntities = (userCommEntities) => {
-
+    const [commEntities, setCommEntities] = useState([]);
+    const [currentSearchMode, setCurrentSearchMode] = useState("Users");
+    
+    const updateCommEntities = (newCommEntities) => {
+        setCommEntities(newCommEntities);
     }
 
-    const updateGroupCommEntities = (groupCommEntities) => {
+    const resetCommEntities = () => {
+        setCommEntities([]);
+    } 
 
-    }
-
-    const resetUserCommEntities = () => {
-
-    }
-
-    const resetGroupCommEntities = () => {
-
+    const handleTogglePressed = (selectedMode) => {
+        setCurrentSearchMode(selectedMode);
     }
 
     return(
-        <div id="searchViewWrapper">
-            <div id="userSearchWrapper">
-                <div id="userSearchContent" className="content">
-                    <div id="userSearchBar" className="searchBarDiv">
-                        <h2>Users</h2>
-                        <SearchBar mode="Friends" updateCommEntities={updateUserCommEntities} resetCommEntities={resetUserCommEntities}/>
+        <div id="searchViewWrapper" className="centeredContent">
+            <div id="searchViewContent">
+                <div id="topBarDiv">
+                    <div id="searchModeToggleWrapper">
+                        <div id="userToggleDiv" className={"toggleDiv centeredContent " + (currentSearchMode === "Friends" ? "selectedToggleDiv":"")} onClick={() => {handleTogglePressed("Friends")}}>Users</div>
+                        <div id="groupToggleDiv" className={"toggleDiv centeredContent " + (currentSearchMode === "Groups" ? "selectedToggleDiv":"")} onClick={() => {handleTogglePressed("Groups")}}>Groups</div>
                     </div>
-                    <div id="userSearchResults" className="resultsDiv">
-
-                    </div>
-                </div>
-            </div>
-
-            <div id="groupSearchWrapper">
-                <div id="groupSearchContent" className="content">
-                    <div id="groupSearchBar" className="searchBarDiv">
-                        <h2>Groups</h2>
-                        <SearchBar mode="Groups" updateCommEntities={updateGroupCommEntities} resetCommEntities={resetGroupCommEntities}/>
-
-                    </div>
-                    <div id="groupSearchResults" className="resultsDiv">
-
+                    <div id="searchBarWrapper" className="centeredContent">
+                        <SearchBar mode={currentSearchMode} updateCommEntities={updateCommEntities} resetCommEntities={resetCommEntities}/>
                     </div>
                 </div>
-
+                <div id="resultsDiv"></div>
             </div>
         </div>
     )

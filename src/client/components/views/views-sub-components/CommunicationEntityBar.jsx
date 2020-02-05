@@ -47,7 +47,7 @@ export default function CommunicationEntitiesBar(props){
     }
 
     return(
-        <div id="communicationEntitiesBar">
+        <div className="communicationEntitiesBar">
             {props.communicationEntities.map((value, index) => {
                 return (
                     <CommunicationEntity
