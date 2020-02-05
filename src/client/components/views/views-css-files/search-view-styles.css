@@ -1,0 +1,30 @@
+#searchViewWrapper{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+#searchViewWrapper > div{
+    flex: 1;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content{
+    border: 1px solid green;
+    width: 70%;
+    height: 70%;
+    margin-bottom: 1%;
+}
+
+.searchBarDiv{
+    height: 10%;
+    border: 1px solid red;
+}
+
+.resultsDiv{
+    height: 90%;
+    border: 1px solid red;
+}

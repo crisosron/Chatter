@@ -11,7 +11,7 @@ export default function SideBar(props){
         let selectedOption = toggleSwitchOptions[selectedOptionIndex];
         if(selectedOption === "Friends") props.changeDisplayedView("individualChat");
         else if(selectedOption === "Groups") props.changeDisplayedView("groupChat");
-        else if(selectedOption === "Search") props.changeDisplayedView("searchUsers");
+        else if(selectedOption === "Search") props.changeDisplayedView("search");
         else props.changeDisplayedView("profile");
     }
 

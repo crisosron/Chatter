@@ -10,7 +10,7 @@
     height: 50%;
     border-radius: 50px;
     background-color: var(--primary-color);
-    border: 1px solid var(--secondary-color);
+    border: 1px solid var(--grey-border-color);
     transition: 0.2s linear;
     font-size: 1vmax;
     text-align: center;

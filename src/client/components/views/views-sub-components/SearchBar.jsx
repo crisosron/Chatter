@@ -62,6 +62,10 @@ export default class SearchBar extends React.Component{
         });
     }
 
+    componentWillUnmount(){
+        socket.removeEventListener(SEARCH_EVENTS.NO_RESULTS_FOUND);
+    }
+
     render(){
         return(
             <div id="searchBar">
