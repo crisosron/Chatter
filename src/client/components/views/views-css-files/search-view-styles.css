@@ -13,7 +13,7 @@
 }
 
 .content{
-    border: 1px solid green;
+    /* border: 1px solid green; */
     width: 70%;
     height: 70%;
     margin-bottom: 1%;
@@ -21,10 +21,36 @@
 
 .searchBarDiv{
     height: 10%;
-    border: 1px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Temporary */
+    /* border: 1px solid var(--grey-border-color); */
+}
+
+.searchBarDiv >h2{
+    margin-right: 3%;
+    font-size: 1.5vmax;
 }
 
 .resultsDiv{
     height: 90%;
-    border: 1px solid red;
+    border: 1px solid var(--grey-border-color);
+}
+
+.searchInput{
+    width: 75%;
+    height: 35%;
+    background-color: var(--primary-color);
+    border-radius: 20px;
+    padding: 10px;
+    border: 1px solid var(--grey-border-color);
+    font-size: 1vmax;
+    text-align: center;
+    transition: 0.2s linear;
+}
+
+.searchInput:focus{
+    box-shadow: var(--box-shadow-darken);
 }
