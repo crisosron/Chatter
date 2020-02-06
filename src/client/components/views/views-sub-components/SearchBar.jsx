@@ -35,8 +35,15 @@ export default class SearchBar extends React.Component{
                 });
             }
 
-            else {
-                socket.emit(SEARCH_EVENTS.PERFORM_GENERAL_SEARCH, {
+            else if(this.props.mode === "Users"){
+                socket.emit(SEARCH_EVENTS.SEARCH_UNKNOWN_USERS, {
+                    stringQuery: searchBarInput.value,
+                    thisUser: this.props.thisUser
+                });
+            }
+
+            else if(this.props.mode === "Groups"){
+                socket.emit(SEARCH_EVENTS.SEARCH_UNKNOWN_GROUPS, {
                     stringQuery: searchBarInput.value,
                     thisUser: this.props.thisUser
                 });
@@ -48,13 +55,13 @@ export default class SearchBar extends React.Component{
             this.props.updateCommEntities(data.results);
         });
 
-        socket.on(SEARCH_EVENTS.DELIVER_GENERAL_SEARCH_USER_RESULTS, data => {
+        socket.on(SEARCH_EVENTS.DELIVER_UNKNOWN_USER_SEARCH_RESULTS, data => {
             if(data.resultingUserCommEntities === undefined) return;
-            this.props.updateGeneralSearchUserEntities(data.resultingUserCommEntities);
+            this.props.updateCommEntities(data.resultingUserCommEntities);
         });
 
-        socket.on(SEARCH_EVENTS.DELIVER_GENERAL_SEARCH_GROUP_RESULTS, data => {
-            this.props.updateGeneralSearchGroupEntities(data.resultingGroupCommEntities);
+        socket.on(SEARCH_EVENTS.DELIVER_UNKNOWN_GROUP_SEARCH_RESULTS, data => {
+            this.props.updateCommEntities(data.resultingGroupCommEntities);
         });
 
         socket.on(SEARCH_EVENTS.NO_RESULTS_FOUND, data => {

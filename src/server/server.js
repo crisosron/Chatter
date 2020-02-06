@@ -38,8 +38,12 @@ io.on("connection", clientSocket => {
         SearchOperations.search(clientSocket, data, "Groups");
     });
 
-    clientSocket.on(SEARCH_EVENTS.PERFORM_GENERAL_SEARCH, data => {
-        SearchOperations.generalSearch(clientSocket, data);
+    clientSocket.on(SEARCH_EVENTS.SEARCH_UNKNOWN_USERS, data => {
+        SearchOperations.searchUnknownUsers(clientSocket, data);
+    });
+
+    clientSocket.on(SEARCH_EVENTS.SEARCH_UNKNOWN_GROUPS, data => {
+        SearchOperations.searchUnknownGroups(clientSocket, data);
     });
 
     clientSocket.on(USER_ACTION_EVENTS.CREATE_GROUP, data => {

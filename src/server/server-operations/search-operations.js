@@ -44,13 +44,12 @@ class SearchOperations{
     }
 
     /**
-     * Performs a search for both usernames and groupnames for a given string
+     * Performs a search for usernames around the same as the given string in the data parameter
      * @param clientSocket {Socket} - Socket object of the client that issued the general search 
-     * @param data {Object} - Object passed through socket.io events. In this case, it should contain stringQuery
+     * @param data {Object} - Object passed through socket.io events. In this case, it should contain stringQuery and thisUser
     */
-    static generalSearch(clientSocket, data){
+    static searchUnknownUsers(clientSocket, data){
         const userNameQuery = {userName: new RegExp(data.stringQuery, 'i')}
-        const groupNameQuery = {groupName: new RegExp(data.stringQuery, 'i')}
 
         // Obtaining users with a username that is around the same as data.stringQuery and emitting it to frontend
         User.find(userNameQuery, (err, res) => {
@@ -63,10 +62,19 @@ class SearchOperations{
                 resultingUserCommEntities.push(new CommunicationEntity(element.userName, element._id));
             });
 
-            clientSocket.emit(SEARCH_EVENTS.DELIVER_GENERAL_SEARCH_USER_RESULTS, {
+            clientSocket.emit(SEARCH_EVENTS.DELIVER_UNKNOWN_USER_SEARCH_RESULTS, {
                 resultingUserCommEntities: resultingUserCommEntities
             });    
         });
+    }
+
+    /**
+     * Performs a search for group names around the same as the given string in the data parameter
+     * @param clientSocket {Socket} - Socket object of the client that issued the general search 
+     * @param data {Object} - Object passed through socket.io events. In this case, it should contain stringQuery
+    */
+    static searchUnknownGroups(clientSocket, data){
+        const groupNameQuery = {groupName: new RegExp(data.stringQuery, 'i')}
 
         // Obtaining groups with a groupName that is around the same as data.stringQuery and emitting it to backend
         Group.find(groupNameQuery, (err, res) => {
@@ -75,7 +83,7 @@ class SearchOperations{
                 resultingGroupCommEntities.push(new CommunicationEntity(element.groupName, element._id));
             });
 
-            clientSocket.emit(SEARCH_EVENTS.DELIVER_GENERAL_SEARCH_GROUP_RESULTS, {
+            clientSocket.emit(SEARCH_EVENTS.DELIVER_UNKNOWN_GROUP_SEARCH_RESULTS, {
                 resultingGroupCommEntities: resultingGroupCommEntities
             });
         });

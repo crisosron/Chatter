@@ -57,7 +57,7 @@ export default function CommunicationEntitiesBar(props){
                     index={index}
                     commEntityID={value._id}
                     className={selectedCommEntityIndex === index ? "selectedCommunicationEntity" : ""}
-                    actions={props.mode === "Friends" ? friendModeCommEntityActions : groupModeCommEntityActions}
+                    actions={props.mode === "Friends" || props.mode === "Users" ? friendModeCommEntityActions : groupModeCommEntityActions}
                     showActionMenu={commEntityShowActionsIndex === index}
                     handleActionClicked={handleActionClicked}
                     >{value._name}</CommunicationEntity>
