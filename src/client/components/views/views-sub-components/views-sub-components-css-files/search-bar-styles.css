@@ -14,6 +14,10 @@
     transition: 0.2s linear;
     font-size: 1vmax;
     text-align: center;
+    background-image: url("../../../../../res/icons/search_icon.png");
+    background-repeat: no-repeat;
+    background-size: 8%;
+    background-position: 2% center;
 }
 
 .searchBarInputField:focus{
