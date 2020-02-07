@@ -23,7 +23,9 @@ export default function IndividualChatDisplayView(props){
     return (
         <div id="communicationViewWrapper">
             <div id="communicationViewSideBarWrapper">
-                <SearchBar mode="Friends" updateCommEntities={updateCommEntities} resetCommEntities={resetCommEntities}/>
+                <div id="communicationEntitySearchBarWrapper">
+                    <SearchBar mode="Friends" updateCommEntities={updateCommEntities} resetCommEntities={resetCommEntities}/>
+                </div>
                 <CommunicationEntityBar mode="Friends" changeChatPane={changeChatPane} communicationEntities={friendCommEntities}></CommunicationEntityBar>
             </div>
             <ChatPane selectedCommEntity={selectedCommEntity}></ChatPane>

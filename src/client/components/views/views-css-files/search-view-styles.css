@@ -31,14 +31,16 @@
     display: flex;
     font-size: 1vmax;
     border-top: 10px solid var(--accent-color);
+    border-right: 10px solid var(--accent-color);
 }
 
 #resultsDiv{
-    width: 100%;
+    width: 120%;
     height: 90%;
-    border: 3px solid var(--grey-border-color);
+    border: 10px solid var(--grey-border-color);
     overflow-y: auto;
     display: flex;
+    margin-left: -11%;
 }
 
 .toggleDiv{
@@ -69,4 +71,15 @@
 
 #resultingCommEntitiesDiv{
     display: flex;
+}
+
+#searchBarWrapper{
+    flex: 1;
+    display: flex;
+}
+
+/* Overriding some default styling of SearchBar */
+#searchInput{
+    border: none;
+    flex: 1;
 }

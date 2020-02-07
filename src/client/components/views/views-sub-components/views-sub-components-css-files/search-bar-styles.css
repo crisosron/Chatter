@@ -1,13 +1,10 @@
-.searchBarWrapper{
+/* .searchBarWrapper{
     flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+} */
 
 .searchBarInputField{
     width: 100%;
-    height: 70%;
+    height: 100%;
     border: none;
     border-bottom: 3px solid var(--accent-color);
     background-color: var(--primary-color);
