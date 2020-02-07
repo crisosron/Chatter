@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react"
 import "./views-css-files/search-view-styles.css";
 import SearchBar from "./views-sub-components/SearchBar";
 import CommunicationEntityBar from "./views-sub-components/CommunicationEntityBar";
-import CommunicationEntity from "./views-sub-components/CommunicationEntity";
+import CommunicationEntityActionBar from "./views-sub-components/CommunicationEntityActionBar";
 export default function SearchView(props){
     const [commEntities, setCommEntities] = useState([]);
     const [currentSearchMode, setCurrentSearchMode] = useState("Users");
@@ -37,8 +37,11 @@ export default function SearchView(props){
                     <div id="resultingCommEntitiesDiv">
                         <CommunicationEntityBar mode={currentSearchMode} communicationEntities={commEntities}/>
                     </div>
+
                     <div id="resultingCommEntitiesActionsDiv">
-                        
+                        {commEntities.map((value, index) => {
+                            return <CommunicationEntityActionBar key={"actionBar" + value._id} isGroup={currentSearchMode === "Groups"} thisUser={props.thisUser} commEntity={value}/>
+                        })}                           
                     </div>
                 </div>
             </div>

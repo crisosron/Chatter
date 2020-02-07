@@ -69,6 +69,7 @@ class LoginRegistrationOperations{
             if(result){
                 clientSocket.emit(LOGIN_EVENTS.LOGIN_SUCCESFUL, {
                     thisUser: {
+                        name: result.userName,
                         id: result._id, // Id of document in the database
                     }
                 });

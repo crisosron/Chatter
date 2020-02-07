@@ -10,6 +10,10 @@
     color: var(--secondary-color);
 }
 
+#resultsDiv > div, #resultingCommEntitiesDiv > div{
+    border: none;
+}
+
 #searchViewContent{
     width: 60%;
     height: 70%;
@@ -61,6 +65,8 @@
 
 #resultsDiv > div{
     flex: 1;
-    border: 1px solid var(--grey-border-color);
+}
+
+#resultingCommEntitiesDiv{
     display: flex;
 }

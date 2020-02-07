@@ -1,0 +1,38 @@
+/* Note that the dimensions of an actionBar matches the dimensions of a CommunicationEntity component */
+.actionBar{
+    width: 100%;
+    height: 10%;
+    display: flex;
+}
+
+.actionButton{
+    flex: 1;
+    background: transparent;
+    border:none;
+    transition: 0.2s linear;
+    text-align: center;
+    font-size: 0.75vmax;
+    background-repeat: no-repeat;
+    background-position:center;
+}
+
+.actionButton:hover{
+    box-shadow: var(--box-shadow-darken);
+}
+
+.joinGroupButton{
+    background-image: url("https://img.icons8.com/windows/32/000000/add-user-group-man-man.png");
+}
+
+.addUserButton{
+    background-image: url("https://img.icons8.com/windows/32/000000/add-user-male.png");
+}
+
+.blockButton{
+    background-image: url("https://img.icons8.com/windows/32/ff0000/no-chat.png")
+}
+
+.sendMessageButton{
+    background-image: url("https://img.icons8.com/windows/32/000000/speech-bubble-with-dots.png");
+}
+
