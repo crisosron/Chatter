@@ -1,6 +1,7 @@
 #profileViewWrapper{
     width: 100%;
     height: 100%;
+    color: var(--secondary-color);
 }
 
 #bannerDiv{
@@ -44,20 +45,57 @@
 #friendsAndGroupsWrapper > div{
     margin-bottom: 2%;
     flex: 1;
-    border: 1px solid blue;
-    overflow-y: auto;
+    border-top: 5px solid var(--grey-border-color);
 }
 
 #accountInformationWrapper{
     margin: 2% 2% 0 0;
     width: 60%;
     height: 100%;
+}
+
+#accountInformationTitleDiv{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
     border: 1px solid black;
 }
 
-{
+#lockChangesDiv{
+    width: 50%;
+    height: 60%;
+    margin-left: 5%;
     display: flex;
+}
+
+#changesLockInputField{
+    background-color: var(--primary-color);
+    border: none;
+    text-align: center;
+    flex: 6;
+    font-size: 0.75vmax;
+}
+
+#changesLockInputField[disabled], #changesLockInputField:focus{
+    box-shadow: var(--box-shadow-darken);
+}
+
+#lockIcon{
+    flex: 1;
+    border: 1px solid cyan;
+}
+
+#accountInformationContent{
     width: 100%;
+    height: 85%;
+    border: 5px solid var(--accent-color);
+}
+
+#accountInformationTitleDiv h1{
+    font-size: 2vmax;
+}
+
+.searchBarWrapper{
     height: 10%;
-    border: 1px solid lime;
 }
