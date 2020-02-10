@@ -1,10 +1,21 @@
-import React, {useState}from "react";
+import React, {useState, useEffect}from "react";
 import "./views-css-files/profile-view-styles.css";
 import SearchBar from "./views-sub-components/SearchBar";
 export default function ProfileView(props){
     const [changesLocked, setChangesLocked] = useState(true);
     const [isValidPassword, setIsValidPassword] = useState(false);
-    let changesLockInputFieldPlaceholder = changesLocked ? "Click lock to make changes to your account information" : "Enter your password"
+    let enableChangesInputField = null;
+    let enableChangesInputFieldPlaceholder = changesLocked ? "Click lock to make changes to your account" : "Enter your password"
+
+    const handleEnableChangesIconClicked = () => {
+        setChangesLocked(!changesLocked);
+    }
+
+    useEffect(() => {
+        if(!changesLocked){
+            enableChangesInputField.focus();
+        }
+    }, [changesLocked]);
 
     return(
         <div id="profileViewWrapper">
@@ -16,12 +27,12 @@ export default function ProfileView(props){
             <div id="profileBodyWrapper">
                 <div id="friendsAndGroupsWrapper">
                     <div id="friendsDiv">
-                        <div class="searchBarWrapper">
+                        <div className="searchBarWrapper">
                             <SearchBar id="userSearchBar" mode="Friends"></SearchBar>
                         </div>
                     </div>
                     <div id="groupsDiv">
-                        <div class="searchBarWrapper">
+                        <div className="searchBarWrapper">
                             <SearchBar id="groupSearchBar" mode="Groups"></SearchBar>
                         </div>
                     </div>
@@ -30,13 +41,14 @@ export default function ProfileView(props){
                 <div id="accountInformationWrapper">
                     <div id="accountInformationTitleDiv">
                         <h1>Your Information</h1>
-                        <div id="lockChangesDiv">
-                            <input id="changesLockInputField"
-                            placeholder={changesLockInputFieldPlaceholder}
+                        <div id="enableChangesDiv">
+                            <input id="enableChangesInputField"
+                            placeholder={enableChangesInputFieldPlaceholder}
                             type="password"
-                            disabled
+                            disabled={changesLocked}
+                            ref={(inputField) => {enableChangesInputField = inputField}}
                             />
-                            <div id="lockIcon"></div>
+                            <div id="enableChangesIconDiv" className={changesLocked ? "lockedIconDiv" : "confirmPassword"} onClick={handleEnableChangesIconClicked}>{!changesLocked ? "Confirm" : ""}</div>
                         </div>
                     </div>
                     <div id="accountInformationContent">
