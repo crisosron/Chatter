@@ -44,7 +44,9 @@
 #friendsAndGroupsWrapper > div{
     margin-bottom: 2%;
     flex: 1;
-    border-top: 5px solid var(--grey-border-color);
+    /* border-top: 5px solid var(--grey-border-color); */
+    background: var(--tertiary-color);
+    border-radius: 20px;
 }
 
 #accountInformationWrapper{
@@ -116,6 +118,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 20px;
+    background: var(--tertiary-color);
 }
 
 #accountInformationContentDiv{
@@ -131,7 +135,7 @@
     border-left: 5px solid var(--accent-color);
     text-align: center;
     font-size: 1vmax;
-    background-color: var(--primary-color);
+    background: transparent;
     transition: 0.2s linear;
 }
 

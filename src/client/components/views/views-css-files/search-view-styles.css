@@ -41,6 +41,7 @@
     overflow-y: auto;
     display: flex;
     margin-left: -11%;
+    background: var(--tertiary-color);
 }
 
 .toggleDiv{

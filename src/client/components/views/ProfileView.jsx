@@ -61,6 +61,7 @@ export default function ProfileView(props){
                             type="password"
                             disabled={changesLocked}
                             ref={(inputField) => {enableChangesInputField = inputField}}
+                            required
                             />
                             <div id="enableChangesIconDiv" className={changesLocked ? "lockedIconDiv" : "confirmPassword"} onClick={changesLocked ? handleEnableChangesIconClicked : handleConfirmPasswordClicked}>{!changesLocked ? "Confirm" : ""}</div>
                         </div>

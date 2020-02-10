@@ -19,6 +19,7 @@
 
 #messagesDiv{
     flex: 11;
+    background: var(--tertiary-color);
 }
 
 #messageInputDiv{
