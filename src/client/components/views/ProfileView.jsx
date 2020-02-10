@@ -3,17 +3,26 @@ import "./views-css-files/profile-view-styles.css";
 import SearchBar from "./views-sub-components/SearchBar";
 export default function ProfileView(props){
     const [changesLocked, setChangesLocked] = useState(true);
-    const [isValidPassword, setIsValidPassword] = useState(false);
+
+    // accountInfoEditingEnabled will enable/disable input fields in accountInformationContentDiv
+    const [accountInfoEditingEnabled, setAccountInfoEditingEnabled] = useState(false);
+
     let enableChangesInputField = null;
     let enableChangesInputFieldPlaceholder = changesLocked ? "Click lock to make changes to your account" : "Enter your password"
 
     const handleEnableChangesIconClicked = () => {
         setChangesLocked(false);
+        setAccountInfoEditingEnabled(false);
     }
 
     const handleConfirmPasswordClicked = () => {
         console.log("TODO: Handle confirmation of password and enable editing for all input fields in accountInformationContent");
         setChangesLocked(true);
+        setAccountInfoEditingEnabled(true);
+    }
+
+    const handleSaveChangesClicked = () => {
+        console.log("TODO: Handle save changes");
     }
 
     useEffect(() => {
@@ -56,8 +65,19 @@ export default function ProfileView(props){
                             <div id="enableChangesIconDiv" className={changesLocked ? "lockedIconDiv" : "confirmPassword"} onClick={changesLocked ? handleEnableChangesIconClicked : handleConfirmPasswordClicked}>{!changesLocked ? "Confirm" : ""}</div>
                         </div>
                     </div>
-                    <div id="accountInformationContent">
+                    <div id="accountInformationContentWrapper">
 
+                        {/* Fields to allow the user to make edits to their account information */}
+                        <div id="accountInformationContentDiv">
+                            {/* TODO: On useEffect, obtain thisUser info from database and preload them in here as values */}
+                            <h2>Username</h2>
+                            <input type="text" disabled={!accountInfoEditingEnabled}/>
+                            <h2>Password</h2>
+                            <input type="password" disabled={!accountInfoEditingEnabled}/>
+                            <h2>Email</h2>
+                            <input type="text" disabled={!accountInfoEditingEnabled}/>
+                            <button id="saveChangesButton" disabled={!accountInfoEditingEnabled} onClick={handleSaveChangesClicked}>Save Changes</button>
+                        </div>
                     </div>
                 </div>
             </div>
