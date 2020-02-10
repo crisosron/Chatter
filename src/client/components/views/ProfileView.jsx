@@ -8,7 +8,12 @@ export default function ProfileView(props){
     let enableChangesInputFieldPlaceholder = changesLocked ? "Click lock to make changes to your account" : "Enter your password"
 
     const handleEnableChangesIconClicked = () => {
-        setChangesLocked(!changesLocked);
+        setChangesLocked(false);
+    }
+
+    const handleConfirmPasswordClicked = () => {
+        console.log("TODO: Handle confirmation of password and enable editing for all input fields in accountInformationContent");
+        setChangesLocked(true);
     }
 
     useEffect(() => {
@@ -48,7 +53,7 @@ export default function ProfileView(props){
                             disabled={changesLocked}
                             ref={(inputField) => {enableChangesInputField = inputField}}
                             />
-                            <div id="enableChangesIconDiv" className={changesLocked ? "lockedIconDiv" : "confirmPassword"} onClick={handleEnableChangesIconClicked}>{!changesLocked ? "Confirm" : ""}</div>
+                            <div id="enableChangesIconDiv" className={changesLocked ? "lockedIconDiv" : "confirmPassword"} onClick={changesLocked ? handleEnableChangesIconClicked : handleConfirmPasswordClicked}>{!changesLocked ? "Confirm" : ""}</div>
                         </div>
                     </div>
                     <div id="accountInformationContent">

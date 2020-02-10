@@ -7,7 +7,6 @@
 #bannerDiv{
     width: 100%;
     height: 25%;
-    /* border: 1px solid black; */
 
     /* Vertically centers child elements within this div */
     display: flex;
