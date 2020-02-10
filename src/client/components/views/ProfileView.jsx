@@ -7,6 +7,10 @@ export default function ProfileView(props){
     // accountInfoEditingEnabled will enable/disable input fields in accountInformationContentDiv
     const [accountInfoEditingEnabled, setAccountInfoEditingEnabled] = useState(false);
 
+    // TODO: Set default comm entities for these arrays
+    const [friendCommEntities, setFriendCommEntities] = useState([]);
+    const [groupCommEntities, setGroupCommEntities] = useState([]);
+
     let enableChangesInputField = null;
     let enableChangesInputFieldPlaceholder = changesLocked ? "Click lock to make changes to your account" : "Enter your password"
 
@@ -25,6 +29,23 @@ export default function ProfileView(props){
         console.log("TODO: Handle save changes");
     }
 
+    const resetFriendCommEntities = () => {
+        setFriendCommEntities([]);
+    }
+
+    const resetGroupCommEntities = () => {
+        setGroupCommEntities([]);
+    }
+
+    const updateFriendCommEntities = friendCommEntities => {
+        setFriendCommEntities(friendCommEntities);
+    }
+
+    const updateGroupCommEntities = groupCommEntities => {
+        setGroupCommEntities(groupCommEntities);
+    }
+
+
     useEffect(() => {
         if(!changesLocked){
             enableChangesInputField.focus();
@@ -42,12 +63,12 @@ export default function ProfileView(props){
                 <div id="friendsAndGroupsWrapper">
                     <div id="friendsDiv">
                         <div className="searchBarWrapper">
-                            <SearchBar id="userSearchBar" mode="Friends"></SearchBar>
+                            <SearchBar id="userSearchBar" updateCommEntities={updateFriendCommEntities} resetCommEntities={resetFriendCommEntities} mode="Friends">Search Friends</SearchBar>
                         </div>
                     </div>
                     <div id="groupsDiv">
                         <div className="searchBarWrapper">
-                            <SearchBar id="groupSearchBar" mode="Groups"></SearchBar>
+                            <SearchBar id="groupSearchBar" updateCommEntities={updateGroupCommEntities} resetCommEntites={resetGroupCommEntities} mode="Groups">Search Groups</SearchBar>
                         </div>
                     </div>
                 </div>

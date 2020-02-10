@@ -32,7 +32,7 @@ export default function SearchView(props){
                         <div id="groupToggleDiv" className={"toggleDiv centeredContent " + (currentSearchMode === "Groups" ? "selectedToggleDiv":"")} onClick={() => {handleTogglePressed("Groups")}}>Groups</div>
                     </div>
                     <div id="searchBarWrapper">
-                        <SearchBar id="searchInput" mode={currentSearchMode} style={{width: "75%"}} updateCommEntities={updateCommEntities} resetCommEntities={resetCommEntities} thisUser={props.thisUser}/>
+                        <SearchBar id="searchInput" mode={currentSearchMode} style={{width: "75%"}} updateCommEntities={updateCommEntities} resetCommEntities={resetCommEntities} thisUser={props.thisUser}>{"Search " + currentSearchMode}</SearchBar>
                     </div>
                 </div>
                 <div id="resultsDiv">

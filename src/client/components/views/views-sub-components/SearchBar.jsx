@@ -75,9 +75,7 @@ export default class SearchBar extends React.Component{
 
     render(){
         return(
-            // <div className="searchBarWrapper"> {/*Using class here for better reusability of this component (same with input elem below)*/}
-            <input id={this.props.id === undefined ? "searchBarInput" : this.props.id} style={this.props.style} className="searchBarInputField" type="text" placeholder={"Search " + this.props.mode}></input>
-            // </div>
+            <input id={this.props.id === undefined ? "searchBarInput" : this.props.id} style={this.props.style} className="searchBarInputField" type="text" placeholder={this.props.children}></input>
         );
     }
 }
