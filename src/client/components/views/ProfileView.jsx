@@ -1,7 +1,10 @@
 import React, {useState, useEffect}from "react";
 import "./views-css-files/profile-view-styles.css";
 import SearchBar from "./views-sub-components/SearchBar";
+import PROFILE_EVENTS from "../../../events/profile-events";
+import socket from "../../../index";
 export default function ProfileView(props){
+    const [userInfo, setUserInfo] = useState({});
     const [changesLocked, setChangesLocked] = useState(true);
 
     // accountInfoEditingEnabled will enable/disable input fields in accountInformationContentDiv
@@ -10,7 +13,7 @@ export default function ProfileView(props){
     // TODO: Set default comm entities for these arrays
     const [friendCommEntities, setFriendCommEntities] = useState([]);
     const [groupCommEntities, setGroupCommEntities] = useState([]);
-
+    
     let enableChangesInputField = null;
     let enableChangesInputFieldPlaceholder = changesLocked ? "Click lock to make changes to your account" : "Enter your password"
 
@@ -45,6 +48,17 @@ export default function ProfileView(props){
         setGroupCommEntities(groupCommEntities);
     }
 
+    useEffect(() => {
+        socket.emit(PROFILE_EVENTS.GET_USER_INFO, {id: props.thisUser.id});
+        socket.on(PROFILE_EVENTS.DELIVER_USER_INFO, data => {
+            setUserInfo({
+                userName: data.userName,
+                password: data.password,
+                email: data.email
+            });
+        });
+
+    }, []);
 
     useEffect(() => {
         if(!changesLocked){
@@ -93,11 +107,11 @@ export default function ProfileView(props){
                         <div id="accountInformationContentDiv">
                             {/* TODO: On useEffect, obtain thisUser info from database and preload them in here as values */}
                             <h2>Username</h2>
-                            <input type="text" disabled={!accountInfoEditingEnabled}/>
+                            <input type="text" disabled={!accountInfoEditingEnabled} value={userInfo.userName}/>
                             <h2>Password</h2>
-                            <input type="password" disabled={!accountInfoEditingEnabled}/>
+                            <input type="password" disabled={!accountInfoEditingEnabled} value={userInfo.password}/>
                             <h2>Email</h2>
-                            <input type="text" disabled={!accountInfoEditingEnabled}/>
+                            <input type="text" disabled={!accountInfoEditingEnabled} value={userInfo.email}/>
                             <button id="saveChangesButton" disabled={!accountInfoEditingEnabled} onClick={handleSaveChangesClicked}>Save Changes</button>
                         </div>
                     </div>

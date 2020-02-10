@@ -6,11 +6,13 @@ const REGISTER_EVENTS = require("../events/register-events");
 const LOGIN_EVENTS = require("../events/login-events");
 const SEARCH_EVENTS = require("../events/search-events");
 const USER_ACTION_EVENTS = require("../events/user-action-events");
+const PROFILE_EVENTS = require("../events/profile-events");
 
 // Singleton classes for their static methods
 const LoginRegistrationOperations = require("./server-operations/login-registration-operations");
 const SearchOperations = require("./server-operations/search-operations");
 const UserActionOperations = require("./server-operations/user-action-operations");
+const ProfileOperations = require("./server-operations/profile-operations");
 
 // Server setup
 let io = require("socket.io")();
@@ -56,5 +58,9 @@ io.on("connection", clientSocket => {
 
     clientSocket.on(USER_ACTION_EVENTS.ADD_FRIEND, data => {
         UserActionOperations.addFriend(clientSocket, data);
+    });
+
+    clientSocket.on(PROFILE_EVENTS.GET_USER_INFO, data => {
+        ProfileOperations.getUserInfo(clientSocket, data.id);
     });
 });
