@@ -44,7 +44,6 @@
 #friendsAndGroupsWrapper > div{
     margin-bottom: 2%;
     flex: 1;
-    /* border-top: 5px solid var(--grey-border-color); */
     background: var(--tertiary-color);
     border-radius: 20px;
 }
@@ -181,4 +180,8 @@
 
 .searchBarWrapper{
     height: 10%;
+}
+
+.searchBarWrapper, .searchBarWrapper > input{
+    border-radius: 20px 20px 0 0;
 }
