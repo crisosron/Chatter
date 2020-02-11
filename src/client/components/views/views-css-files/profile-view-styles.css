@@ -43,20 +43,6 @@
     background-color: var(--tertiary-color);
 }
 
-/* Direct child divs of friendsAndGroupsWrapper will hold CommEntity objects of friends and groups */
-/* #friendsAndGroupsWrapper > div{
-    margin-bottom: 2%;
-    flex: 1;
-    background: var(--tertiary-color);
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-}
-
-#friendsAndGroupsWrapper .communicationEntityDiv{
-    height: 40%;
-} */
-
 #searchToggleDiv{
     height: 10%;
     display: flex;

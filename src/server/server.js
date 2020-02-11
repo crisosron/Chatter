@@ -33,11 +33,11 @@ io.on("connection", clientSocket => {
     });
 
     clientSocket.on(SEARCH_EVENTS.SEARCH_FRIENDS, data => {
-        SearchOperations.search(clientSocket, data, "Friends");
+        SearchOperations.searchFriends(clientSocket, data);
     });
 
     clientSocket.on(SEARCH_EVENTS.SEARCH_GROUPS, data => {
-        SearchOperations.search(clientSocket, data, "Groups");
+        SearchOperations.searchGroups(clientSocket, data);
     });
 
     clientSocket.on(SEARCH_EVENTS.SEARCH_UNKNOWN_USERS, data => {
