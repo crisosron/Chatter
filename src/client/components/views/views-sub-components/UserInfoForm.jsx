@@ -100,7 +100,7 @@ export default function UserInfoForm(props){
 
                         <label>
                             <h2>Email</h2>
-                            <input type="text" disabled={!accountInfoEditingEnabled} value={emailInputValue}/>
+                            <input type="text" disabled={!accountInfoEditingEnabled} value={emailInputValue} onChange={handleEmailInputChanged}/>
                         </label>
                         
                         <input type="submit" value="Save Changes" id="saveChangesButton" disabled={!accountInfoEditingEnabled} onChange={handleEmailInputChanged}/>
