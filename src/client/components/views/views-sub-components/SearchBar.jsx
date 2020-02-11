@@ -20,6 +20,8 @@ export default class SearchBar extends React.Component{
                 return;
             }
 
+            console.log(`processing SearchBar: ${this.props.id}`);
+
             // Emitting to server to perform search based on the mode selected
             if(this.props.mode === "Friends") {
                 socket.emit(SEARCH_EVENTS.SEARCH_FRIENDS, {
@@ -42,7 +44,7 @@ export default class SearchBar extends React.Component{
                 });
             }
 
-            else if(this.props.mode === "Groups"){
+            else if(this.props.mode === "Unknown Groups"){
                 socket.emit(SEARCH_EVENTS.SEARCH_UNKNOWN_GROUPS, {
                     stringQuery: searchBarInput.value,
                     thisUser: this.props.thisUser
@@ -50,8 +52,10 @@ export default class SearchBar extends React.Component{
             }
         });
 
+        // TODO: Can result delivery be simplified with one handler?
         // Setting up socket.io event listeners for SEARCH_EVENT responses from server
         socket.on(SEARCH_EVENTS.DELIVER_RESULTS, data => {
+            console.log(this.props.updateCommEntities);
             this.props.updateCommEntities(data.results);
         });
 

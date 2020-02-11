@@ -38,20 +38,59 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    border: 5px solid var(--accent-color);
+    border-radius: 20px;
+    background-color: var(--tertiary-color);
 }
 
 /* Direct child divs of friendsAndGroupsWrapper will hold CommEntity objects of friends and groups */
-#friendsAndGroupsWrapper > div{
+/* #friendsAndGroupsWrapper > div{
     margin-bottom: 2%;
     flex: 1;
     background: var(--tertiary-color);
     border-radius: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
-.searchBarWrapper{
+#friendsAndGroupsWrapper .communicationEntityDiv{
+    height: 40%;
+} */
+
+#searchToggleDiv{
     height: 10%;
+    display: flex;
+    border-bottom: 3px solid var(--accent-color);
 }
 
-.searchBarWrapper, .searchBarWrapper > input{
-    border-radius: 20px 20px 0 0;
+#searchFriendsToggleDiv, #searchGroupsToggleDiv{
+    flex: 0.25;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1vmax;
+    border-right: 2px solid var(--accent-color);
+    transition: 0.2s linear;
+}
+
+#searchFriendsToggleDiv{
+    border-radius: 15px 0 0 0;
+}
+
+#searchFriendsToggleDiv:hover, #searchGroupsToggleDiv:hover, .selectedSearchOption{
+    box-shadow: var(--box-shadow-darken);
+}
+
+#searchBarWrapper{
+    flex: 1;
+    border-bottom: 2px solid var(--accent-color);
+}
+
+#searchBarWrapper input{
+    border-radius: 0 15px 0 0;
+}
+
+/* Overriding default CommEntityDiv styling in communication-entity-styles.css */
+#profileViewWrapper .communicationEntityDiv{
+    height: 15%;
 }

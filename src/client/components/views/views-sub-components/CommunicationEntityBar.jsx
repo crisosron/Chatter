@@ -19,7 +19,15 @@ export default function CommunicationEntitiesBar(props){
     function handleCommEntitySelected(selectedIndex, selectedCommEntity){
         setSelectedCommEntityIndex(selectedIndex);
         setCommEntityShowActionsIndex(-1);
-        props.changeChatPane(selectedCommEntity)
+
+        if(!props.changeChatPane) // Using falsy
+            return;
+        
+        changeChatPane(selectedCommEntity);
+    }
+
+    function changeChatPane(commEntity){
+        props.changeChatPane(commEntity)
     }
 
     function handleContextMenu(e, index){
@@ -47,7 +55,7 @@ export default function CommunicationEntitiesBar(props){
     }
 
     return(
-        <div className="communicationEntitiesBar">
+        <div id={props.id} className="communicationEntitiesBar">
             {props.communicationEntities.map((value, index) => {
                 return (
                     <CommunicationEntity
