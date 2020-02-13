@@ -3,13 +3,15 @@ import "./views-css-files/profile-view-styles.css";
 import SearchBar from "./views-sub-components/SearchBar";
 import UserInfoForm from "./views-sub-components/UserInfoForm"
 import CommunicationEntityBar from "./views-sub-components/CommunicationEntityBar"
+import socket from "../../../index";
+import PROFILE_EVENTS from "../../../events/profile-events";
 export default function ProfileView(props){
 
     // TODO: Set default comm entities for these arrays
     const [friendCommEntities, setFriendCommEntities] = useState([]);
     const [groupCommEntities, setGroupCommEntities] = useState([]);
-
     const [selectedSearchMode, setSelectedSearchMode] = useState("Friends");
+    const [pendingFriendRequests, setPendingFriendRequests] = useState([]);
 
     const resetCommEntities = () => {
         setFriendCommEntities([]);
@@ -28,6 +30,16 @@ export default function ProfileView(props){
 
     useEffect(() => {
         //TODO: Get pending friend requests and display them to notifications content
+        socket.emit(PROFILE_EVENTS.GET_PENDING_FRIEND_REQUESTS, {
+            id: props.thisUser.id
+        });
+
+        socket.on(PROFILE_EVENTS.DELIVER_PENDING_FRIEND_REQUEST, data => {
+            let newPendingFriendRequests = pendingFriendRequests;
+            newPendingFriendRequests.push(data.pendingFriendRequest);
+            setPendingFriendRequests(newPendingFriendRequests);
+        });
+
     }, []);
 
     return(
@@ -37,7 +49,11 @@ export default function ProfileView(props){
                 <div id="titleInfo"></div>
                 <div id="notificationsWrapper">
                     <h1>Notifications</h1>
-                    <div id="notificationsContentDiv"></div>
+                    <div id="notificationsContentDiv">
+                        {pendingFriendRequests.map((value, index) => {
+                            return <div className="notification"></div>
+                        })}
+                    </div>
                 </div>
             </div>
 

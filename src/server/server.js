@@ -63,4 +63,8 @@ io.on("connection", clientSocket => {
     clientSocket.on(PROFILE_EVENTS.GET_USER_INFO, data => {
         ProfileOperations.getUserInfo(clientSocket, data.id);
     });
+
+    clientSocket.on(PROFILE_EVENTS.GET_PENDING_FRIEND_REQUESTS, data => {
+        ProfileOperations.getPendingFriendRequests(clientSocket, data.id);
+    });
 });

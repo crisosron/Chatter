@@ -93,7 +93,7 @@ class UserActionOperations{
                 
         });
     }
-
+    
     static generateGroupCode(clientSocket){
         clientSocket.emit(USER_ACTION_EVENTS.DELIVER_JOIN_CODE, {
             generatedJoinCode: shortid.generate()
