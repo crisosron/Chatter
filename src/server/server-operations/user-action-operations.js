@@ -47,9 +47,6 @@ class UserActionOperations{
      * @param data {Object} - Object passed through socket io events, should contain `addingUserID` and `userToAddID`
     */
     static addFriend(clientSocket, data){
-        console.log("Inside addFriend method");
-        console.log(`data.addingUserID: ${data.addingUserID}, data.userToAddID: ${data.userToAddID}`);
-        console.log(`typeof data.addingUserID: ${typeof data.addingUserID}, typeof data.userToAddID: ${typeof data.userToAddID}`);
         // Outer findByID allows us to check validity of preconditions
         User.findById(data.addingUserID, (err, addingUser) => {
 
