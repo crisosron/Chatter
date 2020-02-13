@@ -3,6 +3,9 @@ import "./views-css-files/search-view-styles.css";
 import SearchBar from "./views-sub-components/SearchBar";
 import CommunicationEntityBar from "./views-sub-components/CommunicationEntityBar";
 import CommunicationEntityActionBar from "./views-sub-components/CommunicationEntityActionBar";
+import socket from "../../../index";
+import USER_ACTION_EVENTS from "../../../events/user-action-events"
+import NotificationHandler from "../../notification-handler";
 export default function SearchView(props){
     const [commEntities, setCommEntities] = useState([]);
     const [currentSearchMode, setCurrentSearchMode] = useState("Users");
@@ -20,6 +23,22 @@ export default function SearchView(props){
         document.getElementById("searchInput").value = "";
         setCommEntities([]);
     }
+
+    useEffect(() => {
+        socket.on(USER_ACTION_EVENTS.ADD_FRIEND_DENIED, data => {
+            NotificationHandler.createNotification("warning", "Sending of friend request has been denied", data.reason);
+        });
+
+        socket.on(USER_ACTION_EVENTS.ADD_FRIEND_SENT, () => {
+            NotificationHandler.createNotification("success", "Friend Request Sent", "A friend request has been sent");
+        });
+
+        return function cleanup(){
+            socket.removeListener(USER_ACTION_EVENTS.ADD_FRIEND_SENT);
+            socket.removeListener(USER_ACTION_EVENTS.ADD_FRIEND_DENIED)
+        }
+
+    }, []);
 
     return(
         <div id="searchViewWrapper" className="centeredContent">
@@ -42,7 +61,7 @@ export default function SearchView(props){
 
                     <div id="resultingCommEntitiesActionsDiv">
                         {commEntities.map((value, index) => {
-                            return <CommunicationEntityActionBar key={"actionBar" + value._id} isGroup={currentSearchMode === "Unknown Groups"} thisUser={props.thisUser} commEntity={value}/>
+                            return <CommunicationEntityActionBar key={"actionBar" + value._id} isGroup={currentSearchMode === "Unknown Groups"} thisUser={props.thisUser} commEntity={value} thisUserSocket={socket}/>
                         })}                           
                     </div>
                 </div>

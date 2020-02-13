@@ -47,7 +47,9 @@ class UserActionOperations{
      * @param data {Object} - Object passed through socket io events, should contain `addingUserID` and `userToAddID`
     */
     static addFriend(clientSocket, data){
-
+        console.log("Inside addFriend method");
+        console.log(`data.addingUserID: ${data.addingUserID}, data.userToAddID: ${data.userToAddID}`);
+        console.log(`typeof data.addingUserID: ${typeof data.addingUserID}, typeof data.userToAddID: ${typeof data.userToAddID}`);
         // Outer findByID allows us to check validity of preconditions
         User.findById(data.addingUserID, (err, addingUser) => {
 
@@ -61,7 +63,7 @@ class UserActionOperations{
 
             if(addingUser.pendingFriendRequests.includes(userToAddObjectID)){ // If the request has already been sent previously
                 clientSocket.emit(USER_ACTION_EVENTS.ADD_FRIEND_DENIED, {
-                    reason: "A friend request has already been sent to this user"
+                    reason: "You already have a pending friend request with this user"
                 });                
                 return;
 
@@ -75,13 +77,19 @@ class UserActionOperations{
             // Adding ObjectID of userToAdd into pendingFriendRequests of addingUser
             User.findOneAndUpdate(
                 {_id: data.addingUserID}, // Condition
-                {$addToSet: {pendingFriendRequests: mongoose.Types.ObjectId(data.userToAddID)}}, // Update query
+                {$addToSet: {pendingFriendRequests: data.userToAddID}}, // Update query
+                (err, doc) => {
+                    if(err) console.log("Error placing userToAdd into addingUser pending friend requests: ",err);
+                }
             );
             
             // Adding ObjectID of addingUser into pendingFriendRequests of userToAdd
             User.findOneAndUpdate(
                 {_id: data.userToAddID}, // Condition
-                {$addToSet: {pendingFriendRequests: mongoose.Types.ObjectId(data.addingUserID)}}, // Update query
+                {$addToSet: {pendingFriendRequests: data.addingUserID}}, // Update query
+                (err, doc) => {
+                    if(err) console.log("Error placing addingUser into userToAdd pending friend requests: ",err);
+                }
             );
             
             clientSocket.emit(USER_ACTION_EVENTS.ADD_FRIEND_SENT);
