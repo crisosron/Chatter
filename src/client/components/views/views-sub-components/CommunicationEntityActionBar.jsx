@@ -1,7 +1,9 @@
 import React from "react";
 import "./views-sub-components-css-files/communication-entity-action-bar-styles.css";
 export default function CommunicationEntityActionBar(props){
+    console.log(props.isGroup);
     const affirmativeActionClassName = props.isGroup ? "joinGroupButton":"addUserButton"
+    console.log(affirmativeActionClassName);
 
     const handleAffirmativeButtonClicked = () => {
         console.log(`${props.thisUser.name} is trying to add ${props.commEntity._id}`);

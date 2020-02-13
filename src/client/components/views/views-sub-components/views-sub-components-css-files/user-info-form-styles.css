@@ -67,7 +67,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 20px;
     background: var(--tertiary-color);
 }
 
@@ -97,6 +96,7 @@
     box-shadow: var(--box-shadow-darken);
 }
 
+
 #accountInformationContentDiv h2{
     font-size: 1.25vmax;
     margin-bottom: -0.25%;
@@ -125,7 +125,6 @@
 }
 
 #saveChangesButton[disabled]:hover{
-    box-shadow: none;
     cursor: default;
 }
 

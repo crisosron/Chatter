@@ -24,7 +24,7 @@ export default function SearchView(props){
     return(
         <div id="searchViewWrapper" className="centeredContent">
             <div id="searchViewContent">
-                <h1>Search for Users/Groups</h1>
+                <h1>Search For New Users/Groups</h1>
 
                 <div id="topBarDiv">
                     <div id="searchModeToggleWrapper">
@@ -42,7 +42,7 @@ export default function SearchView(props){
 
                     <div id="resultingCommEntitiesActionsDiv">
                         {commEntities.map((value, index) => {
-                            return <CommunicationEntityActionBar key={"actionBar" + value._id} isGroup={currentSearchMode === "Groups"} thisUser={props.thisUser} commEntity={value}/>
+                            return <CommunicationEntityActionBar key={"actionBar" + value._id} isGroup={currentSearchMode === "Unknown Groups"} thisUser={props.thisUser} commEntity={value}/>
                         })}                           
                     </div>
                 </div>

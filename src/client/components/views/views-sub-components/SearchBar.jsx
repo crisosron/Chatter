@@ -20,8 +20,6 @@ export default class SearchBar extends React.Component{
                 return;
             }
 
-            console.log(`processing SearchBar: ${this.props.id}`);
-
             // Emitting to server to perform search based on the mode selected
             if(this.props.mode === "Friends") {
                 socket.emit(SEARCH_EVENTS.SEARCH_FRIENDS, {

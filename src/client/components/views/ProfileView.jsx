@@ -26,11 +26,19 @@ export default function ProfileView(props){
         setGroupCommEntities(groupCommEntities);
     }
 
+    useEffect(() => {
+        //TODO: Get pending friend requests and display them to notifications content
+    }, []);
+
     return(
         <div id="profileViewWrapper">
             <div id="bannerDiv">
                 <div id="profileImageDiv"></div>
                 <div id="titleInfo"></div>
+                <div id="notificationsWrapper">
+                    <h1>Notifications</h1>
+                    <div id="notificationsContentDiv"></div>
+                </div>
             </div>
 
             <div id="profileBodyWrapper">
