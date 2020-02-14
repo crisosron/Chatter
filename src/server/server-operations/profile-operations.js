@@ -29,13 +29,22 @@ class ProfileOperations{
      */
     static getPendingFriendRequests(clientSocket, userID){
         let pendingFriendRequests = [];
+
+        /**
+         *  Callback function called within nested User.findById (callback function needed due to asynchronous nature of mongoose db querying functions)
+         *  @param pendingFriendRequest {Object} - An object that represents a pending friend request. Should contain {id:xxx, userName:xxx}
+         *  @param isLastRequest {boolean} - If true, the callback function will emit pendingFriendRequests array to the client
+         */
         const cb = (pendingFriendRequest, isLastRequest) => {
             pendingFriendRequests.push(pendingFriendRequest);
             if(isLastRequest) clientSocket.emit(PROFILE_EVENTS.DELIVER_PENDING_FRIEND_REQUEST, {pendingFriendRequests: pendingFriendRequests});
         }
 
+        // Outer User.findById is used to find the user whose pending friend requests need to be obtained
         User.findById(userID, (err, res) => {
             for(let i = 0; i < res.pendingFriendRequests.length; i++){
+
+                // Inner User.findByID is used to get the usernames of the users who have pending friend requests with the issuing user
                 User.findById(res.pendingFriendRequests[i], (err, res) => {
                     cb({id: res._id, userName: res.userName}, i === res.pendingFriendRequests.length - 1);
                 });
