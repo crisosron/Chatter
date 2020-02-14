@@ -35,12 +35,10 @@ export default function ProfileView(props){
         });
 
         socket.on(PROFILE_EVENTS.DELIVER_PENDING_FRIEND_REQUEST, data => {
-            let newPendingFriendRequests = pendingFriendRequests;
-            newPendingFriendRequests.push(data.pendingFriendRequest);
-            setPendingFriendRequests(newPendingFriendRequests);
+            console.log(`data.pendingFriendRequests.length: ${data.pendingFriendRequests.length}`);
         });
+    }, [pendingFriendRequests]);
 
-    }, []);
 
     return(
         <div id="profileViewWrapper">

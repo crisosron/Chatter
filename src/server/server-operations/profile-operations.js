@@ -1,6 +1,12 @@
 const PROFILE_EVENTS = require("../../events/profile-events");
 const {User} = require("../database-document-models/user-model");
 class ProfileOperations{
+    
+    /**
+     *  Obtains information of the user with the provided userID
+     *  @param clientSocket {Socket} - Socket object of the requesting client
+     *  @param userID {string} - ID of the user in the Users collection whose information needs to be obtained
+     */
     static getUserInfo(clientSocket, userID){
         User.findById(userID, (err, res) => {
             if(err){
@@ -15,31 +21,26 @@ class ProfileOperations{
             });
         });
     }
-
+    
+    /**
+     *  Gets all the pending friend requests of the user with the supplied userID and sends it to the requesting client
+     *  @param clientSocket {Socket} - Socket object of the requesting client
+     *  @param userID {String} - ID of the user in the Users collection whose pending friend requests need to be obtained
+     */
     static getPendingFriendRequests(clientSocket, userID){
-
-        function cb(pendingFriendRequest){
-            clientSocket.emit(PROFILE_EVENTS.DELIVER_PENDING_FRIEND_REQUEST, {
-                pendingFriendRequest: pendingFriendRequest
-            });
+        let pendingFriendRequests = [];
+        const cb = (pendingFriendRequest, isLastRequest) => {
+            pendingFriendRequests.push(pendingFriendRequest);
+            if(isLastRequest) clientSocket.emit(PROFILE_EVENTS.DELIVER_PENDING_FRIEND_REQUEST, {pendingFriendRequests: pendingFriendRequests});
         }
 
         User.findById(userID, (err, res) => {
-            if(err){
-                console.log("Error in ProfileOperations.getPendingFriendRequests: ", err);
-                return;
-            }
-
             for(let i = 0; i < res.pendingFriendRequests.length; i++){
-                const pendingUserID = res.pendingFriendRequests[i];
-                User.findById(pendingUserID, (err, res) => {
-                    console.log(res);
-                    cb({pendingFriendID: res._id, pendingFriendUserName: res.userName});
+                User.findById(res.pendingFriendRequests[i], (err, res) => {
+                    cb({id: res._id, userName: res.userName}, i === res.pendingFriendRequests.length - 1);
                 });
             }
         });
-
-        
     }
 }
 

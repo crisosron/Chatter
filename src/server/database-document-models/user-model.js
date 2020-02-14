@@ -29,7 +29,7 @@ const userSchema = new Schema({
 
     friends: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
 
-    pendingFriendRequests: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
+    pendingFriendRequests: [{type: mongoose.Schema.Types.ObjectId, ref: 'User', userName: String}]
     
 }, {timestamps: true});
 

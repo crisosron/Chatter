@@ -31,6 +31,17 @@
     height: 10vw;
 }
 
+#notificationsContentDiv{
+    display: flex;
+    flex-direction: column;
+}
+
+.notification{
+    flex: 1;
+    height: 20%;
+    border: 1px solid black;
+}
+
 #titleInfo, #notificationsWrapper{
     margin-right: 2%;
 }
