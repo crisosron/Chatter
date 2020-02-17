@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react"
-import socket from "../../../../index";
+// import socket from "../../../../index";
 import PROFILE_EVENTS from "../../../../events/profile-events";
 import "./views-sub-components-css-files/user-info-form-styles.css";
 export default function UserInfoForm(props){
@@ -44,17 +44,17 @@ export default function UserInfoForm(props){
     // This useEffect hook is designed to simulate componentDidMount. It will send a socket.io event to obtain user info
     // and then handle the server's response by calling the setter methods for the user's info and storing into originalUserInfo
     useEffect(() => {
-        socket.emit(PROFILE_EVENTS.GET_USER_INFO, {id: props.thisUser.id});
-        socket.on(PROFILE_EVENTS.DELIVER_USER_INFO, data => {
-            setOriginalUserInfo({
-                userName: data.userName,
-                password: data.password,
-                email: data.email
-            });
-            setUserNameInputValue(data.userName);
-            setPasswordInputValue(data.password);
-            setEmailInputValue(data.email);
-        });
+        // socket.emit(PROFILE_EVENTS.GET_USER_INFO, {id: props.thisUser.id});
+        // socket.on(PROFILE_EVENTS.DELIVER_USER_INFO, data => {
+        //     setOriginalUserInfo({
+        //         userName: data.userName,
+        //         password: data.password,
+        //         email: data.email
+        //     });
+        //     setUserNameInputValue(data.userName);
+        //     setPasswordInputValue(data.password);
+        //     setEmailInputValue(data.email);
+        // });
 
     }, []);
 

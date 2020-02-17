@@ -9,8 +9,11 @@ import 'dotenv/config'
 // TODO: Determine why SERVER_PORT environment variable is undefined here
 //console.log(process.env.SERVER_PORT);
 //const socket = openSocket("http://localhost:" + process.env.SERVER_PORT);
-const socket = openSocket("http://localhost:8000");
-export default socket;
+
+
+// const socket = openSocket("http://localhost:8000");
+// export default socket;
+
 ReactDOM.render(<Chatter />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../css-files/login-register-styles.css";
 import "../css-files/button-styles.css";
-import socket from "../../index";
+// import socket from "../../index";
 import LOGIN_EVENTS from "../../events/login-events";
 import NotificationHandler from "../notification-handler";
 import {Redirect} from "react-router-dom";
@@ -16,32 +16,32 @@ export default class Login extends Component{
     handleLoginClicked = () => {
         let userName = document.getElementById("userNameInputField").value;
         let password = document.getElementById("passwordInputField").value;
-        socket.emit(LOGIN_EVENTS.REQUEST_LOGIN, {
-            userName: userName,
-            password: password,
-        });
+    //     socket.emit(LOGIN_EVENTS.REQUEST_LOGIN, {
+    //         userName: userName,
+    //         password: password,
+    //     });
     }
 
     componentDidMount(){
-        socket.on(LOGIN_EVENTS.LOGIN_DENIED, () => {
-            NotificationHandler.createNotification("danger", "Login Denied", "Please check your login credentials");
-        })
+        // socket.on(LOGIN_EVENTS.LOGIN_DENIED, () => {
+        //     NotificationHandler.createNotification("danger", "Login Denied", "Please check your login credentials");
+        // })
 
-        socket.on(LOGIN_EVENTS.LOGIN_SUCCESFUL, data => {
-            NotificationHandler.createNotification("success", "Login Successful", "Please wait to be redirected", 3000, (id, removedBy) => {
-                this.setState({
-                    redirectToChat: true,
-                    thisUser: data.thisUser
-                });
-            });
-            // TODO: Make input fields readonly
-        })
+        // socket.on(LOGIN_EVENTS.LOGIN_SUCCESFUL, data => {
+        //     NotificationHandler.createNotification("success", "Login Successful", "Please wait to be redirected", 3000, (id, removedBy) => {
+        //         this.setState({
+        //             redirectToChat: true,
+        //             thisUser: data.thisUser
+        //         });
+        //     });
+        //     // TODO: Make input fields readonly
+        // })
     }
 
     componentWillUnmount(){
         // Removes some events from the sockets to make sure that the events are being received the correct number of times
-        socket.removeEventListener(LOGIN_EVENTS.LOGIN_DENIED)
-        socket.removeEventListener(LOGIN_EVENTS.LOGIN_SUCCESFUL)
+        // socket.removeEventListener(LOGIN_EVENTS.LOGIN_DENIED)
+        // socket.removeEventListener(LOGIN_EVENTS.LOGIN_SUCCESFUL)
     }
 
     render(){

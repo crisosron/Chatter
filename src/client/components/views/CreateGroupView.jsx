@@ -11,27 +11,27 @@ export default function CreateGroupDisplayView(props){
         const groupDescription = document.getElementById("groupDescriptionInputField").value;
 
         // TODO: Group code will be generated via shortid lib in the serverside, passed to this components as props
-        socket.emit(USER_ACTION_EVENTS.CREATE_GROUP, {
-            groupName: groupName,
-            groupDescription: groupDescription,
-            joinCode: joinCode,
-            creatorID: props.thisUser.id
-        });
+        // socket.emit(USER_ACTION_EVENTS.CREATE_GROUP, {
+        //     groupName: groupName,
+        //     groupDescription: groupDescription,
+        //     joinCode: joinCode,
+        //     creatorID: props.thisUser.id
+        // });
     }
 
     useEffect(() => {
-        socket.emit(USER_ACTION_EVENTS.GENERATE_JOIN_CODE);
-        socket.on(USER_ACTION_EVENTS.DELIVER_JOIN_CODE, data => setJoinCode(data.generatedJoinCode));
+        // socket.emit(USER_ACTION_EVENTS.GENERATE_JOIN_CODE);
+        // socket.on(USER_ACTION_EVENTS.DELIVER_JOIN_CODE, data => setJoinCode(data.generatedJoinCode));
         
-        socket.on(USER_ACTION_EVENTS.CREATE_GROUP_DENIED, (data) => {
-            NotificationHandler.createNotification("danger", "Group Creation Denied", data.reason);
-            document.getElementById("groupNameInputField").value = "";
-            document.getElementById("groupDescriptionInputField").value = "";
-        });
+        // socket.on(USER_ACTION_EVENTS.CREATE_GROUP_DENIED, (data) => {
+        //     NotificationHandler.createNotification("danger", "Group Creation Denied", data.reason);
+        //     document.getElementById("groupNameInputField").value = "";
+        //     document.getElementById("groupDescriptionInputField").value = "";
+        // });
 
-        socket.on(USER_ACTION_EVENTS.CREATE_GROUP_SUCCESS, () => {
-            NotificationHandler.createNotification("success", "Group Created", "Your group has been created and is ready for use!");
-        });
+        // socket.on(USER_ACTION_EVENTS.CREATE_GROUP_SUCCESS, () => {
+        //     NotificationHandler.createNotification("success", "Group Created", "Your group has been created and is ready for use!");
+        // });
     }, []);
 
     return(
