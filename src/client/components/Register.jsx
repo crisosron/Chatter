@@ -34,7 +34,7 @@ export default class Register extends Component{
         const newUser = {
             userName: userName,
             password: password,
-            email: email
+            email: email,
         }
 
         // Posting to register-user route

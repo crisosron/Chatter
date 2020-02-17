@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const {User} = require("../database-document-models/user-model");
+const REGISTER_EVENTS = require("../../events/register-events");
+// const socket = require("../../index");
 
 // Processes user registration
 router.get("/", (req, res) => {
@@ -17,8 +19,7 @@ router.post("/register", (req, res) => {
 
         // If the given username is already registered, deny registration
         if(doc != null){
-            // TODO: Send notification to res? with reason
-            res.send("Username is already in use");
+            console.log("Username is already in use");
             return;
         }
 
@@ -30,8 +31,7 @@ router.post("/register", (req, res) => {
 
             // If the given email is already registered, deny registration
             if(doc != null){
-                // TODO: Send notification to res? with reason
-                res.send("Email is already in use");
+                console.log("Email is already in use");
                 return;
             }
 

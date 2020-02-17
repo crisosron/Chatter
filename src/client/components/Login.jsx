@@ -5,11 +5,13 @@ import "../css-files/button-styles.css";
 import LOGIN_EVENTS from "../../events/login-events";
 import NotificationHandler from "../notification-handler";
 import {Redirect} from "react-router-dom";
+import openSocket from "socket.io-client";
 export default class Login extends Component{
     constructor(props){
         super(props);
         this.state = {
-            redirectToChat: false
+            redirectToChat: false,
+            socketEndPoint: "http://localhost:8000"
         }
     }
 
@@ -36,6 +38,8 @@ export default class Login extends Component{
         //     });
         //     // TODO: Make input fields readonly
         // })
+        const socket = openSocket(this.state.socketEndPoint);
+
     }
 
     componentWillUnmount(){

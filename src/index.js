@@ -10,8 +10,7 @@ import 'dotenv/config'
 //console.log(process.env.SERVER_PORT);
 //const socket = openSocket("http://localhost:" + process.env.SERVER_PORT);
 
-
-// const socket = openSocket("http://localhost:8000");
+// const socket = openSocket("http://localhost:8001");
 // export default socket;
 
 ReactDOM.render(<Chatter />, document.getElementById('root'));
