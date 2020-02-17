@@ -2,15 +2,37 @@ const express = require("express");
 const router = express.Router();
 const {User} = require("../database-document-models/user-model");
 const REGISTER_EVENTS = require("../../events/register-events");
+const LOGIN_EVENTS = require("../../events/login-events");
 const io = require("../socket");
 
-// Processes user registration
-router.get("/", (req, res) => {
-    // TODO: Handle login
-});
+// Processes user login
+router.post("/", (req, res) => {
+    console.log("Inside router.post for login");
+    User.findOne({userName: req.body.userName, password: req.body.password}, (err, result) => {
+        if(err){
+            console.log(`Error in LoginRegistrationOperations.login: ${err}`);
+            return;
+        }
 
+        if(result){
+            io.to(req.body.clientSocketID).emit(LOGIN_EVENTS.LOGIN_SUCCESFUL, {
+                thisUser: {
+                    name: result.userName,
+                    id: result._id
+                }
+            });
+            return;
+        }
+
+        res.send({testObj: "test obj"});
+
+        io.to(req.body.clientSocketID).emit(LOGIN_EVENTS.LOGIN_DENIED);
+    });});
+
+// Processes user registration
 router.post("/register", (req, res) => {
-    console.log("in router.post for registration");
+
+    // Outer findOne method checks for the userName
     User.findOne({userName: req.body.userName}, (err, doc) => {
         if(err){
             console.log(`Error in LoginRegistrationOperations.registerUser with userName query: ${err}`);
@@ -19,13 +41,13 @@ router.post("/register", (req, res) => {
 
         // If the given username is already registered, deny registration
         if(doc != null){
-            console.log("Username is already in use: Need to send notification to client: ", req.body.clientSocketID);
             io.to(req.body.clientSocketID).emit(REGISTER_EVENTS.REGISTRATION_DENIED, {
                 reason: `The user name ${req.body.userName} is already in use by another user`
             });
             return;
         }
 
+        // Inner findOne checks for the email
         User.findOne({email: req.body.email}, (err, doc) => {
             if(err){
                 console.log(`Error in LoginRegistrationOperations.registerUser with email query: ${err}`);
@@ -34,7 +56,6 @@ router.post("/register", (req, res) => {
 
             // If the given email is already registered, deny registration
             if(doc != null){
-                console.log("Email is already in use");
                 io.to(req.body.clientSocketID).emit(REGISTER_EVENTS.REGISTRATION_DENIED, {
                     reason: `The email ${req.body.email} is already associated with another account`
                 }); 
@@ -48,9 +69,10 @@ router.post("/register", (req, res) => {
             });
             
             newUser.save()
-                .then(() => {/*TODO: send notification to client of succesful registration*/res.json("New user created")})
+                .then(() => {
+                    io.to(req.body.clientSocketID).emit(REGISTER_EVENTS.REGISTRATION_SUCCESSFUL);                   
+                })
                 .catch(error => res.status(400).json("Error with registration: ", error));
-            
         });
 
     });

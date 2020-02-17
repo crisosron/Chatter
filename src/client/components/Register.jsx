@@ -26,7 +26,7 @@ export default class Register extends Component{
         })
     }
 
-    handleRegisterClicked = e => {
+    handleRegisterPressed = e => {
         e.preventDefault();
         let userName = document.getElementById("userNameInputField").value;
         let password = document.getElementById("passwordInputField").value;
@@ -43,6 +43,11 @@ export default class Register extends Component{
             .then(res => console.log(res.data));
     }
 
+    componentWillUnmount(){
+        socket.removeEventListener(REGISTER_EVENTS.REGISTRATION_DENIED);
+        socket.removeEventListener(REGISTER_EVENTS.REGISTRATION_SUCCESSFUL);
+    }
+
     render(){
         if(this.state.redirectToLogin){
             return (
@@ -57,12 +62,11 @@ export default class Register extends Component{
 
                 {/* Detail Input Div */}
                 <div id="detailInputDiv">
-                    <form onSubmit={this.handleRegisterClicked}>
+                    <form onSubmit={this.handleRegisterPressed}>
                         <h1>Register</h1>
                         <input type="text" placeholder="Username" id="userNameInputField"></input>
                         <input type="password" placeholder="Password (minimum 5 characters)" id="passwordInputField"></input>
                         <input type="text" placeholder="Email" id="emailInputField"></input>
-                        {/* <button className="generalButton" onClick={this.handleRegisterClicked}>Register</button> */}
                         <input type="submit" value="Register" className="generalButton"/>
                         <div id="accountStatusText">
                             <p>Already have an account? <a href="/">Login</a></p>
