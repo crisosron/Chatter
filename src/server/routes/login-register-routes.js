@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {User} = require("../database-document-models/user-model");
 const REGISTER_EVENTS = require("../../events/register-events");
-// const socket = require("../../index");
+const io = require("../socket");
 
 // Processes user registration
 router.get("/", (req, res) => {
@@ -19,7 +19,10 @@ router.post("/register", (req, res) => {
 
         // If the given username is already registered, deny registration
         if(doc != null){
-            console.log("Username is already in use");
+            console.log("Username is already in use: Need to send notification to client: ", req.body.clientSocketID);
+            io.to(req.body.clientSocketID).emit(REGISTER_EVENTS.REGISTRATION_DENIED, {
+                reason: `The user name ${req.body.userName} is already in use by another user`
+            });
             return;
         }
 
@@ -32,6 +35,9 @@ router.post("/register", (req, res) => {
             // If the given email is already registered, deny registration
             if(doc != null){
                 console.log("Email is already in use");
+                io.to(req.body.clientSocketID).emit(REGISTER_EVENTS.REGISTRATION_DENIED, {
+                    reason: `The email ${req.body.email} is already associated with another account`
+                }); 
                 return;
             }
 

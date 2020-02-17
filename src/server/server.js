@@ -1,11 +1,8 @@
 require('dotenv/config');
 const express = require("express");
-const http = require("http");
-const socketIO = require("socket.io");
 const app = express();
-const server = http.createServer(app);
-const io = socketIO(server);
 const DatabaseConnection = require("./database-connection");
+const io = require("./socket");
 
 // Obtaining express and socket io server port numbers from .env
 const EXPRESS_SERVER_PORT = process.env.EXPRESS_SERVER_PORT || 5000;
@@ -25,14 +22,10 @@ app.use(function(req, res, next) {
     next();
 });
 
-server.listen(EXPRESS_SERVER_PORT, () => console.log("Express server listening on port number: ", EXPRESS_SERVER_PORT));
-
-// Handles user login/registration operations
-app.use("/", require("./routes/login-register-routes"));
+app.listen(EXPRESS_SERVER_PORT, () => console.log("Express server listening on port number: ", EXPRESS_SERVER_PORT));
 
 // Initialises the connection to the database
 let dbConnection = new DatabaseConnection();
 
-io.on('connection', clientSocket => {
-    console.log("A new client connected");
-});
+// Handles user login/registration operations
+app.use("/", require("./routes/login-register-routes"));

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../css-files/login-register-styles.css"
-// import socket from "../../index"
+import socket from "../../index"
 import {Redirect} from "react-router-dom";
 import NotificationHandler from "../notification-handler";
 import REGISTER_EVENTS from "../../events/register-events"
@@ -15,15 +15,15 @@ export default class Register extends Component{
     }
 
     initServerListening(){
-        // socket.on(REGISTER_EVENTS.REGISTRATION_DENIED, data => {
-        //     NotificationHandler.createNotification("danger", "Registration Denied", data.reason);
-        // });
+        socket.on(REGISTER_EVENTS.REGISTRATION_DENIED, data => {
+            NotificationHandler.createNotification("danger", "Registration Denied", data.reason);
+        });
 
-        // socket.on(REGISTER_EVENTS.REGISTRATION_SUCCESSFUL, data => {
-        //     NotificationHandler.createNotification("success", "Registration Successful", "Please wait to be redirected to login", 3000, (id, removedBy) => {
-        //         this.setState({redirectToLogin: true});                
-        //     });
-        // })
+        socket.on(REGISTER_EVENTS.REGISTRATION_SUCCESSFUL, data => {
+            NotificationHandler.createNotification("success", "Registration Successful", "Please wait to be redirected to login", 3000, (id, removedBy) => {
+                this.setState({redirectToLogin: true});                
+            });
+        })
     }
 
     handleRegisterClicked = e => {
@@ -35,6 +35,7 @@ export default class Register extends Component{
             userName: userName,
             password: password,
             email: email,
+            clientSocketID: socket.id
         }
 
         // Posting to register-user route

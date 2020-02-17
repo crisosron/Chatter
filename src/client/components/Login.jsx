@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import "../css-files/login-register-styles.css";
 import "../css-files/button-styles.css";
-// import socket from "../../index";
+import socket from "../../index";
 import LOGIN_EVENTS from "../../events/login-events";
 import NotificationHandler from "../notification-handler";
 import {Redirect} from "react-router-dom";
-import openSocket from "socket.io-client";
 export default class Login extends Component{
     constructor(props){
         super(props);
@@ -38,7 +37,7 @@ export default class Login extends Component{
         //     });
         //     // TODO: Make input fields readonly
         // })
-        const socket = openSocket(this.state.socketEndPoint);
+        // const socket = openSocket(this.state.socketEndPoint);
 
     }
 
