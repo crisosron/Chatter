@@ -16,6 +16,8 @@ export default class Login extends Component{
 
     handleLoginClicked = e => {
         e.preventDefault();
+
+        // Obtaining user provided credentials
         let userName = document.getElementById("userNameInputField").value;
         let password = document.getElementById("passwordInputField").value;
         const loggingInUser = {
@@ -24,9 +26,11 @@ export default class Login extends Component{
             clientSocketID: socket.id
         }
 
+        // Sending a POST request to process the login with the user-provided credentials
         axios.post("http://localhost:8000", loggingInUser)
             .then(res => {
-                console.log(res.data.thisUser);
+                
+                // Handling of response by server with thisUser info and redirecting the client to the main application
                 this.setState({
                     redirectToChat: true,
                     thisUser: res.data.thisUser
@@ -34,15 +38,25 @@ export default class Login extends Component{
             });
     }
 
+    handleKeyPressed = e => {
+        // Checks if enter key was pressed - If so, invoke click on login button
+        if(e.keyCode === 13){
+            document.getElementById("loginButton").click();
+        }
+    }
+
     componentDidMount(){
         socket.on(LOGIN_EVENTS.LOGIN_DENIED, () => {
             NotificationHandler.createNotification("danger", "Login Denied", "Please check your login credentials");
         })
+        
+        document.addEventListener("keydown", this.handleKeyPressed);
     }
 
     componentWillUnmount(){
         // Removes some events from the sockets to make sure that the events are being received the correct number of times
         socket.removeEventListener(LOGIN_EVENTS.LOGIN_DENIED)
+        document.removeEventListener("keydown", this.handleKeyPressed);
     }
 
     render(){
@@ -66,7 +80,7 @@ export default class Login extends Component{
                         <h1>Login</h1>
                         <input type="text" placeholder="Username" id="userNameInputField"></input>
                         <input type="password" placeholder="Password (minimum 5 characters)" id="passwordInputField"></input>
-                        <input type="submit" value="Login" />
+                        <input type="submit" value="Login" id="loginButton"/>
                         <p><a href="/">Forgot Password</a></p>
 
                         <div id="accountStatusText">

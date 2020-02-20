@@ -8,26 +8,15 @@ import axios from "axios";
 export default class Register extends Component{
     constructor(props){
         super(props);
-        this.initServerListening();
         this.state = {
             redirectToLogin: false
         }
     }
 
-    initServerListening(){
-        socket.on(REGISTER_EVENTS.REGISTRATION_DENIED, data => {
-            NotificationHandler.createNotification("danger", "Registration Denied", data.reason);
-        });
-
-        socket.on(REGISTER_EVENTS.REGISTRATION_SUCCESSFUL, data => {
-            NotificationHandler.createNotification("success", "Registration Successful", "Please wait to be redirected to login", 3000, (id, removedBy) => {
-                this.setState({redirectToLogin: true});                
-            });
-        })
-    }
-
     handleRegisterPressed = e => {
         e.preventDefault();
+
+        // Obtaining user-entered info from input fields
         let userName = document.getElementById("userNameInputField").value;
         let password = document.getElementById("passwordInputField").value;
         let email = document.getElementById("emailInputField").value
@@ -38,14 +27,39 @@ export default class Register extends Component{
             clientSocketID: socket.id
         }
 
-        // Posting to register-user route
+        // Posting to register-user route to register the user
         axios.post("http://localhost:8000/register", newUser)
-            .then(res => console.log(res.data));
+            .then(res => { // Handling response from server (res.send() in login-register-routes.js in /register route)
+                this.setState({
+                    redirectToLogin: true
+                });
+            });
+    }
+
+    handleKeyPress = e => {
+        // Checks if enter was pressed, if so, invoke click on registerButton
+        if(e.keyCode === 13){
+            document.getElementById("registerButton").click();
+        }
+    }
+
+    componentDidMount(){
+        socket.on(REGISTER_EVENTS.REGISTRATION_DENIED, data => {
+            NotificationHandler.createNotification("danger", "Registration Denied", data.reason);
+        });
+
+        // This notification should be shown when the user has already been redirected to the login page as a response from the POST request in handleRegisterPressed
+        socket.on(REGISTER_EVENTS.REGISTRATION_SUCCESSFUL, data => {
+            NotificationHandler.createNotification("success", "Registration Successful", "Please enter your login credentials");
+        });
+
+        document.addEventListener("keydown", this.handleKeyPress);
     }
 
     componentWillUnmount(){
         socket.removeEventListener(REGISTER_EVENTS.REGISTRATION_DENIED);
         socket.removeEventListener(REGISTER_EVENTS.REGISTRATION_SUCCESSFUL);
+        document.removeEventListener("keydown", this.handleKeyPress);
     }
 
     render(){

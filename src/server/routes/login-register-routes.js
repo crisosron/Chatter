@@ -41,7 +41,7 @@ router.post("/register", (req, res) => {
         // If the given username is already registered, deny registration
         if(doc != null){
             io.to(req.body.clientSocketID).emit(REGISTER_EVENTS.REGISTRATION_DENIED, {
-                reason: `The user name ${req.body.userName} is already in use by another user`
+                reason: `The user name '${req.body.userName}' is already in use by another user`
             });
             return;
         }
@@ -56,7 +56,7 @@ router.post("/register", (req, res) => {
             // If the given email is already registered, deny registration
             if(doc != null){
                 io.to(req.body.clientSocketID).emit(REGISTER_EVENTS.REGISTRATION_DENIED, {
-                    reason: `The email ${req.body.email} is already associated with another account`
+                    reason: `The email '${req.body.email}' is already associated with another account`
                 }); 
                 return;
             }
@@ -69,7 +69,8 @@ router.post("/register", (req, res) => {
             
             newUser.save()
                 .then(() => {
-                    io.to(req.body.clientSocketID).emit(REGISTER_EVENTS.REGISTRATION_SUCCESSFUL);                   
+                    io.to(req.body.clientSocketID).emit(REGISTER_EVENTS.REGISTRATION_SUCCESSFUL);
+                    res.send();    
                 })
                 .catch(error => res.status(400).json("Error with registration: ", error));
         });
