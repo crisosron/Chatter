@@ -25,30 +25,24 @@ export default class Login extends Component{
         }
 
         axios.post("http://localhost:8000", loggingInUser)
-            .then(res => {console.log(res.data.testObj);});
+            .then(res => {
+                console.log(res.data.thisUser);
+                this.setState({
+                    redirectToChat: true,
+                    thisUser: res.data.thisUser
+                });
+            });
     }
 
     componentDidMount(){
         socket.on(LOGIN_EVENTS.LOGIN_DENIED, () => {
             NotificationHandler.createNotification("danger", "Login Denied", "Please check your login credentials");
         })
-
-        socket.on(LOGIN_EVENTS.LOGIN_SUCCESFUL, data => {
-            NotificationHandler.createNotification("success", "Login Successful", "Please wait to be redirected", 3000, (id, removedBy) => {
-                this.setState({
-                    redirectToChat: true,
-                    thisUser: data.thisUser
-                });
-            });
-            // TODO: Make input fields readonly
-        })
-
     }
 
     componentWillUnmount(){
         // Removes some events from the sockets to make sure that the events are being received the correct number of times
         socket.removeEventListener(LOGIN_EVENTS.LOGIN_DENIED)
-        socket.removeEventListener(LOGIN_EVENTS.LOGIN_SUCCESFUL)
     }
 
     render(){

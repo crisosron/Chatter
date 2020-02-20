@@ -7,7 +7,6 @@ const io = require("../socket");
 
 // Processes user login
 router.post("/", (req, res) => {
-    console.log("Inside router.post for login");
     User.findOne({userName: req.body.userName, password: req.body.password}, (err, result) => {
         if(err){
             console.log(`Error in LoginRegistrationOperations.login: ${err}`);
@@ -15,16 +14,16 @@ router.post("/", (req, res) => {
         }
 
         if(result){
-            io.to(req.body.clientSocketID).emit(LOGIN_EVENTS.LOGIN_SUCCESFUL, {
-                thisUser: {
-                    name: result.userName,
-                    id: result._id
-                }
-            });
+            io.to(req.body.clientSocketID).emit(LOGIN_EVENTS.LOGIN_SUCCESFUL);
+
+            // Replying to client the 'thisUser' information which includes the user's id in the users collection, and their username
+            res.send({thisUser: {
+                name: result.userName,
+                id: result._id
+            }});
+
             return;
         }
-
-        res.send({testObj: "test obj"});
 
         io.to(req.body.clientSocketID).emit(LOGIN_EVENTS.LOGIN_DENIED);
     });});
