@@ -63,7 +63,7 @@ export default class Login extends Component{
         if(this.state.redirectToChat){
             return (
                 <Redirect push to={{
-                    pathname: "/chat",
+                    pathname: "/home",
                     state: {
                         thisUser: this.state.thisUser
                     }
