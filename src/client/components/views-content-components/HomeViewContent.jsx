@@ -1,5 +1,5 @@
 import React from "react";
-export default function DefaultDisplayedView(){
+export default function HomeViewContent(){
     const styles = {
         display: "flex",
         justifyContent: "center",

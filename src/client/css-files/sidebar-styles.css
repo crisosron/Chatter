@@ -12,8 +12,41 @@
     border-bottom: 3px solid var(--accent-color);
 }
 
+.spacerDiv{
+    flex: 4;
+}
+
 #navigationOptionsDiv{
-    flex: 10;
+    flex: 5;
+    flex-direction: column;
+    display: flex;
+}
+
+.navOption{
+    flex: 1;
+    width: 95%;
+    transition: 0.2s linear;
+    font-size: 1vmax; 
+    color: var(--primary-color);
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navOption:hover{
+    cursor: pointer;
+
+    /* Darkens */
+    box-shadow: var(--box-shadow-lighten);
+}
+
+.selectedNavOption{
+    background-color: var(--accent-color);
+}
+
+.navOption:visited{
+    color: var(--primary-color);
 }
 
 #settingsDiv{

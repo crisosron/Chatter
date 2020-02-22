@@ -1,11 +1,11 @@
 import React, {useState, useEffect}from "react";
-import "./views-css-files/profile-view-styles.css";
+import "./views-content-css-files/profile-view-styles.css";
 import SearchBar from "./views-sub-components/SearchBar";
 import UserInfoForm from "./views-sub-components/UserInfoForm"
 import CommunicationEntityBar from "./views-sub-components/CommunicationEntityBar"
 // import socket from "../../../index";
 import PROFILE_EVENTS from "../../../events/profile-events";
-export default function ProfileView(props){
+export default function ProfileViewContent(props){
 
     // TODO: Set default comm entities for these arrays
     const [friendCommEntities, setFriendCommEntities] = useState([]);

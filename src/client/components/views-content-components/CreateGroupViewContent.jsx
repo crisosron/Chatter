@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import "./views-css-files/create-group-view-styles.css";
+import "./views-content-css-files/create-group-view-styles.css";
 import USER_ACTION_EVENTS from "../../../events/user-action-events";
 import NotificationHandler from "../../notification-handler";
 import socket from "../../../index";

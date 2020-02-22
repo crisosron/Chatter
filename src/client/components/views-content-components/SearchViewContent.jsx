@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from "react"
-import "./views-css-files/search-view-styles.css";
+import "./views-content-css-files/search-view-styles.css";
 import SearchBar from "./views-sub-components/SearchBar";
 import CommunicationEntityBar from "./views-sub-components/CommunicationEntityBar";
 import CommunicationEntityActionBar from "./views-sub-components/CommunicationEntityActionBar";
 // import socket from "../../../index";
 import USER_ACTION_EVENTS from "../../../events/user-action-events"
 import NotificationHandler from "../../notification-handler";
-export default function SearchView(props){
+export default function SearchViewContent(props){
     const [commEntities, setCommEntities] = useState([]);
     const [currentSearchMode, setCurrentSearchMode] = useState("Users");
     
