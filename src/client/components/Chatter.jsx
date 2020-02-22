@@ -1,7 +1,7 @@
 import React from 'react';
 import Login from "./Login"
 import Register from "./Register"
-import Chat from "./Chat";
+import Home from "./HomeView";
 import ReactNotification from "react-notifications-component";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
@@ -13,7 +13,8 @@ function Chatter() {
         <Switch>
           <Route path="/" exact component={Login} />
           <Route path="/register" exact component={Register} />
-          <Route path="/chat" exact component={Chat} />
+          <Route path="/home" exact component={Home} />
+          <Route path="/create-group" exact component={} />
         </Switch>
       </BrowserRouter>
     </div>
