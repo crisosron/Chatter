@@ -6,7 +6,6 @@ const io = require("./socket");
 
 // Obtaining express and socket io server port numbers from .env
 const EXPRESS_SERVER_PORT = process.env.EXPRESS_SERVER_PORT || 5000;
-// const SOCKET_IO_SERVER_PORT = process.env.SOCKET_IO_SERVER_PORT || 5001
 
 // Middleware to handle raw json
 app.use(express.json());
@@ -29,3 +28,6 @@ let dbConnection = new DatabaseConnection();
 
 // Handles user login/registration operations
 app.use("/", require("./routes/login-register-routes"));
+
+// Handles user action operations (eg add friends, create groups)
+app.use("/chat", require("./routes/login-register-routes"));

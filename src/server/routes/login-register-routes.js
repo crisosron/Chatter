@@ -60,7 +60,8 @@ router.post("/register", (req, res) => {
                 }); 
                 return;
             }
-
+            
+            // Creating a new user using the User model and saving into the database
             let newUser = new User({
                 userName: req.body.userName,
                 password: req.body.password,
@@ -70,7 +71,7 @@ router.post("/register", (req, res) => {
             newUser.save()
                 .then(() => {
                     io.to(req.body.clientSocketID).emit(REGISTER_EVENTS.REGISTRATION_SUCCESSFUL);
-                    res.send();    
+                    res.send(); // Basic reply to acknowledge to the client that the registration was succesful (triggers .then in client POST request)
                 })
                 .catch(error => res.status(400).json("Error with registration: ", error));
         });

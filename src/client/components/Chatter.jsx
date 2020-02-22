@@ -11,9 +11,9 @@ function Chatter() {
       <ReactNotification/>
       <BrowserRouter>
         <Switch>
-          <Route path="/" exact component={Login}></Route>
-          <Route path="/register" exact component={Register}></Route>
-          <Route path="/chat" exact component={Chat}></Route>
+          <Route path="/" exact component={Login} />
+          <Route path="/register" exact component={Register} />
+          <Route path="/chat" exact component={Chat} />
         </Switch>
       </BrowserRouter>
     </div>

@@ -47,6 +47,7 @@ class UserActionOperations{
      * @param data {Object} - Object passed through socket io events, should contain `addingUserID` and `userToAddID`
     */
     static addFriend(clientSocket, data){
+        
         // Outer findByID allows us to check validity of preconditions
         User.findById(data.addingUserID, (err, addingUser) => {
 
