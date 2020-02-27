@@ -5,9 +5,9 @@ import CreateGroupViewContent from "./views-content-components/CreateGroupViewCo
 export default function CreateGroupView(props){
     return(
         <div id="mainWrapper">
-            <SideBar thisUser={props.location.state.thisUser} />
+            <SideBar thisUser={props.location.thisUser} />
             <div id="mainView">
-                <CreateGroupViewContent thisUser={props.location.state.thisUser}/>
+                <CreateGroupViewContent thisUser={props.state.thisUser}/>
             </div>
         </div>
     );

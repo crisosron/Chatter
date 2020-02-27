@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 
 export default function SideBar(props){
     const [selectedNavOptionIndex, setSelectedNavOptionIndex] = useState(-1);
-    const toggleSwitchOptions = [
+    const navOptions = [
         {title: "Friends", linkPath: "/chat"},
         {title: "Groups", linkPath: "/group-chat"},
         {title: "Search", linkPath: "/search"},
@@ -31,11 +31,14 @@ export default function SideBar(props){
             <div className="spacerDiv" />
 
             <div id="navigationOptionsDiv">
-                {toggleSwitchOptions.map((elem, index) => {
+
+                {/* Rendering navigation options */}
+                {navOptions.map((elem, index) => {
                     return(
                         <Link className={"navOption " + (index === selectedNavOptionIndex ? "selectedNavOption" : "")} to={{
                             pathname: elem.linkPath,
-                        }}>
+                            thisUser: props.thisUser
+                        }} key={"linkElem"+elem.title}>
                             <div onClick={handleNavOptionClicked}>
                                 {elem.title}
                             </div>

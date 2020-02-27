@@ -1,5 +1,5 @@
 import React from "react";
-export default function HomeViewContent(){
+export default function HomeViewContent(props){
     const styles = {
         display: "flex",
         justifyContent: "center",
@@ -8,7 +8,7 @@ export default function HomeViewContent(){
 
     return(
         <div id="defaultDisplayedView" style={styles}>
-            <h1>Search a user to get started</h1>
+            <h1>HomeViewContent:{props.thisUser.name}</h1>
         </div>
     )
 }

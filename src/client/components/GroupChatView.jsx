@@ -5,9 +5,9 @@ import GroupChatViewContent from "./views-content-components/GroupChatViewConten
 export default function GroupChatView(props){
     return(
         <div id="mainWrapper">
-            <SideBar thisUser={props.location.state.thisUser} />
+            <SideBar thisUser={props.location.thisUser} />
             <div id="mainView">
-                <GroupChatViewContent thisUser={props.location.state.thisUser}/>
+                <GroupChatViewContent thisUser={props.location.thisUser}/>
             </div>
         </div>
     );

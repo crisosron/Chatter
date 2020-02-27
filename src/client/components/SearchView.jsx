@@ -5,9 +5,9 @@ import SearchViewContent from "./views-content-components/SearchViewContent";
 export default function SearchView(props){
     return(
         <div id="mainWrapper">
-            <SideBar thisUser={props.location.state.thisUser} />
+            <SideBar thisUser={props.location.thisUser} />
             <div id="mainView">
-                <SearchViewContent thisUser={props.location.state.thisUser}/>
+                <SearchViewContent thisUser={props.location.thisUser}/>
             </div>
         </div>
     );

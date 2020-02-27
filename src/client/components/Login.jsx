@@ -49,8 +49,6 @@ export default class Login extends Component{
         socket.on(LOGIN_EVENTS.LOGIN_DENIED, () => {
             NotificationHandler.createNotification("danger", "Login Denied", "Please check your login credentials");
         })
-        
-        document.addEventListener("keydown", this.handleKeyPressed);
     }
 
     componentWillUnmount(){
