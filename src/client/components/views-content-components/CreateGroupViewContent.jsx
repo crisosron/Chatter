@@ -7,24 +7,29 @@ import shortid from "shortid";
 import axios from "axios";
 
 export default function CreateGroupDisplayView(props){
+    console.log(props);
     const [joinCode, setJoinCode] = useState(shortid.generate());
 
     const handleCreateGroupPressed = () => {
-        const groupName = document.getElementById("groupNameInputField").value;
-        const groupDescription = document.getElementById("groupDescriptionInputField").value;
-        const data = {
-            groupName: groupName,
-            groupDescription: groupDescription,
-            joinCode: joinCode,
-            creatorID: props.thisUser.id
+        const groupNameInputField = document.getElementById("groupNameInputField");
+        const groupDescriptionInputField = document.getElementById("groupDescriptionInputField");
+
+        // Checking that the entered group name is valid
+        if(groupNameInputField.value.length < 2){
+            NotificationHandler.createNotification("danger", "Group Creation Denied", "Group name must have at least 2 characters");
+            groupNameInputField.value = "";
         }
+
+        // Data object to send to server via POST request
+        const data = {
+            groupName: groupNameInputField.value,
+            groupDescription: groupDescriptionInputField.value,
+            joinCode: joinCode,
+            creatorID: props.thisUser.id,
+            clientSocketID: socket.id
+        }
+
         axios.post("http://localhost:8000/create-group", data);
-        // socket.emit(USER_ACTION_EVENTS.CREATE_GROUP, {
-        //     groupName: groupName,
-        //     groupDescription: groupDescription,
-        //     joinCode: joinCode,
-        //     creatorID: props.thisUser.id
-        // });
     }
 
     useEffect(() => {
@@ -37,6 +42,12 @@ export default function CreateGroupDisplayView(props){
         socket.on(USER_ACTION_EVENTS.CREATE_GROUP_SUCCESS, () => {
             NotificationHandler.createNotification("success", "Group Created", "Your group has been created and is ready for use!");
         });
+
+        return () => {
+            socket.removeEventListener(USER_ACTION_EVENTS.CREATE_GROUP_SUCCESS);
+            socket.removeEventListener(USER_ACTION_EVENTS.CREATE_GROUP_DENIED);
+        }
+
     }, []);
 
     return(
@@ -45,7 +56,7 @@ export default function CreateGroupDisplayView(props){
                 <h1>Create a Group</h1>
                 <div id="groupDetailsInput">
                     <h2 className="groupDetailsInputLabel">Group Name</h2>
-                    <input className="groupDetailsInputField" id="groupNameInputField" type="text" />
+                    <input className="groupDetailsInputField" id="groupNameInputField" placeholder="2 Characters Minimum" type="text" />
 
                     <h2 className="groupDetailsInputLabel">Group Description</h2>
                     <input className="groupDetailsInputField" id="groupDescriptionInputField" type="text" />

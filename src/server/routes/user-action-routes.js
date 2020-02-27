@@ -8,34 +8,42 @@ const USER_ACTION_EVENTS = require("../../events/user-action-events");
 
 router.post("/create-group", (req, res) => {
     console.log("in router.post for /create-group");
-    // Group.findOne({groupName: req.body.groupName}, (err, res) => {
+    console.log(req.body);
+    Group.findOne({groupName: req.body.groupName}, (err, doc) => {
 
-    //     // If a group with the given name already exists, deny the group creation
-    //     if(res){
-    //         io.to(req.body.clientSocketID).emit(USER_ACTION_EVENTS.CREATE_GROUP_DENIED, {
-    //             reason: `A group with the name ${req.body.groupName} already exists`
-    //         });
+        if(err){
+            console.log("Error in /create-group route: ", err);
+            return;
+        }
 
-    //     } else if(req.body.groupName.length < 2){
-    //         io.to(req.body.clientSocketID).emit(USER_ACTION_EVENTS.CREATE_GROUP_DENIED, {
-    //             reason: `A group name must have at least 2 characters`
-    //         });
+        // Checking preconditions
+        // If a group with the given name already exists, deny the group creation
+        if(doc){
+            io.to(req.body.clientSocketID).emit(USER_ACTION_EVENTS.CREATE_GROUP_DENIED, {
+                reason: `A group with the name '${req.body.groupName}' already exists`
+            });
+
+        }else if(req.body.groupName.length < 2){
+            io.to(req.body.clientSocketID).emit(USER_ACTION_EVENTS.CREATE_GROUP_DENIED, {
+                reason: `A group name must have at least 2 characters`
+            });
         
-    //     }else{
-    //         let newGroup = new Group({
-    //             groupName: req.body.groupName,
-    //             members: [mongoose.Types.ObjectId(req.body.creatorID)],
-    //             description: req.body.groupDescription,
-    //             joinCode: req.body.joinCode
-    //         });
-    
-    //         newGroup.save();
+        }else{
 
-    //         // TODO: Fix this, the group._id is not being added to the array of groups that the creator is associated with
-    //         // User.findOneAndUpdate({_id: req.body.creatorID}, {$addToSet: {groups: newGroup._id}});
-    //         io.to(req.body.clientSocketID).emit(USER_ACTION_EVENTS.CREATE_GROUP_SUCCESS);
-    //     }
-    // });
+            // Creating a new group using the Group model and saving it to the database
+            let newGroup = new Group({
+                groupName: req.body.groupName,
+                members: [mongoose.Types.ObjectId(req.body.creatorID)],
+                description: req.body.groupDescription,
+                joinCode: req.body.joinCode
+            });
+    
+            newGroup.save();
+
+            // TODO: Check postcondition that members has req.body.creatorID
+            io.to(req.body.clientSocketID).emit(USER_ACTION_EVENTS.CREATE_GROUP_SUCCESS);
+        }
+    });
 });
 
 module.exports = router;

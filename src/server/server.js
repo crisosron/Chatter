@@ -30,4 +30,4 @@ let dbConnection = new DatabaseConnection();
 app.use("/", require("./routes/login-register-routes"));
 
 // Handles user action operations (eg add friends, create groups)
-app.use("/create-group", require("./routes/user-action-routes"));
+app.use("/", require("./routes/user-action-routes"));
