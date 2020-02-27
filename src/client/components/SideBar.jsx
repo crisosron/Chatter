@@ -16,11 +16,6 @@ export default function SideBar(props){
         setSelectedNavOptionIndex(index);
     }
 
-    const handleSettingsContextMenuOptionClicked = (e, data) => {
-        if(data.action === "Create Group") props.changeDisplayedView("createGroup");
-        else if(data.action === "View Profile") props.changeDisplayedView("profile");
-    }
-
     return(
         <div id="sideBar">
             <div id="logoDiv">
@@ -35,7 +30,7 @@ export default function SideBar(props){
                 {/* Rendering navigation options */}
                 {navOptions.map((elem, index) => {
                     return(
-                        <Link className={"navOption " + (index === selectedNavOptionIndex ? "selectedNavOption" : "")} to={{
+                        <Link className={"navOption sideBarLink" + (index === selectedNavOptionIndex ? "selectedNavOption" : "")} to={{
                             pathname: elem.linkPath,
                             thisUser: props.thisUser
                         }} key={"linkElem"+elem.title}>
@@ -57,9 +52,13 @@ export default function SideBar(props){
             </ContextMenuTrigger>
 
             <ContextMenu id="settingsContextMenu">
-                <MenuItem className="settingsMenuItem" data={{action: "Create Group"}} onClick={handleSettingsContextMenuOptionClicked}>Create Group</MenuItem>
-                <MenuItem className="settingsMenuItem" data={{action: "View Profile"}} onClick={handleSettingsContextMenuOptionClicked}>Profile</MenuItem>
-                <MenuItem className="settingsMenuItem" data={{action: "Logout"}} onClick={handleSettingsContextMenuOptionClicked}>Logout</MenuItem>
+                <Link className="sideBarLink" to={{
+                    pathname: "/create-group",
+                    thisUser: props.thisUser
+                }}>
+                    <MenuItem className="settingsMenuItem" data={{action: "Create Group"}}>Create Group</MenuItem>
+                </Link>
+                <MenuItem className="settingsMenuItem" data={{action: "Logout"}}>Logout</MenuItem>
             </ContextMenu>
 
         </div>

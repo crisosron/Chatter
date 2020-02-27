@@ -3,27 +3,31 @@ import "./views-content-css-files/create-group-view-styles.css";
 import USER_ACTION_EVENTS from "../../../events/user-action-events";
 import NotificationHandler from "../../notification-handler";
 import socket from "../../../index";
+import shortid from "shortid";
 import axios from "axios";
 
 export default function CreateGroupDisplayView(props){
-    const [joinCode, setJoinCode] = useState(null);
+    const [joinCode, setJoinCode] = useState(shortid.generate());
+
     const handleCreateGroupPressed = () => {
         const groupName = document.getElementById("groupNameInputField").value;
         const groupDescription = document.getElementById("groupDescriptionInputField").value;
-
-        // TODO: Group code will be generated via shortid lib in the serverside, passed to this components as props
-        socket.emit(USER_ACTION_EVENTS.CREATE_GROUP, {
+        const data = {
             groupName: groupName,
             groupDescription: groupDescription,
             joinCode: joinCode,
             creatorID: props.thisUser.id
-        });
+        }
+        axios.post("http://localhost:8000/create-group", data);
+        // socket.emit(USER_ACTION_EVENTS.CREATE_GROUP, {
+        //     groupName: groupName,
+        //     groupDescription: groupDescription,
+        //     joinCode: joinCode,
+        //     creatorID: props.thisUser.id
+        // });
     }
 
     useEffect(() => {
-        socket.emit(USER_ACTION_EVENTS.GENERATE_JOIN_CODE);
-        socket.on(USER_ACTION_EVENTS.DELIVER_JOIN_CODE, data => setJoinCode(data.generatedJoinCode));
-        
         socket.on(USER_ACTION_EVENTS.CREATE_GROUP_DENIED, (data) => {
             NotificationHandler.createNotification("danger", "Group Creation Denied", data.reason);
             document.getElementById("groupNameInputField").value = "";

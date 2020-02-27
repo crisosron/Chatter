@@ -7,7 +7,7 @@ export default function CreateGroupView(props){
         <div id="mainWrapper">
             <SideBar thisUser={props.location.thisUser} />
             <div id="mainView">
-                <CreateGroupViewContent thisUser={props.state.thisUser}/>
+                <CreateGroupViewContent thisUser={props.location.thisUser}/>
             </div>
         </div>
     );

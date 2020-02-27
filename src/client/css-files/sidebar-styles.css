@@ -27,11 +27,22 @@
     width: 95%;
     transition: 0.2s linear;
     font-size: 1vmax; 
-    color: var(--primary-color);
-    text-decoration: none;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.sideBarLink{
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.sideBarLink:visited{
+    color: var(--primary-color);
+}
+
+.sideBarLink:hover{
+    cursor: pointer;
 }
 
 .navOption:hover{
@@ -43,10 +54,6 @@
 
 .selectedNavOption{
     background-color: var(--accent-color);
-}
-
-.navOption:visited{
-    color: var(--primary-color);
 }
 
 #settingsDiv{
