@@ -4,43 +4,6 @@ const USER_ACTION_EVENTS = require("../../events/user-action-events");
 const mongoose = require("mongoose");
 const shortid = require("shortid");
 class UserActionOperations{
-
-    /**
-     * Creates a group and saves it into the database
-     * @param clientSocket {Socket} - The socket of the group creator
-     * @param data {Object} - Data passed through socket io events. In this method, data should contain groupName 
-     * 
-    */
-    static createGroup(clientSocket, data){
-        Group.findOne({groupName: data.groupName}, (err, res) => {
-
-            // If a group with the given name already exists, deny the group creation
-            if(res){
-                clientSocket.emit(USER_ACTION_EVENTS.CREATE_GROUP_DENIED, {
-                    reason: `A group with the name ${data.groupName} already exists`
-                });
-            } else if(data.groupName.length < 2){
-                clientSocket.emit(USER_ACTION_EVENTS.CREATE_GROUP_DENIED, {
-                    reason: `A group name must have at least 2 characters`
-                });
-            
-            }else{
-                let newGroup = new Group({
-                    groupName: data.groupName,
-                    members: [mongoose.Types.ObjectId(data.creatorID)],
-                    description: data.groupDescription,
-                    joinCode: data.joinCode
-                });
-        
-                newGroup.save();
-
-                // TODO: Fix this, the group._id is not being added to the array of groups that the creator is associated with
-                User.findOneAndUpdate({_id: data.creatorID}, {$addToSet: {groups: newGroup._id}});
-                clientSocket.emit(USER_ACTION_EVENTS.CREATE_GROUP_SUCCESS);
-            }
-        });
-    }
-
     /**
      * Adds a user to another user's friends list
      * @param clientSocket {Socket} - Socket object of the client that issued the add request
