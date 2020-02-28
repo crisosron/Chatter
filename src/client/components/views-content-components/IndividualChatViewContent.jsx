@@ -4,7 +4,6 @@ import SearchBar from "./views-sub-components/SearchBar";
 import ChatPane from "./views-sub-components/ChatPane";
 import "./views-content-css-files/communication-view-styles.css";
 export default function IndividualChatViewContent(props){
-    console.log(props.thisUser.name);
     let [friendCommEntities, setFriendCommEntities] = useState([]); // TODO: Fetch all friends of thisUser from db
     let [selectedCommEntity, setSelectedCommEntity] = useState(null); // The selectedCommEntity will be the comm entity that thisUser will be communicating with
     const updateCommEntities = (friendCommEntities) => {

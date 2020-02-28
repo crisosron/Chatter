@@ -6,7 +6,6 @@ import CommunicationEntityBar from "./views-sub-components/CommunicationEntityBa
 // import socket from "../../../index";
 import PROFILE_EVENTS from "../../../events/profile-events";
 export default function ProfileViewContent(props){
-
     // TODO: Set default comm entities for these arrays
     const [friendCommEntities, setFriendCommEntities] = useState([]);
     const [groupCommEntities, setGroupCommEntities] = useState([]);

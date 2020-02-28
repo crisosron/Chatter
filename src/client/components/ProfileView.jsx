@@ -5,9 +5,9 @@ import ProfileViewContent from "./views-content-components/ProfileViewContent";
 export default function ProfileView(props){
     return(
         <div id="mainWrapper">
-            <SideBar />
+            <SideBar thisUser={props.location.thisUser}/>
             <div id="mainView">
-                <ProfileViewContent/>
+                <ProfileViewContent thisUser={props.location.thisUser}/>
             </div>
         </div>
     );

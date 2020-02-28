@@ -7,7 +7,6 @@ import shortid from "shortid";
 import axios from "axios";
 
 export default function CreateGroupDisplayView(props){
-    console.log(props);
     const [joinCode, setJoinCode] = useState(shortid.generate());
 
     const handleCreateGroupPressed = () => {
