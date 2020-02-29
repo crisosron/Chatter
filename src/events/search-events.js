@@ -5,7 +5,7 @@ const SEARCH_EVENTS = {
     SEARCH_UNKNOWN_GROUPS: "search-unknown-groups",
     NO_RESULTS_FOUND: "no-results-found",
 
-    // Unknown CommunicationEntity delviery events
+    // Unknown CommunicationEntity delivery events
     DELIVER_UNKNOWN_USER_SEARCH_RESULTS: "deliver-unknown-user-search-results",
     DELIVER_UNKNOWN_GROUP_SEARCH_RESULTS: "deliver-unknown-groups-search-results",
 

@@ -3,7 +3,7 @@ import "./views-content-css-files/search-view-styles.css";
 import SearchBar from "./views-sub-components/SearchBar";
 import CommunicationEntityBar from "./views-sub-components/CommunicationEntityBar";
 import CommunicationEntityActionBar from "./views-sub-components/CommunicationEntityActionBar";
-// import socket from "../../../index";
+import socket from "../../../index";
 import USER_ACTION_EVENTS from "../../../events/user-action-events"
 import NotificationHandler from "../../notification-handler";
 export default function SearchViewContent(props){
@@ -25,18 +25,18 @@ export default function SearchViewContent(props){
     }
 
     useEffect(() => {
-        // socket.on(USER_ACTION_EVENTS.ADD_FRIEND_DENIED, data => {
-        //     NotificationHandler.createNotification("warning", "Sending of friend request has been denied", data.reason);
-        // });
+        socket.on(USER_ACTION_EVENTS.ADD_FRIEND_DENIED, data => {
+            NotificationHandler.createNotification("warning", "Sending of friend request has been denied", data.reason);
+        });
 
-        // socket.on(USER_ACTION_EVENTS.ADD_FRIEND_SENT, () => {
-        //     NotificationHandler.createNotification("success", "Friend Request Sent", "A friend request has been sent");
-        // });
+        socket.on(USER_ACTION_EVENTS.ADD_FRIEND_SENT, () => {
+            NotificationHandler.createNotification("success", "Friend Request Sent", "A friend request has been sent");
+        });
 
-        // return function cleanup(){
-        //     socket.removeListener(USER_ACTION_EVENTS.ADD_FRIEND_SENT);
-        //     socket.removeListener(USER_ACTION_EVENTS.ADD_FRIEND_DENIED)
-        // }
+        return function cleanup(){
+            socket.removeListener(USER_ACTION_EVENTS.ADD_FRIEND_SENT);
+            socket.removeListener(USER_ACTION_EVENTS.ADD_FRIEND_DENIED)
+        }
 
     }, []);
 

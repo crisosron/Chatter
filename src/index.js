@@ -6,11 +6,8 @@ import * as serviceWorker from './serviceWorker';
 import openSocket from "socket.io-client";
 import 'dotenv/config'
 
-// TODO: Determine why SERVER_PORT environment variable is undefined here
-//console.log(process.env.SERVER_PORT);
-//const socket = openSocket("http://localhost:" + process.env.SERVER_PORT);
-
-const socket = openSocket("http://localhost:8001");
+const SOCKET_IO_SERVER_PORT = process.env.REACT_APP_SOCKET_SERVER_PORT || 5001;
+const socket = openSocket(`http://localhost:${SOCKET_IO_SERVER_PORT}`);
 export default socket;
 
 ReactDOM.render(<Chatter />, document.getElementById('root'));
