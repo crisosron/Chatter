@@ -6,7 +6,8 @@ const groupSchema = new Schema({
         unique: true,
         type: String,
         required: true,
-        minlength: 2
+        minlength: 2,
+        maxlength: 20
     },
 
     members: {

@@ -55,10 +55,10 @@ export default function CreateGroupDisplayView(props){
                 <h1>Create a Group</h1>
                 <div id="groupDetailsInput">
                     <h2 className="groupDetailsInputLabel">Group Name</h2>
-                    <input className="groupDetailsInputField" id="groupNameInputField" placeholder="2 Characters Minimum" type="text" />
+                    <input className="groupDetailsInputField" id="groupNameInputField" placeholder="2 Characters Minimum" type="text" maxLength="20" />
 
                     <h2 className="groupDetailsInputLabel">Group Description</h2>
-                    <input className="groupDetailsInputField" id="groupDescriptionInputField" type="text" />
+                    <input className="groupDetailsInputField" id="groupDescriptionInputField" type="text" maxLength="200" />
 
                     <h2 className="groupDetailsInputLabel">Generated Group Code</h2>
                     <input className="groupDetailsInputField disabledInputField" type="text" value={joinCode} disabled />
