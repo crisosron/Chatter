@@ -5,9 +5,12 @@ console.log(`Socket.IO server listening on port: ${SOCKET_IO_SERVER_PORT}`);
 
 // Importing event constants
 const SEARCH_EVENTS = require("../events/search-events");
+const USER_ACTION_EVENTS = require("../events/user-action-events");
 
 // Importing search operation functions
 const searchOperations = require("./socket-operations/search-operations");
+const userActionOperations = require("./socket-operations/user-action-operations");
+
 
 io.on("connection", clientSocket => {
     console.log(`New client socket connected: ${clientSocket.id}`);
@@ -27,6 +30,11 @@ io.on("connection", clientSocket => {
 
     clientSocket.on(SEARCH_EVENTS.SEARCH_UNKNOWN_USERS, data => {
         searchOperations.searchUnknownUsers(clientSocket, data);
+    });
+
+    // Handling USER_ACTION_EVENTS
+    clientSocket.on(USER_ACTION_EVENTS.ADD_FRIEND, data => {
+        userActionOperations.addFriend(clientSocket, data);
     });
 });
 

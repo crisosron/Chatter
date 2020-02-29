@@ -9,33 +9,32 @@ const {Group} = require("../database-document-models/group-model");
  * @param data {Object} - Object passed through socket io events. In this case, it should contain stringQuery which is the value to be searched for in the collections 
 */
 function searchFriends(clientSocket, data){
-    console.log(`Inside searchFriends function with data: ${data}`);
     // Notice the usage of RegExp - This is so we can do a substring search when looking for the docs in the database
     // (Similar to doing LIKE data.stringQuery% in SQL but case insensitive)
-    // const query = {userName: new RegExp(data.stringQuery, 'i')};
+    const query = {userName: new RegExp(data.stringQuery, 'i')};
 
-    // // TODO: Need to filter out clientSocket's user name from the results
-    // User.find(query, (err, res) => {
-    //     if(err){
-    //         console.log("Error with search: ", err);
-    //         return;
-    //     }
+    // TODO: Need to filter out clientSocket's user name from the results
+    User.find(query, (err, res) => {
+        if(err){
+            console.log("Error with search: ", err);
+            return;
+        }
 
-    //     if(res.length === 0){
-    //         clientSocket.emit(SEARCH_EVENTS.NO_RESULTS_FOUND, {
-    //             message: `No results for: ${data.stringQuery}`
-    //         });
-    //         return;
-    //     }
+        if(res.length === 0){
+            clientSocket.emit(SEARCH_EVENTS.NO_RESULTS_FOUND, {
+                message: `No results for: ${data.stringQuery}`
+            });
+            return;
+        }
 
-    //     // Creating CommunicationEntity objects for every result
-    //     const resultingCommEntities = [];
-    //     res.forEach(element => {
-    //         resultingCommEntities.push(new CommunicationEntity(element.userName, element._id));
-    //     });
+        // Creating CommunicationEntity objects for every result
+        const resultingCommEntities = [];
+        res.forEach(element => {
+            resultingCommEntities.push(new CommunicationEntity(element.userName, element._id));
+        });
 
-    //     clientSocket.emit(SEARCH_EVENTS.DELIVER_RESULTS, {results: resultingCommEntities});
-    // });
+        clientSocket.emit(SEARCH_EVENTS.DELIVER_RESULTS, {results: resultingCommEntities});
+    });
 }
 
 /**
