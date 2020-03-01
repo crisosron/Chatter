@@ -6,9 +6,8 @@ import "./views-content-css-files/communication-view-styles.css"
 export default function GroupChatViewContent(props){
     let [groupCommEntities, setGroupCommEntities] = useState([]); // TODO: Fetch all groups of thisUser from db
     let [selectedCommEntity, setSelectedCommEntity] = useState(null); // The selectedCommEntity will be the comm entity that thisUser will be communicating with
-    const updateCommEntities = (friendCommEntities) => {
-        console.log(`Called updateCommEntities: ${friendCommEntities}`);
-        setGroupCommEntities(friendCommEntities);
+    const updateCommEntities = (groupCommEntities) => {
+        setGroupCommEntities(groupCommEntities);
     }
 
     const resetCommEntities = () => {

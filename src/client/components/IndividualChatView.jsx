@@ -5,9 +5,9 @@ import IndividualChatViewContent from "./views-content-components/IndividualChat
 export default function IndividualChatView(props){
     return(
         <div id="mainWrapper">
-            <SideBar thisUser={props.location.thisUser} />
+            <SideBar />
             <div id="mainView">
-                <IndividualChatViewContent thisUser={props.location.thisUser}/>
+                <IndividualChatViewContent/>
             </div>
         </div>
     );

@@ -11,6 +11,7 @@ export default function ProfileViewContent(props){
     const [groupCommEntities, setGroupCommEntities] = useState([]);
     const [selectedSearchMode, setSelectedSearchMode] = useState("Friends");
     const [pendingFriendRequests, setPendingFriendRequests] = useState([]);
+    const thisUser = JSON.parse(localStorage.getItem("thisUser"));
 
     const resetCommEntities = () => {
         setFriendCommEntities([]);
@@ -30,7 +31,7 @@ export default function ProfileViewContent(props){
     useEffect(() => {
         //TODO: Get pending friend requests and display them to notifications content
         // socket.emit(PROFILE_EVENTS.GET_PENDING_FRIEND_REQUESTS, {
-        //     id: props.thisUser.id
+        //     id: thisUser.id
         // });
 
         // socket.on(PROFILE_EVENTS.DELIVER_PENDING_FRIEND_REQUEST, data => {
@@ -66,7 +67,7 @@ export default function ProfileViewContent(props){
                     <CommunicationEntityBar mode={selectedSearchMode} communicationEntities={selectedSearchMode === "Friends" ? friendCommEntities : groupCommEntities}></CommunicationEntityBar>
                    
                 </div>
-                <UserInfoForm thisUser={props.thisUser}/>
+                <UserInfoForm />
             </div>
         </div>
     )

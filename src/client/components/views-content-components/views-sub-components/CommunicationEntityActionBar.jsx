@@ -3,22 +3,23 @@ import "./views-sub-components-css-files/communication-entity-action-bar-styles.
 import USER_ACTION_EVENTS from "../../../../events/user-action-events";
 import socket from "../../../../index";
 export default function CommunicationEntityActionBar(props){
+    const thisUser = JSON.parse(localStorage.getItem("thisUser"));
     const affirmativeActionClassName = props.isGroup ? "joinGroupButton":"addUserButton"
 
     const handleAffirmativeButtonClicked = () => {
-        console.log(`${props.thisUser.name} is trying to add ${props.commEntity._id}`);
+        console.log(`${thisUser.name} is trying to add ${props.commEntity._id}`);
         socket.emit(USER_ACTION_EVENTS.ADD_FRIEND, {
-            addingUserID: props.thisUser.id,
+            addingUserID: thisUser.id,
             userToAddID: props.commEntity._id
         });
     }
 
     const handleSendMessageButtonClicked = () => {
-        console.log(`${props.thisUser.name} is trying to send a message to ${props.commEntity._id}`);
+        console.log(`${thisUser.name} is trying to send a message to ${props.commEntity._id}`);
     }
 
     const handleBlockButtonClicked = () => {
-        console.log(`${props.thisUser.name} is trying to block ${props.commEntity._id}`);
+        console.log(`${thisUser.name} is trying to block ${props.commEntity._id}`);
     }
 
     return(

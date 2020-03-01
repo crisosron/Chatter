@@ -6,6 +6,7 @@ import NotificationHandler from "../../../notification-handler";
 
 export default class SearchBar extends React.Component{
     componentDidMount(){
+        const thisUser = JSON.parse(localStorage.getItem("thisUser"));
         const searchBarInput = document.getElementById(this.props.id === undefined ? "searchBarInput":this.props.id);
         searchBarInput.addEventListener("keydown", (e) => {
             if(e.keyCode === 8 && searchBarInput.value.length === 1){
@@ -24,28 +25,28 @@ export default class SearchBar extends React.Component{
             if(this.props.mode === "Friends") {
                 socket.emit(SEARCH_EVENTS.SEARCH_FRIENDS, {
                     stringQuery: searchBarInput.value,
-                    thisUser: this.props.thisUser
+                    thisUser: thisUser
                 });
             }
 
             else if(this.props.mode === "Groups"){
                 socket.emit(SEARCH_EVENTS.SEARCH_GROUPS, {
                     stringQuery: searchBarInput.value,
-                    thisUser: this.props.thisUser
+                    thisUser: thisUser
                 });
             }
 
             else if(this.props.mode === "Users"){
                 socket.emit(SEARCH_EVENTS.SEARCH_UNKNOWN_USERS, {
                     stringQuery: searchBarInput.value,
-                    thisUser: this.props.thisUser
+                    thisUser: thisUser
                 });
             }
 
             else if(this.props.mode === "Unknown Groups"){
                 socket.emit(SEARCH_EVENTS.SEARCH_UNKNOWN_GROUPS, {
                     stringQuery: searchBarInput.value,
-                    thisUser: this.props.thisUser
+                    thisUser: thisUser
                 });
             }
         });
@@ -53,7 +54,6 @@ export default class SearchBar extends React.Component{
         // TODO: Can result delivery be simplified with one handler?
         // Setting up socket.io event listeners for SEARCH_EVENT responses from server
         socket.on(SEARCH_EVENTS.DELIVER_RESULTS, data => {
-            console.log(this.props.updateCommEntities);
             this.props.updateCommEntities(data.results);
         });
 
@@ -73,6 +73,9 @@ export default class SearchBar extends React.Component{
 
     componentWillUnmount(){
         socket.removeEventListener(SEARCH_EVENTS.NO_RESULTS_FOUND);
+        socket.removeEventListener(SEARCH_EVENTS.DELIVER_RESULTS);
+        socket.removeEventListener(SEARCH_EVENTS.DELIVER_UNKNOWN_GROUP_SEARCH_RESULTS);
+        socket.removeEventListener(SEARCH_EVENTS.DELIVER_UNKNOWN_USER_SEARCH_RESULTS);
     }
 
     render(){

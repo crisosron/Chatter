@@ -7,8 +7,6 @@ const mongoose = require("mongoose");
 const USER_ACTION_EVENTS = require("../../events/user-action-events");
 
 router.post("/create-group", (req, res) => {
-    console.log("in router.post for /create-group");
-    console.log(req.body);
     Group.findOne({groupName: req.body.groupName}, (err, doc) => {
 
         if(err){

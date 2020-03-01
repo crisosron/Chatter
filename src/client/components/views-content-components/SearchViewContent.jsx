@@ -51,7 +51,7 @@ export default function SearchViewContent(props){
                         <div id="groupToggleDiv" className={"toggleDiv centeredContent " + (currentSearchMode === "Unknown Groups" ? "selectedToggleDiv":"")} onClick={() => {handleTogglePressed("Unknown Groups")}}>Groups</div>
                     </div>
                     <div id="searchBarWrapper">
-                        <SearchBar id="searchInput" mode={currentSearchMode} style={{width: "75%"}} updateCommEntities={updateCommEntities} resetCommEntities={resetCommEntities} thisUser={props.thisUser}>{"Search " + currentSearchMode}</SearchBar>
+                        <SearchBar id="searchInput" mode={currentSearchMode} style={{width: "75%"}} updateCommEntities={updateCommEntities} resetCommEntities={resetCommEntities}>{"Search " + currentSearchMode}</SearchBar>
                     </div>
                 </div>
                 <div id="resultsDiv">
@@ -61,8 +61,7 @@ export default function SearchViewContent(props){
 
                     <div id="resultingCommEntitiesActionsDiv">
                         {commEntities.map((value, index) => {
-                            // return <CommunicationEntityActionBar key={"actionBar" + value._id} isGroup={currentSearchMode === "Unknown Groups"} thisUser={props.thisUser} commEntity={value} thisUserSocket={socket}/>
-                            return <CommunicationEntityActionBar key={"actionBar" + value._id} isGroup={currentSearchMode === "Unknown Groups"} thisUser={props.thisUser} commEntity={value}/>
+                            return <CommunicationEntityActionBar key={"actionBar" + value._id} isGroup={currentSearchMode === "Unknown Groups"} commEntity={value}/>
                         })}                           
                     </div>
                 </div>

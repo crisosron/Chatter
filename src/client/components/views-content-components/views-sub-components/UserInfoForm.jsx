@@ -3,6 +3,7 @@ import React, {useState, useEffect} from "react"
 import PROFILE_EVENTS from "../../../../events/profile-events";
 import "./views-sub-components-css-files/user-info-form-styles.css";
 export default function UserInfoForm(props){
+    const thisUser = JSON.parse(localStorage.getItem("thisUser"));
     const [changesLocked, setChangesLocked] = useState(true);
 
     // accountInfoEditingEnabled will enable/disable input fields in accountInformationContentDiv
@@ -44,7 +45,7 @@ export default function UserInfoForm(props){
     // This useEffect hook is designed to simulate componentDidMount. It will send a socket.io event to obtain user info
     // and then handle the server's response by calling the setter methods for the user's info and storing into originalUserInfo
     useEffect(() => {
-        // socket.emit(PROFILE_EVENTS.GET_USER_INFO, {id: props.thisUser.id});
+        // socket.emit(PROFILE_EVENTS.GET_USER_INFO, {id: thisUser.id});
         // socket.on(PROFILE_EVENTS.DELIVER_USER_INFO, data => {
         //     setOriginalUserInfo({
         //         userName: data.userName,

@@ -32,7 +32,6 @@ export default function SideBar(props){
                     return(
                         <Link className={"navOption sideBarLink" + (index === selectedNavOptionIndex ? "selectedNavOption" : "")} to={{
                             pathname: elem.linkPath,
-                            thisUser: props.thisUser
                         }} key={"linkElem"+elem.title}>
                             <div onClick={handleNavOptionClicked}>
                                 {elem.title}
@@ -54,7 +53,6 @@ export default function SideBar(props){
             <ContextMenu id="settingsContextMenu">
                 <Link className="sideBarLink" to={{
                     pathname: "/create-group",
-                    thisUser: props.thisUser
                 }}>
                     <MenuItem className="settingsMenuItem" data={{action: "Create Group"}}>Create Group</MenuItem>
                 </Link>

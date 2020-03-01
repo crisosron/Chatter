@@ -6,9 +6,11 @@ export default function HomeViewContent(props){
         alignItems: "center"
     }
 
+    const thisUser = JSON.parse(localStorage.getItem("thisUser"));
+
     return(
         <div id="defaultDisplayedView" style={styles}>
-            <h1>HomeViewContent:{props.thisUser.name}</h1>
+            <h1>HomeViewContent:{thisUser.name}</h1>
         </div>
     )
 }

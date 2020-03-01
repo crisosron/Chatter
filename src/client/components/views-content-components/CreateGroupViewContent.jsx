@@ -8,6 +8,7 @@ import axios from "axios";
 
 export default function CreateGroupDisplayView(props){
     const [joinCode, setJoinCode] = useState(shortid.generate());
+    const thisUser = JSON.parse(localStorage.getItem("thisUser"));
 
     const handleCreateGroupPressed = () => {
         const groupNameInputField = document.getElementById("groupNameInputField");
@@ -24,7 +25,7 @@ export default function CreateGroupDisplayView(props){
             groupName: groupNameInputField.value,
             groupDescription: groupDescriptionInputField.value,
             joinCode: joinCode,
-            creatorID: props.thisUser.id,
+            creatorID: thisUser.id,
             clientSocketID: socket.id
         }
 
