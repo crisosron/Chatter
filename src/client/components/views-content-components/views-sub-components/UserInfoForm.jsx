@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from "react"
 import socket from "../../../../index";
 import PROFILE_EVENTS from "../../../../events/profile-events";
+import NotificationHandler from "../../../notification-handler";
 import "./views-sub-components-css-files/user-info-form-styles.css";
 export default function UserInfoForm(props){
     const thisUser = JSON.parse(sessionStorage.getItem("thisUser"));
-    const [changesLocked, setChangesLocked] = useState(true);
+    const [enableChangesInputFieldLocked, setEnableChangesInputFieldLocked] = useState(true);
 
     // accountInfoEditingEnabled will enable/disable input fields in accountInformationContentDiv
     const [accountInfoEditingEnabled, setAccountInfoEditingEnabled] = useState(false);
@@ -15,14 +16,25 @@ export default function UserInfoForm(props){
     const [emailInputValue, setEmailInputValue] = useState("");
 
     const handleEnableChangesIconClicked = () => {
-        setChangesLocked(false);
-        setAccountInfoEditingEnabled(false);
+
+        // If accountInfoEditing has already been enabled and the user then clicks the lock icon, it should disable account editing and also lock the enableChangesInputField (restore default state essentially)
+        if(accountInfoEditingEnabled){
+            document.getElementById("enableChangesInputField").value = "";
+            setAccountInfoEditingEnabled(false);
+            setEnableChangesInputFieldLocked(true);
+        }else{
+            setEnableChangesInputFieldLocked(false);
+        }
     }
 
     const handleConfirmPasswordClicked = () => {
-        console.log("TODO: Handle confirmation of password and enable editing for all input fields in accountInformationContent");
-        setChangesLocked(true);
-        setAccountInfoEditingEnabled(true);
+
+        // Sends a socket.io event to check the validity of the password and allow editing of account info if so
+        // Note that the responses to this event is located in useEffect hook
+        socket.emit(PROFILE_EVENTS.REQUEST_ENABLE_CHANGES, {
+            enteredPassword: document.getElementById("enableChangesInputField").value,
+            id: thisUser.id
+        });        
     }
 
     const handleSaveChangesClicked = () => {
@@ -57,17 +69,36 @@ export default function UserInfoForm(props){
             setEmailInputValue(data.email);
         });
 
+        // If the entered password to enable changes does not match the registered password of thisUser
+        socket.on(PROFILE_EVENTS.DENY_ENABLE_CHANGES, () => {
+            setAccountInfoEditingEnabled(false);
+            // setEnableChangesPasswordInputLocked(false);
+            NotificationHandler.createNotification("danger", "Incorrect Password", "Please try again");
+        });
+
+        // If the entered password to enable changes matches the registered password of thisUser - enable account info editing
+        socket.on(PROFILE_EVENTS.CONFIRM_ENABLE_CHANGES, () => {
+            setEnableChangesInputFieldLocked(true);
+            setAccountInfoEditingEnabled(true);
+        });
+
+        return () => {
+            socket.removeListener(PROFILE_EVENTS.DENY_ENABLE_CHANGES);
+            socket.removeListener(PROFILE_EVENTS.CONFIRM_ENABLE_CHANGES);
+            socket.removeListener(PROFILE_EVENTS.DELIVER_USER_INFO);
+        }
+
     }, []);
 
     // This useEffect is for performing the operations required when changesLocked mutates
     useEffect(() => {
-        if(!changesLocked){
+        if(!enableChangesInputFieldLocked){
             enableChangesInputField.focus();
         }
-    }, [changesLocked]);
+    }, [enableChangesInputFieldLocked]);
 
     let enableChangesInputField = null;
-    let enableChangesInputFieldPlaceholder = changesLocked ? "Click lock to make changes to your account" : "Enter your password"
+    let enableChangesInputFieldPlaceholder = enableChangesInputFieldLocked ? "Click lock to make changes to your account" : "Enter your password"
 
     return(
         <div id="accountInformationWrapper">
@@ -77,11 +108,15 @@ export default function UserInfoForm(props){
                     <input id="enableChangesInputField"
                     placeholder={enableChangesInputFieldPlaceholder}
                     type="password"
-                    disabled={changesLocked}
+                    disabled={enableChangesInputFieldLocked}
                     ref={(inputField) => {enableChangesInputField = inputField}}
                     required
                     />
-                    <div id="enableChangesIconDiv" className={changesLocked ? "lockedIconDiv" : "confirmPassword"} onClick={changesLocked ? handleEnableChangesIconClicked : handleConfirmPasswordClicked}>{!changesLocked ? "Confirm" : ""}</div>
+                    <div id="enableChangesIconDiv" 
+                    className={enableChangesInputFieldLocked ? "lockedIconDiv" : "confirmPassword"} 
+                    onClick={enableChangesInputFieldLocked ? handleEnableChangesIconClicked : handleConfirmPasswordClicked}>
+                        {!enableChangesInputFieldLocked ? "Confirm" : ""}
+                    </div>
                 </div>
             </div>
             <div id="accountInformationContentWrapper">

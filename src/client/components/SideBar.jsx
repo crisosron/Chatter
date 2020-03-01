@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 export default function SideBar(props){
     const [selectedNavOptionIndex, setSelectedNavOptionIndex] = useState(-1);
     const navOptions = [
+        {title: "Home", linkPath: "/home"},
         {title: "Friends", linkPath: "/chat"},
         {title: "Groups", linkPath: "/group-chat"},
         {title: "Search", linkPath: "/search"},

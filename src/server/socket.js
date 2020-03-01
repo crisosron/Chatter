@@ -46,6 +46,10 @@ io.on("connection", clientSocket => {
     clientSocket.on(PROFILE_EVENTS.GET_USER_INFO, data => {
         profileOperations.getUserInfo(clientSocket, data);
     });
+
+    clientSocket.on(PROFILE_EVENTS.REQUEST_ENABLE_CHANGES, data => {
+        profileOperations.requestEnableChanges(clientSocket, data);
+    });
 });
 
 module.exports = io;

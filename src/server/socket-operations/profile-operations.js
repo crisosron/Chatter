@@ -51,4 +51,16 @@ function getPendingFriendRequests(clientSocket, data){
     });
 }
 
-module.exports = {getUserInfo, getPendingFriendRequests};
+/**
+ *  Function that confirms whether or not the password entered by the user to make changes to their account information is valid
+ *  @param clientSocket {Socket} - Socket object of the client that issued the request
+ *  @param data {Object} - Object containing data.id (of requesting User) data.enteredPassword to check against the actual password of the requesting user
+ */
+function requestEnableChanges(clientSocket, data){
+    User.findById(data.id, (err, res) => {
+        if(res.password === data.enteredPassword) clientSocket.emit(PROFILE_EVENTS.CONFIRM_ENABLE_CHANGES);
+        else clientSocket.emit(PROFILE_EVENTS.DENY_ENABLE_CHANGES);
+    });
+}
+
+module.exports = {getUserInfo, getPendingFriendRequests, requestEnableChanges};
