@@ -4,7 +4,7 @@ import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 import {Link} from "react-router-dom";
 
 export default function SideBar(props){
-    const [selectedNavOptionIndex, setSelectedNavOptionIndex] = useState(-1);
+    const [selectedNavOptionIndex, setSelectedNavOptionIndex] = useState(0);
     const navOptions = [
         {title: "Home", linkPath: "/home"},
         {title: "Friends", linkPath: "/chat"},
