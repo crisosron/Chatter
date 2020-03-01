@@ -27,13 +27,12 @@ export default class Login extends Component{
         }
 
         // Sending a POST request to process the login with the user-provided credentials
-        axios.post("http://localhost:8000", loggingInUser)
+        axios.post(`http://localhost:${process.env.REACT_APP_EXPRESS_SERVER_PORT}`, loggingInUser)
             .then(res => {
-                localStorage.setItem("thisUser", JSON.stringify(res.data.thisUser));                
+                sessionStorage.setItem("thisUser", JSON.stringify(res.data.thisUser));                
                 // Handling of response by server with thisUser info and redirecting the client to the main application
                 this.setState({
                     redirectToChat: true,
-                    thisUser: res.data.thisUser
                 });
             });
     }
@@ -62,9 +61,6 @@ export default class Login extends Component{
             return (
                 <Redirect push to={{
                     pathname: "/home",
-                    state: {
-                        thisUser: this.state.thisUser
-                    }
                 }} />
             );
         }

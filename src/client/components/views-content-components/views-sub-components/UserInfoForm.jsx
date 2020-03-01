@@ -3,7 +3,7 @@ import socket from "../../../../index";
 import PROFILE_EVENTS from "../../../../events/profile-events";
 import "./views-sub-components-css-files/user-info-form-styles.css";
 export default function UserInfoForm(props){
-    const thisUser = JSON.parse(localStorage.getItem("thisUser"));
+    const thisUser = JSON.parse(sessionStorage.getItem("thisUser"));
     const [changesLocked, setChangesLocked] = useState(true);
 
     // accountInfoEditingEnabled will enable/disable input fields in accountInformationContentDiv

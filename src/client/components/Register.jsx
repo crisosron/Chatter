@@ -35,7 +35,7 @@ export default class Register extends Component{
         }
 
         // Posting to register-user route to register the user
-        axios.post("http://localhost:8000/register", newUser)
+        axios.post(`http://localhost:${process.env.REACT_APP_EXPRESS_SERVER_PORT}/register`, newUser)
             .then(res => { // Handling response from server (res.send() in login-register-routes.js in /register route)
                 this.setState({
                     redirectToLogin: true

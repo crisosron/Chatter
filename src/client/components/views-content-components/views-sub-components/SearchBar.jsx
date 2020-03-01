@@ -6,7 +6,7 @@ import NotificationHandler from "../../../notification-handler";
 
 export default class SearchBar extends React.Component{
     componentDidMount(){
-        const thisUser = JSON.parse(localStorage.getItem("thisUser"));
+        const thisUser = JSON.parse(sessionStorage.getItem("thisUser"));
         const searchBarInput = document.getElementById(this.props.id === undefined ? "searchBarInput":this.props.id);
         searchBarInput.addEventListener("keydown", (e) => {
             if(e.keyCode === 8 && searchBarInput.value.length === 1){

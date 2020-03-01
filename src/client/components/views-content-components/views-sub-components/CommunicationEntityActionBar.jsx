@@ -3,7 +3,7 @@ import "./views-sub-components-css-files/communication-entity-action-bar-styles.
 import USER_ACTION_EVENTS from "../../../../events/user-action-events";
 import socket from "../../../../index";
 export default function CommunicationEntityActionBar(props){
-    const thisUser = JSON.parse(localStorage.getItem("thisUser"));
+    const thisUser = JSON.parse(sessionStorage.getItem("thisUser"));
     const affirmativeActionClassName = props.isGroup ? "joinGroupButton":"addUserButton"
 
     const handleAffirmativeButtonClicked = () => {

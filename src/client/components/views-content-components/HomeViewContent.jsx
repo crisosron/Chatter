@@ -6,7 +6,7 @@ export default function HomeViewContent(props){
         alignItems: "center"
     }
 
-    const thisUser = JSON.parse(localStorage.getItem("thisUser"));
+    const thisUser = JSON.parse(sessionStorage.getItem("thisUser"));
 
     return(
         <div id="defaultDisplayedView" style={styles}>

@@ -11,7 +11,7 @@ export default function ProfileViewContent(props){
     const [groupCommEntities, setGroupCommEntities] = useState([]);
     const [selectedSearchMode, setSelectedSearchMode] = useState("Friends");
     const [pendingFriendRequests, setPendingFriendRequests] = useState([]);
-    const thisUser = JSON.parse(localStorage.getItem("thisUser"));
+    const thisUser = JSON.parse(sessionStorage.getItem("thisUser"));
 
     const resetCommEntities = () => {
         setFriendCommEntities([]);

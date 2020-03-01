@@ -11,13 +11,6 @@ import ReactNotification from "react-notifications-component";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 function Chatter() {
-
-  useEffect(() => {
-    return () => {
-      localStorage.clear(); // Clears localStorage on unmount of this component
-    }
-  }, []);
-
   return (
     <div>
       <ReactNotification/>

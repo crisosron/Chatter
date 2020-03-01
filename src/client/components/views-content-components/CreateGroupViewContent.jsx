@@ -29,7 +29,7 @@ export default function CreateGroupDisplayView(props){
             clientSocketID: socket.id
         }
 
-        axios.post("http://localhost:8000/create-group", data);
+        axios.post(`http://localhost:${process.env.REACT_APP_EXPRESS_SERVER_PORT}/create-group`, data);
     }
 
     useEffect(() => {
