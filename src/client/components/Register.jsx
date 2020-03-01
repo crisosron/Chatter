@@ -20,6 +20,13 @@ export default class Register extends Component{
         let userName = document.getElementById("userNameInputField").value;
         let password = document.getElementById("passwordInputField").value;
         let email = document.getElementById("emailInputField").value
+
+        // Checking that the password exceeds the minlen of 5 charactesr
+        if(password.length < 5){
+            NotificationHandler.createNotification("danger", "Registration Denied", "Your password must be at least 5 characters in length");
+            return;
+        }
+
         const newUser = {
             userName: userName,
             password: password,
@@ -81,7 +88,7 @@ export default class Register extends Component{
                         <input type="text" placeholder="Username" id="userNameInputField"></input>
                         <input type="password" placeholder="Password (minimum 5 characters)" id="passwordInputField"></input>
                         <input type="text" placeholder="Email" id="emailInputField"></input>
-                        <input type="submit" value="Register" className="generalButton"/>
+                        <input type="submit" id="registerButton" value="Register" className="generalButton"/>
                         <div id="accountStatusText">
                             <p>Already have an account? <a href="/">Login</a></p>
                         </div>
