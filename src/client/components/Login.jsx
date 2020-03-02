@@ -29,7 +29,9 @@ export default class Login extends Component{
         // Sending a POST request to process the login with the user-provided credentials
         axios.post(`http://localhost:${process.env.REACT_APP_EXPRESS_SERVER_PORT}`, loggingInUser)
             .then(res => {
-                sessionStorage.setItem("thisUser", JSON.stringify(res.data.thisUser));                
+                sessionStorage.setItem("thisUser", JSON.stringify(res.data.thisUser));               
+                sessionStorage.setItem("selectedNavOptionIndex", "0");
+                
                 // Handling of response by server with thisUser info and redirecting the client to the main application
                 this.setState({
                     redirectToChat: true,
@@ -73,7 +75,7 @@ export default class Login extends Component{
                     <form onSubmit={this.handleLoginClicked}>
                         <h1>Login</h1>
                         <input type="text" placeholder="Username" id="userNameInputField"></input>
-                        <input type="password" placeholder="Password (minimum 5 characters)" id="passwordInputField"></input>
+                        <input type="password" placeholder="Password" id="passwordInputField"></input>
                         <input type="submit" value="Login" id="loginButton"/>
                         <p><a href="/">Forgot Password</a></p>
 

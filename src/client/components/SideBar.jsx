@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React from "react";
 import "../css-files/sidebar-styles.css";
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 import {Link} from "react-router-dom";
 
 export default function SideBar(props){
-    const [selectedNavOptionIndex, setSelectedNavOptionIndex] = useState(0);
+    const selectedNavOptionIndex = parseInt(sessionStorage.getItem("selectedNavOptionIndex"));
     const navOptions = [
         {title: "Home", linkPath: "/home"},
         {title: "Friends", linkPath: "/chat"},
@@ -14,7 +14,7 @@ export default function SideBar(props){
     ];
 
     const handleNavOptionClicked = index => {
-        setSelectedNavOptionIndex(index);
+        sessionStorage.setItem("selectedNavOptionIndex", index.toString());
     }
 
     return(
@@ -31,12 +31,8 @@ export default function SideBar(props){
                 {/* Rendering navigation options */}
                 {navOptions.map((elem, index) => {
                     return(
-                        <Link className={"navOption sideBarLink" + (index === selectedNavOptionIndex ? "selectedNavOption" : "")} to={{
-                            pathname: elem.linkPath,
-                        }} key={"linkElem"+elem.title}>
-                            <div onClick={handleNavOptionClicked}>
-                                {elem.title}
-                            </div>
+                        <Link className={"navOption " + (index === selectedNavOptionIndex ? "selectedNavOption" : "")} to={{pathname: elem.linkPath}} key={"linkElem" + elem.title} onClick={() => {handleNavOptionClicked(index)}}>
+                            {elem.title}
                         </Link>
                     )
                 })}

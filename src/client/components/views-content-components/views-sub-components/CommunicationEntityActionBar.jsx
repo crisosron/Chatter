@@ -7,7 +7,6 @@ export default function CommunicationEntityActionBar(props){
     const affirmativeActionClassName = props.isGroup ? "joinGroupButton":"addUserButton"
 
     const handleAffirmativeButtonClicked = () => {
-        console.log(`${thisUser.name} is trying to add ${props.commEntity._id}`);
         socket.emit(USER_ACTION_EVENTS.ADD_FRIEND, {
             addingUserID: thisUser.id,
             userToAddID: props.commEntity._id

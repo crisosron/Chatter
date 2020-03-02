@@ -72,7 +72,6 @@ export default function UserInfoForm(props){
         // If the entered password to enable changes does not match the registered password of thisUser
         socket.on(PROFILE_EVENTS.DENY_ENABLE_CHANGES, () => {
             setAccountInfoEditingEnabled(false);
-            // setEnableChangesPasswordInputLocked(false);
             NotificationHandler.createNotification("danger", "Incorrect Password", "Please try again");
         });
 

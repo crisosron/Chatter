@@ -22,6 +22,7 @@
     display: flex;
 }
 
+/* Styling for SideBar links */
 .navOption{
     flex: 1;
     width: 95%;
@@ -30,25 +31,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.sideBarLink{
     color: var(--primary-color);
     text-decoration: none;
 }
 
-.sideBarLink:visited{
+.navOption:visited{
     color: var(--primary-color);
 }
 
-.sideBarLink:hover{
+.navOption:hover{
     cursor: pointer;
 }
 
 .navOption:hover{
     cursor: pointer;
-
-    /* Darkens */
     box-shadow: var(--box-shadow-lighten);
 }
 
