@@ -1,11 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const {User} = require("../database-document-models/user-model");
 const {Group} = require("../database-document-models/group-model");
-const io = require("../socket");
 const mongoose = require("mongoose");
-const USER_ACTION_EVENTS = require("../../events/user-action-events");
 
+// Handling group creation route
 router.post("/create-group", (req, res) => {
     Group.findOne({groupName: req.body.groupName}, (err, doc) => {
 
@@ -17,12 +15,15 @@ router.post("/create-group", (req, res) => {
         // Checking preconditions
         // If a group with the given name already exists, deny the group creation
         if(doc){
-            io.to(req.body.clientSocketID).emit(USER_ACTION_EVENTS.CREATE_GROUP_DENIED, {
+            res.send({
+                createGroupFailed: true,
                 reason: `A group with the name '${req.body.groupName}' already exists`
             });
-
+        
+        // Checking the precondition that the groupname must have at least 2 characters
         }else if(req.body.groupName.length < 2){
-            io.to(req.body.clientSocketID).emit(USER_ACTION_EVENTS.CREATE_GROUP_DENIED, {
+            res.send({
+                createGroupFailed: true,
                 reason: `A group name must have at least 2 characters`
             });
         
@@ -36,10 +37,13 @@ router.post("/create-group", (req, res) => {
                 joinCode: req.body.joinCode
             });
     
-            newGroup.save();
-
-            // TODO: Check postcondition that members has req.body.creatorID
-            io.to(req.body.clientSocketID).emit(USER_ACTION_EVENTS.CREATE_GROUP_SUCCESS);
+            newGroup.save()
+            .then(result => {
+                // TODO: Check postcondition that members has req.body.creatorID
+                res.send({
+                    createGroupFailed: false
+                });
+            });
         }
     });
 });

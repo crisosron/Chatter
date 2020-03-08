@@ -1,9 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const {User} = require("../database-document-models/user-model");
-const REGISTER_EVENTS = require("../../events/register-events");
-const LOGIN_EVENTS = require("../../events/login-events");
-const io = require("../socket");
 
 // Processes user login
 router.post("/", (req, res) => {
@@ -14,18 +11,23 @@ router.post("/", (req, res) => {
         }
 
         if(result){
-            io.to(req.body.clientSocketID).emit(LOGIN_EVENTS.LOGIN_SUCCESFUL);
 
             // Replying to client the 'thisUser' information which includes the user's id in the users collection, and their username
-            res.send({thisUser: {
-                name: result.userName,
-                id: result._id
-            }});
-
+            res.send({
+                loginFailed: false,
+                thisUser: {
+                    name: result.userName,
+                    id: result._id
+                }
+            });
             return;
         }
 
-        io.to(req.body.clientSocketID).emit(LOGIN_EVENTS.LOGIN_DENIED);
+        // Replaying to client that the login attempt was unsuccesful
+        res.send({
+            loginFailed: true
+        });
+
     });});
 
 // Processes user registration
@@ -40,7 +42,8 @@ router.post("/register", (req, res) => {
 
         // If the given username is already registered, deny registration
         if(doc != null){
-            io.to(req.body.clientSocketID).emit(REGISTER_EVENTS.REGISTRATION_DENIED, {
+            res.send({
+                registrationFailed: true,
                 reason: `The user name '${req.body.userName}' is already in use by another user`
             });
             return;
@@ -55,9 +58,10 @@ router.post("/register", (req, res) => {
 
             // If the given email is already registered, deny registration
             if(doc != null){
-                io.to(req.body.clientSocketID).emit(REGISTER_EVENTS.REGISTRATION_DENIED, {
+                res.send({
+                    registrationFailed: true,
                     reason: `The email '${req.body.email}' is already associated with another account`
-                }); 
+                });
                 return;
             }
             
@@ -70,8 +74,7 @@ router.post("/register", (req, res) => {
             
             newUser.save()
                 .then(() => {
-                    io.to(req.body.clientSocketID).emit(REGISTER_EVENTS.REGISTRATION_SUCCESSFUL);
-                    res.send(); // Basic reply to acknowledge to the client that the registration was succesful (triggers .then in client POST request)
+                    res.send({registrationFailed: false}); // Basic reply to acknowledge to the client that the registration was succesful (triggers .then in client POST request)
                 })
                 .catch(error => res.status(400).json("Error with registration: ", error));
         });

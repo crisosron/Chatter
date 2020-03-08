@@ -3,7 +3,6 @@ import "../css-files/login-register-styles.css"
 import socket from "../../index"
 import {Redirect} from "react-router-dom";
 import NotificationHandler from "../notification-handler";
-import REGISTER_EVENTS from "../../events/register-events"
 import axios from "axios";
 export default class Register extends Component{
     constructor(props){
@@ -35,8 +34,17 @@ export default class Register extends Component{
         }
 
         // Posting to register-user route to register the user
-        axios.post(`http://localhost:${process.env.REACT_APP_EXPRESS_SERVER_PORT}/register`, newUser)
+        axios.post(`http://localhost:${process.env.REACT_APP_SERVER_PORT}/register`, newUser)
             .then(res => { // Handling response from server (res.send() in login-register-routes.js in /register route)
+                
+                // Handling failed registration
+                if(res.data.registrationFailed){
+                    NotificationHandler.createNotification("danger", "Registration Denied", res.data.reason);
+                    return;
+                }
+
+                // If registraation is succesful, show notification and redirect to login page
+                NotificationHandler.createNotification("success", "Registration Successful", "Please enter your login credentials");
                 this.setState({
                     redirectToLogin: true
                 });
@@ -51,21 +59,10 @@ export default class Register extends Component{
     }
 
     componentDidMount(){
-        socket.on(REGISTER_EVENTS.REGISTRATION_DENIED, data => {
-            NotificationHandler.createNotification("danger", "Registration Denied", data.reason);
-        });
-
-        // This notification should be shown when the user has already been redirected to the login page as a response from the POST request in handleRegisterPressed
-        socket.on(REGISTER_EVENTS.REGISTRATION_SUCCESSFUL, data => {
-            NotificationHandler.createNotification("success", "Registration Successful", "Please enter your login credentials");
-        });
-
         document.addEventListener("keydown", this.handleKeyPress);
     }
 
     componentWillUnmount(){
-        socket.removeEventListener(REGISTER_EVENTS.REGISTRATION_DENIED);
-        socket.removeEventListener(REGISTER_EVENTS.REGISTRATION_SUCCESSFUL);
         document.removeEventListener("keydown", this.handleKeyPress);
     }
 

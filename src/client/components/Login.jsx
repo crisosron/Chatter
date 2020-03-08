@@ -16,6 +16,7 @@ export default class Login extends Component{
 
     handleLoginClicked = e => {
         e.preventDefault();
+        console.log("Login clicked");
 
         // Obtaining user provided credentials
         let userName = document.getElementById("userNameInputField").value;
@@ -27,8 +28,16 @@ export default class Login extends Component{
         }
 
         // Sending a POST request to process the login with the user-provided credentials
-        axios.post(`http://localhost:${process.env.REACT_APP_EXPRESS_SERVER_PORT}`, loggingInUser)
+        axios.post(`http://localhost:${process.env.REACT_APP_SERVER_PORT}`, loggingInUser)
             .then(res => {
+
+                // Showing notification that login attempt failed
+                if(res.data.loginFailed){
+                    NotificationHandler.createNotification("danger", "Login Denied", "Please check your login credentials");
+                    return;
+                }
+
+                // If login succeeds, store thisUser into sessionStorage and redirect to home page of application
                 sessionStorage.setItem("thisUser", JSON.stringify(res.data.thisUser));               
                 sessionStorage.setItem("selectedNavOptionIndex", "0");
                 
@@ -46,15 +55,8 @@ export default class Login extends Component{
         }
     }
 
-    componentDidMount(){
-        socket.on(LOGIN_EVENTS.LOGIN_DENIED, () => {
-            NotificationHandler.createNotification("danger", "Login Denied", "Please check your login credentials");
-        })
-    }
-
     componentWillUnmount(){
         // Removes some events from the sockets to make sure that the events are being received the correct number of times
-        socket.removeEventListener(LOGIN_EVENTS.LOGIN_DENIED)
         document.removeEventListener("keydown", this.handleKeyPressed);
     }
 

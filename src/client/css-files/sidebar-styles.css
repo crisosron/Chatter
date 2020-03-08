@@ -52,6 +52,7 @@
     background-color: var(--accent-color);
 }
 
+/* Styling for settings part of the SideBar */
 #settingsDiv{
     flex: 1;
     box-shadow: var(--box-shadow-lighten);

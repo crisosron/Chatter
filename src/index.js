@@ -6,8 +6,8 @@ import * as serviceWorker from './serviceWorker';
 import openSocket from "socket.io-client";
 import 'dotenv/config'
 
-const SOCKET_IO_SERVER_PORT = process.env.REACT_APP_SOCKET_SERVER_PORT || 5001;
-const socket = openSocket(`http://localhost:${SOCKET_IO_SERVER_PORT}`);
+const SERVER_PORT = process.env.REACT_APP_SERVER_PORT || 5000;
+const socket = openSocket(`http://localhost:${SERVER_PORT}`);
 export default socket;
 
 ReactDOM.render(<Chatter />, document.getElementById('root'));

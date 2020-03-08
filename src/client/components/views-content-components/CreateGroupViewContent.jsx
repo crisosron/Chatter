@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import "./views-content-css-files/create-group-view-styles.css";
-import USER_ACTION_EVENTS from "../../../events/user-action-events";
 import NotificationHandler from "../../notification-handler";
 import socket from "../../../index";
 import shortid from "shortid";
@@ -29,26 +28,20 @@ export default function CreateGroupDisplayView(props){
             clientSocketID: socket.id
         }
 
-        axios.post(`http://localhost:${process.env.REACT_APP_EXPRESS_SERVER_PORT}/create-group`, data);
-    }
+        // Sending post request to create a group with user provided input
+        axios.post(`http://localhost:${process.env.REACT_APP_SERVER_PORT}/create-group`, data)
+        .then(res => { // Handling response from server
 
-    useEffect(() => {
-        socket.on(USER_ACTION_EVENTS.CREATE_GROUP_DENIED, (data) => {
-            NotificationHandler.createNotification("danger", "Group Creation Denied", data.reason);
-            document.getElementById("groupNameInputField").value = "";
-            document.getElementById("groupDescriptionInputField").value = "";
-        });
+            // Handling group creation failure by showing notification
+            if(res.data.createGroupFailed){
+                NotificationHandler.createNotification("danger", "Group Creation Denied", res.data.reason);
+                return;
+            }
 
-        socket.on(USER_ACTION_EVENTS.CREATE_GROUP_SUCCESS, () => {
+            // Handling group creation success
             NotificationHandler.createNotification("success", "Group Created", "Your group has been created and is ready for use!");
         });
-
-        return () => {
-            socket.removeEventListener(USER_ACTION_EVENTS.CREATE_GROUP_SUCCESS);
-            socket.removeEventListener(USER_ACTION_EVENTS.CREATE_GROUP_DENIED);
-        }
-
-    }, []);
+    }
 
     return(
         <div id="createGroupViewWrapper">
