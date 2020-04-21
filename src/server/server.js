@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 
 // ################### SERVER RELATED GENERAL SETUP ################### //
-const SERVER_PORT = process.env.SERVER_PORT || 5000;
+const SERVER_PORT = process.env.EXPRESS_SERVER_PORT || 5000;
 
 // app.listen returns an HTTP server so we can use app.listen instead of server = require("http").createServer.listen(...);
 // This wil allow our middleware routes to be used (which would otherwise not be the case with server.listen(...))
