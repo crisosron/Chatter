@@ -1,16 +1,17 @@
 const express = require("express");
 const router = express.Router();
+const serverUtils = require("../utilities");
 const {User} = require("../database-document-models/user-model");
 
 // Processes user login
 router.post("/", (req, res) => {
-    User.findOne({userName: req.body.userName, password: req.body.password}, (err, result) => {
+    User.findOne({userName: req.body.userName}, (err, result) => {
         if(err){
             console.log(`Error in LoginRegistrationOperations.login: ${err}`);
             return;
         }
 
-        if(result){
+        if(result && result.validPassword(req.body.password)){
 
             // Replying to client the 'thisUser' information which includes the user's id in the users collection, and their username
             res.send({
@@ -68,15 +69,17 @@ router.post("/register", (req, res) => {
             // Creating a new user using the User model and saving into the database
             let newUser = new User({
                 userName: req.body.userName,
-                password: req.body.password,
                 email: req.body.email
             });
+            
+            // Creating and hashing the password
+            newUser.password = newUser.generateHash(req.body.password);
             
             newUser.save()
                 .then(() => {
                     res.send({registrationFailed: false}); // Basic reply to acknowledge to the client that the registration was succesful (triggers .then in client POST request)
                 })
-                .catch(error => res.status(400).json("Error with registration: ", error));
+                .catch(error => res.json("Error with registration: ", error));
         });
 
     });
