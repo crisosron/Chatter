@@ -5,53 +5,40 @@ import NotificationHandler from "../../../notification-handler";
 import "./views-sub-components-css-files/user-info-form-styles.css";
 export default function UserInfoForm(props){
     const thisUser = JSON.parse(sessionStorage.getItem("thisUser"));
-    const [enableChangesInputFieldLocked, setEnableChangesInputFieldLocked] = useState(true);
-
-    // accountInfoEditingEnabled will enable/disable input fields in accountInformationContentDiv
-    const [accountInfoEditingEnabled, setAccountInfoEditingEnabled] = useState(false);
     const [originalUserInfo, setOriginalUserInfo] = useState({}); // TODO: Develop an undo changes in the form and use this state var in its implementation
 
     const [userNameInputValue, setUserNameInputValue] = useState("");
-    const [passwordInputValue, setPasswordInputValue] = useState("");
+    const [newPasswordInputValue, setNewPasswordInputValue] = useState("");
     const [emailInputValue, setEmailInputValue] = useState("");
-
-    const handleEnableChangesIconClicked = () => {
-
-        // If accountInfoEditing has already been enabled and the user then clicks the lock icon, it should disable account editing and also lock the enableChangesInputField (restore default state essentially)
-        if(accountInfoEditingEnabled){
-            document.getElementById("enableChangesInputField").value = "";
-            setAccountInfoEditingEnabled(false);
-            setEnableChangesInputFieldLocked(true);
-        }else{
-            setEnableChangesInputFieldLocked(false);
-        }
-    }
-
-    const handleConfirmPasswordClicked = () => {
-
-        // Sends a socket.io event to check the validity of the password and allow editing of account info if so
-        // Note that the responses to this event is located in useEffect hook
-        socket.emit(PROFILE_EVENTS.REQUEST_ENABLE_CHANGES, {
-            enteredPassword: document.getElementById("enableChangesInputField").value,
-            id: thisUser.id
-        });        
-    }
+    const [currentPasswordInputValue, setCurrenPasswordInputValue] = useState("");
+    const [changesMade, setChangesMade] = useState(false);
 
     const handleSaveChangesClicked = () => {
         console.log("TODO: Handle save changes");
+        // Firstly, determine if the entered current password is correct
+        // then, determine what input fields actually have new data in them
+        // Once that is done, validate them
+        // Then send the update query to server
     }
 
     // Handlers for onChange on each of the input fields
     const handleUserNameInputChanged = e => {
         setUserNameInputValue(e.target.value);
+        setChangesMade(true);
     }
 
-    const handlePasswordInputChanged = e => {
-        setPasswordInputValue(e.target.value);
+    const handleNewPasswordInputChanged = e => {
+        setNewPasswordInputValue(e.target.value);
     }
 
     const handleEmailInputChanged = e => {
         setEmailInputValue(e.target.value);
+        setChangesMade(true);
+    }
+
+    const handleCurrentPasswordInputChanged = e => {
+        setCurrenPasswordInputValue(e.target.value);
+        // Note: no setChangesMade call here
     }
 
     // This useEffect hook is designed to simulate componentDidMount. It will send a socket.io event to obtain user info
@@ -61,62 +48,22 @@ export default function UserInfoForm(props){
         socket.on(PROFILE_EVENTS.DELIVER_USER_INFO, data => {
             setOriginalUserInfo({
                 userName: data.userName,
-                password: data.password,
                 email: data.email
             });
             setUserNameInputValue(data.userName);
-            setPasswordInputValue(data.password);
             setEmailInputValue(data.email);
         });
 
-        // If the entered password to enable changes does not match the registered password of thisUser
-        socket.on(PROFILE_EVENTS.DENY_ENABLE_CHANGES, () => {
-            setAccountInfoEditingEnabled(false);
-            NotificationHandler.createNotification("danger", "Incorrect Password", "Please try again");
-        });
-
-        // If the entered password to enable changes matches the registered password of thisUser - enable account info editing
-        socket.on(PROFILE_EVENTS.CONFIRM_ENABLE_CHANGES, () => {
-            setEnableChangesInputFieldLocked(true);
-            setAccountInfoEditingEnabled(true);
-        });
-
         return () => {
-            socket.removeListener(PROFILE_EVENTS.DENY_ENABLE_CHANGES);
-            socket.removeListener(PROFILE_EVENTS.CONFIRM_ENABLE_CHANGES);
             socket.removeListener(PROFILE_EVENTS.DELIVER_USER_INFO);
         }
 
     }, []);
 
-    // This useEffect is for performing the operations required when changesLocked mutates
-    useEffect(() => {
-        if(!enableChangesInputFieldLocked){
-            enableChangesInputField.focus();
-        }
-    }, [enableChangesInputFieldLocked]);
-
-    let enableChangesInputField = null;
-    let enableChangesInputFieldPlaceholder = enableChangesInputFieldLocked ? "Click lock to make changes to your account" : "Enter your password"
-
     return(
         <div id="accountInformationWrapper">
             <div id="accountInformationTitleDiv">
                 <h1>Your Information</h1>
-                <div id="enableChangesDiv">
-                    <input id="enableChangesInputField"
-                    placeholder={enableChangesInputFieldPlaceholder}
-                    type="password"
-                    disabled={enableChangesInputFieldLocked}
-                    ref={(inputField) => {enableChangesInputField = inputField}}
-                    required
-                    />
-                    <div id="enableChangesIconDiv" 
-                    className={enableChangesInputFieldLocked ? "lockedIconDiv" : "confirmPassword"} 
-                    onClick={enableChangesInputFieldLocked ? handleEnableChangesIconClicked : handleConfirmPasswordClicked}>
-                        {!enableChangesInputFieldLocked ? "Confirm" : ""}
-                    </div>
-                </div>
             </div>
             <div id="accountInformationContentWrapper">
 
@@ -124,21 +71,26 @@ export default function UserInfoForm(props){
                 <div id="accountInformationContentDiv">
                     <form onSubmit={handleSaveChangesClicked}>
                         <label>
-                            <h2>Username</h2>
-                            <input type="text" disabled={!accountInfoEditingEnabled} value={userNameInputValue} onChange={handleUserNameInputChanged}/>
+                            <h2>Change Username</h2>
+                            <input class="textualInput" type="text" value={userNameInputValue} onChange={handleUserNameInputChanged}/>
                         </label>
 
                         <label>
-                            <h2>Password</h2>
-                            <input type="password" disabled={!accountInfoEditingEnabled} value={passwordInputValue} onChange={handlePasswordInputChanged}/>
+                            <h2>Change Email</h2>
+                            <input class="textualInput" type="text" value={emailInputValue} onChange={handleEmailInputChanged}/>
                         </label>
 
                         <label>
-                            <h2>Email</h2>
-                            <input type="text" disabled={!accountInfoEditingEnabled} value={emailInputValue} onChange={handleEmailInputChanged}/>
+                            <h2>Change Password</h2>
+                            <input class="textualInput" type="password" value={newPasswordInputValue} onChange={handleNewPasswordInputChanged} placeholder="Enter your new password"/>
                         </label>
                         
-                        <input type="submit" value="Save Changes" id="saveChangesButton" disabled={!accountInfoEditingEnabled} onChange={handleEmailInputChanged}/>
+                        <label>
+                            <h2>Enter password to save changes</h2>
+                            <input class="textualInput" type="password" value={currentPasswordInputValue} onChange={handleCurrentPasswordInputChanged} placeholder="Enter your current password"/>
+                        </label>
+                        <input type="submit" value="Save Changes" id="saveChangesButton" onChange={handleSaveChangesClicked}/>
+                        {/* TODO: Implement reset  */}
                     </form>
                 </div>
             </div>
