@@ -43,7 +43,7 @@ userSchema.methods.generateHash = function(password){
 }
 
 userSchema.methods.validPassword = function(password){
-    return bcrypt.compare(password, this.password);
+    return bcrypt.compareSync(password, this.password);
 }
 
 const User = mongoose.model('User', userSchema);
