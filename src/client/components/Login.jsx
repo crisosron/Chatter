@@ -6,6 +6,8 @@ import LOGIN_EVENTS from "../../events/login-events";
 import NotificationHandler from "../notification-handler";
 import {Redirect} from "react-router-dom";
 import axios from "axios";
+
+import Logo from "../../res/images/logo-vertical-large.png"
 export default class Login extends Component{
     constructor(props){
         super(props);
@@ -80,7 +82,7 @@ export default class Login extends Component{
                         <p class="loginRegisterUtilityLinks" id="registerPageLink"><a href="/register">Don't have an account?</a></p>
                     </div>
                     <div class="contentDiv" id="titleDiv">
-
+                        <img id="logoImage" src={Logo} alt="Chatter Logo" />
                     </div>
                 </div>
             </div>

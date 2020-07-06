@@ -15,7 +15,7 @@
 
 .centerWrapper{
     /* Size of center wrapper is relative to .wrapper elements (see Login.jsx/Register.jsx)*/
-    width: 60%;
+    width: 55%;
     height: 60%;
     background-color: var(--tertiary-color);
     display: flex;
@@ -33,6 +33,7 @@
 
 #titleDiv{
     background-color: var(--secondary-color);
+    position: relative;
 }
 
 /* Applied to input fields within .contentDiv */
@@ -96,5 +97,18 @@
     /* left: 50%; */
     /* -webkit-transform: translateX(-50%); */
     /* transform: translateX(-50%) */
+}
+
+#logoImage{
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
 }
 
