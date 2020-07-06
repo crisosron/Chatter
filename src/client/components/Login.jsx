@@ -22,7 +22,7 @@ export default class Login extends Component{
 
         // Obtaining user provided credentials
         let userName = document.getElementById("userNameInputField").value;
-        let password = document.getElementById("passwordInputField").value;
+        let password = document.getElementById("passwordInputFieldLogin").value;
         const loggingInUser = {
             userName: userName,
             password: password,
@@ -71,17 +71,21 @@ export default class Login extends Component{
             );
         }
         return(
-            <div class="wrapper">
-                <div class="centerWrapper direct-centered">
-                    <div class="contentDiv" id="detailsInputDiv">
+            <div className="wrapper">
+                <div className="centerWrapper direct-centered">
+                    <div className="contentDiv" id="detailsInputDiv">
                         <h1>Login</h1>
-                        <input class="contentDivInputField contentDivInputFieldLoginPage" id="userNameInputField" placeholder="Username" type="text" />
-                        <input class="contentDivInputField contentDivInputFieldLoginPage" id="passwordInputField" placeholder="Password" type="password"/>
-                        <p class="loginRegisterUtilityLinks" id="forgotPasswordLink"><a href="index.html">Forgot your username/password?</a></p> {/* TODO: Link to an actual 'forgot your password page' */}
-                        <input type="submit" value="Login" id="loginButton" />
-                        <p class="loginRegisterUtilityLinks" id="registerPageLink"><a href="/register">Don't have an account?</a></p>
+                        <form class="inputForm" onSubmit={this.handleLoginClicked}>
+                            <input className="contentDivInputField" id="userNameInputField" placeholder="Username" type="text" />
+                            <input className="contentDivInputField" id="passwordInputFieldLogin" placeholder="Password" type="password"/>
+                            <p className="loginRegisterUtilityLink" id="forgotPasswordLink"><a href="index.html">Forgot your username/password?</a></p> {/* TODO: Link to an actual 'forgot your password page' */}
+                            <input type="submit" value="Login" id="loginButton" className="submitButton"/>
+                            <div id="accountStatusLink">
+                                <p className="loginRegisterUtilityLink"><a href="/register">Don't have an account?</a></p>
+                            </div>
+                        </form>
                     </div>
-                    <div class="contentDiv" id="titleDiv">
+                    <div className="contentDiv" id="titleDiv">
                         <img id="logoImage" src={Logo} alt="Chatter Logo" />
                     </div>
                 </div>
