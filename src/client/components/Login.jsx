@@ -69,31 +69,22 @@ export default class Login extends Component{
             );
         }
         return(
-        <div>
-            <div id="centerWrapper">
-
-                {/* Detail Input Div */}
-                <div id="detailInputDiv">
-                    <form onSubmit={this.handleLoginClicked}>
+            <div class="wrapper">
+                <div class="centerWrapper direct-centered">
+                    <div class="contentDiv" id="detailsInputDiv">
                         <h1>Login</h1>
-                        <input type="text" placeholder="Username" id="userNameInputField"></input>
-                        <input type="password" placeholder="Password" id="passwordInputField"></input>
-                        <input type="submit" value="Login" id="loginButton"/>
-                        <p><a href="/">Forgot Password</a></p>
+                        <input class="contentDivInputField contentDivInputFieldLoginPage" id="userNameInputField" placeholder="Username" type="text" />
+                        <input class="contentDivInputField contentDivInputFieldLoginPage" id="passwordInputField" placeholder="Password" type="password"/>
+                        <p class="loginRegisterUtilityLinks" id="forgotPasswordLink"><a href="index.html">Forgot your username/password?</a></p> {/* TODO: Link to an actual 'forgot your password page' */}
+                        <input type="submit" value="Login" id="loginButton" />
+                        <p class="loginRegisterUtilityLinks" id="registerPageLink"><a href="/register">Don't have an account?</a></p>
+                    </div>
+                    <div class="contentDiv" id="titleDiv">
 
-                        <div id="accountStatusText">
-                            <p>Don't have an account? <a href="/register">Register</a></p>
-                        </div>
-                    </form>
-                    
+                    </div>
                 </div>
-
-                {/* Title Div */}
-                <div id="titleDiv">
-                    <h1>Chatter</h1>
-                </div>
-
             </div>
-        </div>);
+        );
+
     }
 }

@@ -1,92 +1,100 @@
-#centerWrapper{
-    width: 50%;
-    height: 50%;
-    border: 3px solid var(--outline-color);
+.wrapper{
+    height: 100vh;
+    text-align:center;
+}
+
+/* Centers an element (horizontally and vertically) relative to its parent element */
+.direct-centered{
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.centerWrapper{
+    /* Size of center wrapper is relative to .wrapper elements (see Login.jsx/Register.jsx)*/
+    width: 60%;
+    height: 60%;
+    background-color: var(--tertiary-color);
     display: flex;
-    border-radius: 10px;
-    background-color: var(--secondary-color);
-    color: var(--light-text-color);
-
-    /* Centers this element relative to its parent container */
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 }
 
-#detailInputDiv form{
-    width: 100%;
-    height: 100%;
-}
-
-#centerWrapper div{
+/* Applied to divs that are children of .centerWrapper div */
+.contentDiv{
     flex: 1;
-    border-width: 5px;
+    font: var(--h1-font);
 }
 
-#centerWrapper h1, input{
-    color: var(--outline-color);
+#detailsInputDiv{
+    color: var(--dark-text-color);
 }
 
 #titleDiv{
-    display: flex;
-    justify-content: center ;
-    align-items: center;
+    background-color: var(--secondary-color);
 }
 
-#titleDiv h1{
-    font-size: 4vmax;
-}
-
-#detailInputDiv{
-    border-right: 1px solid var(--accent-color);
-    text-align: center;
-}
-
-#detailInputDiv p{
-    font-size: 13px;
-}
-
-#accountStatusText{
-    /* The combination of these rules allow the message ot be centered at the bottom of the parent div (detailInputDiv) */
-    position: absolute;
-    width: 50%;
-    bottom: 0;
-}
-
-#detailInputDiv h1{
-    text-align: center;
-}
-
-#detailInputDiv input{
-    width: 75%;
+/* Applied to input fields within .contentDiv */
+.contentDivInputField{
+    width: 80%;
     height: 10%;
+    outline: none;
     border: none;
     border-bottom: 3px solid var(--accent-color);
-    background-color: var(--secondary-color);
-    box-shadow: var(--box-shadow-lighten);
-    text-align: center;
-    margin-bottom: 5%;
+    margin-bottom: 8%;
     font-size: 1vmax;
+    background-color: var(--tertiary-color);
+    box-shadow: var(--box-shadow-input-field);
+    padding-left: 10px;
 }
 
-#detailInputDiv input[type="submit"]{
-    border:none;
-    background-color: var(--accent-color);
+/* Removes default focus effect on input fields with contentDivInputField class */
+.contentDivInputField:focus{
+    outline: none;
+}
+
+#passwordInputField{
+    margin-bottom: 0.5%; /* Overrides margin-bottom value in .contentDivInputField */
+}
+
+#loginButton{
+    width: 60%;
+    height: 10%;
+    border: none;
+    background-color: var(--green-accent-color);
     transition: 0.2s linear;
+    color: white;
+    font-size: 1.5vmax;
+    margin-top: 10%;
+    border-radius: 10px;
 }
 
-#detailInputDiv input[type="submit"]:hover{
-    border-radius: 15px;
+#loginButton:hover{
+    box-shadow: var(--box-shadow-lighten);
     cursor: pointer;
 }
 
-#detailInputDiv a{
-    color: var(--accent-color);
+.loginRegisterUtilityLinks{
+    font-size: 0.65vmax;
+    font-family: var(--font-family);
+    font-weight: lighter;
 }
 
-/* Removes the default focus effect on input elements */
-input:focus{
-    outline: none;
+#forgotPasswordLink{
+    margin-right: 10%;
+    text-align: right;
+
+}
+
+#detailsInputDiv > #registerPageLink{
+    position: absolute;
+    left: 19.5%;
+    bottom: 2%;
+
+    /* Applies bottom centering */
+    /* left: 50%; */
+    /* -webkit-transform: translateX(-50%); */
+    /* transform: translateX(-50%) */
 }
 
