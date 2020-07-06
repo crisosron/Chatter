@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f3eff5;
+  background-color: var(--primary-color);
 }
 
 code {
@@ -15,10 +15,12 @@ code {
 
 /* Declaring css variables using root selector so they are accessible to every css file in the project */
 :root{
-  --primary-color: #f3eff5;
-  --secondary-color: #2d3142;
-  --tertiary-color: #f9f7fa;
-  --accent-color: #91b0d1;
+
+  /* Colors */
+  --primary-color: #ffffff;
+  --secondary-color: #323E56;
+  --tertiary-color: #FDEEEA;
+  --accent-color: #E66045;
   --light-text-color: #f3eff5; /*Same as primary*/
   --dark-text-color: #454955;
   --dark-outline-color: #454955;
@@ -28,4 +30,14 @@ code {
   --affirmative-color: #2D882D;
   --negative-color: #AA4139;
   --neutral-color: #AA8429;
+  --green-accent-color: #A6E775;
+
+
+  --box-shadow-input-field: 0 0 100px 100px rgba(0, 0, 0, 0.08) inset; /* Same as --box-shadow-darken but this is intended to be applied to input fields with in a 'default nature' as opposed to --box-shadow-darken which is for hover effects and events */
+
+  /* Fonts */
+  --font-family: 'Roboto', sans-serif;
+  --h1-font: 27px var(--font-family);
+
+
 }

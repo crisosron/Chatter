@@ -6,6 +6,8 @@ import LOGIN_EVENTS from "../../events/login-events";
 import NotificationHandler from "../notification-handler";
 import {Redirect} from "react-router-dom";
 import axios from "axios";
+
+import Logo from "../../res/images/logo-vertical-large.png"
 export default class Login extends Component{
     constructor(props){
         super(props);
@@ -20,7 +22,7 @@ export default class Login extends Component{
 
         // Obtaining user provided credentials
         let userName = document.getElementById("userNameInputField").value;
-        let password = document.getElementById("passwordInputField").value;
+        let password = document.getElementById("passwordInputFieldLogin").value;
         const loggingInUser = {
             userName: userName,
             password: password,
@@ -69,31 +71,26 @@ export default class Login extends Component{
             );
         }
         return(
-        <div>
-            <div id="centerWrapper">
-
-                {/* Detail Input Div */}
-                <div id="detailInputDiv">
-                    <form onSubmit={this.handleLoginClicked}>
+            <div className="wrapper">
+                <div className="centerWrapper direct-centered">
+                    <div className="contentDiv" id="detailsInputDiv">
                         <h1>Login</h1>
-                        <input type="text" placeholder="Username" id="userNameInputField"></input>
-                        <input type="password" placeholder="Password" id="passwordInputField"></input>
-                        <input type="submit" value="Login" id="loginButton"/>
-                        <p><a href="/">Forgot Password</a></p>
-
-                        <div id="accountStatusText">
-                            <p>Don't have an account? <a href="/register">Register</a></p>
-                        </div>
-                    </form>
-                    
+                        <form class="inputForm" onSubmit={this.handleLoginClicked}>
+                            <input className="contentDivInputField" id="userNameInputField" placeholder="Username" type="text" />
+                            <input className="contentDivInputField" id="passwordInputFieldLogin" placeholder="Password" type="password"/>
+                            <p className="loginRegisterUtilityLink" id="forgotPasswordLink"><a href="index.html">Forgot your username/password?</a></p> {/* TODO: Link to an actual 'forgot your password page' */}
+                            <input type="submit" value="Login" id="loginButton" className="submitButton"/>
+                            <div id="accountStatusLink">
+                                <p className="loginRegisterUtilityLink"><a href="/register">Don't have an account?</a></p>
+                            </div>
+                        </form>
+                    </div>
+                    <div className="contentDiv" id="titleDiv">
+                        <img id="logoImage" src={Logo} alt="Chatter Logo" />
+                    </div>
                 </div>
-
-                {/* Title Div */}
-                <div id="titleDiv">
-                    <h1>Chatter</h1>
-                </div>
-
             </div>
-        </div>);
+        );
+
     }
 }

@@ -4,6 +4,9 @@ import socket from "../../index"
 import {Redirect} from "react-router-dom";
 import NotificationHandler from "../notification-handler";
 import axios from "axios";
+
+import Logo from "../../res/images/logo-vertical-large.png"
+
 export default class Register extends Component{
     constructor(props){
         super(props);
@@ -75,29 +78,30 @@ export default class Register extends Component{
             );
         }
         return(
-        <div>
-            <div id="centerWrapper">
+            <div className="wrapper">
+                <div className="centerWrapper direct-centered">
 
-                {/* Detail Input Div */}
-                <div id="detailInputDiv">
-                    <form onSubmit={this.handleRegisterPressed}>
-                        <h1>Register</h1>
-                        <input type="text" placeholder="Username" id="userNameInputField"></input>
-                        <input type="password" placeholder="Password (minimum 5 characters)" id="passwordInputField"></input>
-                        <input type="text" placeholder="Email" id="emailInputField"></input>
-                        <input type="submit" id="registerButton" value="Register" className="generalButton"/>
-                        <div id="accountStatusText">
-                            <p>Already have an account? <a href="/">Login</a></p>
-                        </div>
-                    </form>
+                    {/* Detail Input Div */}
+                    <div className="contentDiv" id="detailsInputDiv">
+                        <form class="inputForm" onSubmit={this.handleRegisterPressed}>
+                            <h1>Register</h1>
+                            <input type="text" className="contentDivInputField" placeholder="Username" id="userNameInputField"></input>
+                            <input type="password" className="contentDivInputField" placeholder="Password (minimum 5 characters)" id="passwordInputField"></input>
+                            <input type="text" className="contentDivInputField" placeholder="Email" id="emailInputField"></input>
+                            <input type="submit" id="registerButton" value="Register" className="submitButton"/>
+                            <div id="accountStatusLink">
+                                <p className="loginRegisterUtilityLink"><a href="/">Already have an account?</a></p>
+                            </div>
+                        </form>
+                    </div>
+
+                    {/* Title Div */}
+                    <div className="contentDiv" id="titleDiv">
+                        <img id="logoImage" src={Logo} alt="Chatter Logo" />
+                    </div>
+
                 </div>
-
-                {/* Title Div */}
-                <div id="titleDiv">
-                    <h1>Chatter</h1>
-                </div>
-
             </div>
-        </div>);
+        );
     }
 }
