@@ -1,1 +1,0 @@
-These icons are only stored in here as a backup. Each icon is used in the application as an embedded link from the source (www.icons8.com). These files should not be removed however just in case we need to use them directly in the application.

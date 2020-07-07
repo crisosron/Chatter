@@ -1,61 +1,42 @@
-import React from "react";
+import React, {useState} from "react";
 import "../css-files/sidebar-styles.css";
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
+import SideBarOption from "./SideBarOption";
 import {Link} from "react-router-dom";
+
+// Importing icons and images
+import friendsIconPath from "../../res/icons/ic_side_bar_option_friends_24px.png";
+import groupsIconPath from "../../res/icons/ic_side_bar_option_groups_24px.png";
+import searchIconPath from "../../res/icons/ic_side_bar_option_search_24px.png";
+import settingsIconPath from "../../res/icons/ic_side_bar_option_settings_24px.png";
+import sideBarLogoPath from "../../res/images/side_bar_chatter_logo.png"
 
 export default function SideBar(props){
     const selectedNavOptionIndex = parseInt(sessionStorage.getItem("selectedNavOptionIndex"));
-    const navOptions = [
-        {title: "Home", linkPath: "/home"},
-        {title: "Friends", linkPath: "/chat"},
-        {title: "Groups", linkPath: "/group-chat"},
-        {title: "Search", linkPath: "/search"},
-        {title: "Profile", linkPath: "/profile"}
-    ];
 
-    const handleNavOptionClicked = index => {
-        sessionStorage.setItem("selectedNavOptionIndex", index.toString());
-    }
+    // These represent the data that needs to be displayed for each link in the SideBar
+    const sideBarOptionsData = [
+        {title: "Friends", linkPath: "/chat", iconPath: friendsIconPath},
+        {title: "Groups", linkPath: "/group-chat", iconPath: groupsIconPath},
+        {title: "Search", linkPath: "/search", iconPath: searchIconPath},
+        {title: "Settings", linkPath: "/settings", iconPath: settingsIconPath},
+    ];
 
     return(
         <div id="sideBar">
             <div id="logoDiv">
-                <h1>Chatter</h1>
-            </div>
-
-            {/* TODO: Good practice? */}
-            <div className="spacerDiv" />
-
-            <div id="navigationOptionsDiv">
-
-                {/* Rendering navigation options */}
-                {navOptions.map((elem, index) => {
-                    return(
-                        <Link className={"navOption " + (index === selectedNavOptionIndex ? "selectedNavOption" : "")} to={{pathname: elem.linkPath}} key={"linkElem" + elem.title} onClick={() => {handleNavOptionClicked(index)}}>
-                            {elem.title}
-                        </Link>
-                    )
-                })}
-                
-            </div>
-
-            <div className="spacerDiv" />
-
-            <ContextMenuTrigger id="settingsContextMenu" holdToDisplay={1}>
-                <div id="settingsDiv">
-                    <h2>Settings</h2>
-                </div>
-            </ContextMenuTrigger>
-
-            <ContextMenu id="settingsContextMenu">
-                <Link className="sideBarLink" to={{
-                    pathname: "/create-group",
-                }}>
-                    <MenuItem className="settingsMenuItem" data={{action: "Create Group"}}>Create Group</MenuItem>
+                <Link to="/">
+                    {/* TODO: Perform graceful exit somehow by asking for confirmation and logging the user out if approved */}
+                    <img src={sideBarLogoPath} alt="logo" />
                 </Link>
-                <MenuItem className="settingsMenuItem" data={{action: "Logout"}}>Logout</MenuItem>
-            </ContextMenu>
+            </div>
+            {sideBarOptionsData.map((elem, index) => {
+                return(
+                    <SideBarOption iconPath={elem.iconPath} index={index} isSelected={index === selectedNavOptionIndex ? true : false} linkPath={elem.linkPath}>{elem.title}</SideBarOption>
+                );
+            })}
 
         </div>
-    )
+
+    );
 }

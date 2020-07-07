@@ -1,5 +1,19 @@
 #sideBar > div{
     width: 100%;
+}
+
+#logoDiv{
+    height: 15%;
+
+    /* Centers child elements both horizontally and vertically (in this context, the sidebar logo)*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* #sideBar > div{
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -7,22 +21,16 @@
 
 #logoDiv{
     flex: 1;
-    margin-top: 5%;
     border-top: 3px solid var(--accent-color);
     border-bottom: 3px solid var(--accent-color);
 }
 
-.spacerDiv{
-    flex: 4;
-}
-
 #navigationOptionsDiv{
-    flex: 5;
+    flex: 6;
     flex-direction: column;
     display: flex;
 }
 
-/* Styling for SideBar links */
 .navOption{
     flex: 1;
     width: 95%;
@@ -52,7 +60,6 @@
     background-color: var(--accent-color);
 }
 
-/* Styling for settings part of the SideBar */
 #settingsDiv{
     flex: 1;
     box-shadow: var(--box-shadow-lighten);
@@ -78,4 +85,4 @@
 #settingsDiv > .react-contextmenu-wrapper{
     flex:1;
     transition: 0.2s linear;
-}
+} */
