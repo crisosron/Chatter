@@ -1,0 +1,31 @@
+.sideBarOption{
+    width: 100%;
+    height: 100px;
+    font: var(--h1-font);
+    transition: 0.2s ease;
+    text-decoration: none;
+    color: var(--primary-color);
+
+    /* Centers child elements both horizontally and vertically (in this context, icons and text)*/
+    display: flex;
+    align-items: center; /* Centers vertically */
+    justify-content: center; /* Centers Horizontally */
+}
+
+.sideBarOption:hover{
+    cursor: pointer;
+    box-shadow: var(--box-shadow-lighten);
+    transition: 0.2s ease;
+}
+
+.sideBarOption:visited{
+    color: var(--primary-color);
+}
+
+.selectedSideBarOption{
+    box-shadow: var(--box-shadow-lighten);
+}
+
+.sideBarOptionIcon{
+    margin-right: 10px;
+}
