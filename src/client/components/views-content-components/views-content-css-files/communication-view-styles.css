@@ -5,7 +5,6 @@
 }
 
 #communicationViewWrapper > div {
-    margin: 1%;
 }
 
 #communicationViewSideBarWrapper{
@@ -16,4 +15,5 @@
 
 #communicationEntitySearchBarWrapper{
     flex: 1;
+    background-color: var(--tertiary-color);
 }

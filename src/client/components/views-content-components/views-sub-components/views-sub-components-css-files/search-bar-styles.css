@@ -7,16 +7,18 @@
     height: 100%;
     border: none;
     border-bottom: 3px solid var(--accent-color);
-    background-color: var(--primary-color);
+    background-color: var(--tertiary-color);
     transition: 0.2s linear;
     font-size: 1vmax;
     text-align: center;
     background-image: url("https://img.icons8.com/ios-filled/50/000000/search.png");
     background-repeat: no-repeat;
     background-size: 5%;
-    background-position: 2% center;
+    background-position: 5% center;
+    border-bottom: 3px solid var(--accent-color);
 }
 
 .searchBarInputField:focus{
+    outline: none;
     box-shadow: var(--box-shadow-darken);
 }
