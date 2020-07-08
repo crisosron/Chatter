@@ -68,6 +68,7 @@ export default function CommunicationEntitiesBar(props){
                     actions={props.mode === "Friends" || props.mode === "Users" ? friendModeCommEntityActions : groupModeCommEntityActions}
                     showActionMenu={commEntityShowActionsIndex === index}
                     handleActionClicked={handleActionClicked}
+                    displayStatusIndicators={props.mode === "Friends"}
                     >{value._name}</CommunicationEntity>
                 );
             })}
