@@ -7,35 +7,41 @@
     border: 1px solid var(--grey-border-color);
 }
 
-.communicationEntityDiv{
+.communicationEntityDiv, .communicationEntityActionsDiv{
     width: 100%;
-    height: 100px; /* Note that the height does not scale, but the width does */
+    height: 10%;
+    margin: 0;
+    border-left: 3px solid #fcd581;
     transition: 0.2s linear;
 }
 
-.communicationEntityDiv:hover{
+.communicationEntityDiv:hover, .actionDiv:hover{
     cursor: pointer;
-    box-shadow: var(--box-shadow-lighten);
+    box-shadow: var(--box-shadow-darken);
 }
 
 .selectedCommunicationEntity{
-    box-shadow: var(--box-shadow-lighten);
+    box-shadow: var(--box-shadow-darken);
 }
 
-.displayImage{
-    margin: 0 20px;
-    display: flex;
-    float: left;
+.displayImageDiv{
+    border: 1px solid green;
+    width: 20%;
+    height: 70%;
+    margin: 0 5%;
+    float: left; /*Allows elements to be added side by side to this*/
 }
 
-/* Holds the content (Username and last message) for the CommunicationEntity component */
 .communicationEntityContentDiv{
-    width: 65%;
+    width: 60%;
     height: 70%;
     float: left;
+    display: flex;
+    justify-content: center ;
+    align-items: center;
 }
 
-/* Vertically centers the element relative to its parent container */
+/* Vertically centers the div */
 .verticallyCenteredRelativeToParent{
     position: relative;
     top: 50%;
@@ -44,21 +50,35 @@
     transform: translateY(-50%);
 }
 
-/* Styling for the text within communicationEntityContentDivs */
-.communicationEntityContentDiv p{
-    font-family: var(--font-family);
-    margin-bottom: 5px;
-    font-size: 12px;
-
-    /* Replaces overflowing text with ellipsis */
-    text-overflow: ellipsis;
-
-    /* Required for text-overflow rule to apply */
-    white-space: nowrap;
-    overflow: hidden;
+.communicationEntityContentDiv h2{
+    font-size: 1vmax;
 }
 
-#userNameText{
-    margin-top: 5px; /* For some reason, setting the font-family to var(--font-family) (see index.css) causes some unwanted margins. This line removes those unwanted margins */
-    font-size: 20px;
+.communicationEntityActionsDiv{
+    display: flex;
 }
+
+.actionDiv{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s linear;
+    font-size: 0.75vmax;
+}
+
+/*Color indication for actionDivs*/
+.affirmative{
+    background-color: var(--affirmative-color);
+}
+
+.negative{
+    background-color: var(--negative-color);
+}
+
+.neutral{
+    background-color: var(--neutral-color);
+}
+
+
+
