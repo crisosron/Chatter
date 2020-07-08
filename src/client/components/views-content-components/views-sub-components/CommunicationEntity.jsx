@@ -1,17 +1,28 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./views-sub-components-css-files/communication-entity-styles.css";
-import singleUserIconPath from "../../../../res/icons/ic_comm_entity_single_user_24px.svg";
 
 export default function CommunicationEntity(props){
 
-    return(
-        <div id={props.id} className={"communicationEntityDiv " + props.className} onClick={() => {props.onClick(props.index);}}>
-            <img className="displayImage verticallyCenteredRelativeToParent" src={singleUserIconPath} alt="single user icon" />
-            <div className="communicationEntityContentDiv verticallyCenteredRelativeToParent">
-                <p id="userNameText">{props.children}</p>
-                <p>TODO: Insert part of last message sent here</p>
+    if(!props.showActionMenu){
+        return(
+            <div id={props.id} className={"communicationEntityDiv " + props.className} onClick={() => {props.onClick(props.index);}} onContextMenu={(e) => {props.onContextMenu(e, props.index)}}>
+                    <div className="displayImageDiv verticallyCenteredRelativeToParent"></div>
+                    <div className="communicationEntityContentDiv verticallyCenteredRelativeToParent">
+                        <h2>{props.children}</h2>
+                    </div>
             </div>
-        </div>
 
-    );
+        );
+    }
+
+    return(
+        <div id={props.id + "actionDiv"} className={"communicationEntityActionsDiv"}>
+            {props.actions.map((value, index) => {
+                return <div 
+                key={value.actionName + index} 
+                className={"actionDiv " + value.className} 
+                onClick={() => {props.handleActionPressed(value.actionName, props.commEntityID)}}>{value.actionName}</div>
+            })}
+        </div>
+    ); 
 }
