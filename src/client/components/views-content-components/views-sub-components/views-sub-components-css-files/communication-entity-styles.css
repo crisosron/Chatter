@@ -22,7 +22,15 @@
     box-shadow: var(--box-shadow-lighten);
 }
 
-.displayImage{
+/* The status indicator is an image. It has to use absolute positioning so it is on the corner of the display image */
+.statusIndicator{
+    position:absolute;
+    top: 37px;
+    left: 37px;
+}
+
+/* Div necessary to contain an 'image within an image' - Outer image is the display picture, inner image is the status indicator */
+.displayImageDiv{
     margin: 0 20px;
     display: flex;
     float: left;
@@ -30,7 +38,7 @@
 
 /* Holds the content (Username and last message) for the CommunicationEntity component */
 .communicationEntityContentDiv{
-    width: 65%;
+    width: 60%;
     height: 70%;
     float: left;
 }
@@ -61,4 +69,8 @@
 #userNameText{
     margin-top: 5px; /* For some reason, setting the font-family to var(--font-family) (see index.css) causes some unwanted margins. This line removes those unwanted margins */
     font-size: 20px;
+}
+
+.unreadMessageIndicator{
+    margin-left: 5%;
 }
