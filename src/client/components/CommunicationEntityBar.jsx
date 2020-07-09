@@ -1,6 +1,15 @@
 import React, {useState} from "react"
 import CommunicationEntity from "./CommunicationEntity"
 import "../css-files/view-styles.css";
+
+const COMM_ENTITY_ACTIONS = {
+    ADD: "Add",
+    REMOVE: "Remove",
+    JOIN: "Join",
+    LEAVE: "Leave",
+    DISMISS: "Dismiss"
+}
+
 export default function CommunicationEntitiesBar(props){
     const [selectedCommEntityIndex, setSelectedCommEntityIndex] = useState(-1);
     const [commEntityShowActionsIndex, setCommEntityShowActionsIndex] = useState(-1);
