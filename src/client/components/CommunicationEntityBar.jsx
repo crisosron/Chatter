@@ -1,7 +1,6 @@
 import React, {useState} from "react"
 import CommunicationEntity from "./CommunicationEntity"
-import "./views-sub-components-css-files/communication-entity-styles.css";
-import COMM_ENTITY_ACTIONS from "./comm-entity-actions";
+import "../css-files/view-styles.css";
 export default function CommunicationEntitiesBar(props){
     const [selectedCommEntityIndex, setSelectedCommEntityIndex] = useState(-1);
     const [commEntityShowActionsIndex, setCommEntityShowActionsIndex] = useState(-1);
@@ -56,7 +55,7 @@ export default function CommunicationEntitiesBar(props){
 
     return(
         <div id={props.id} className="communicationEntitiesBar">
-            {props.communicationEntities.map((value, index) => {
+            {/* {props.communicationEntities.map((value, index) => {
                 return (
                     <CommunicationEntity
                     key={"communicationEntity" + value._id}
@@ -71,7 +70,7 @@ export default function CommunicationEntitiesBar(props){
                     displayStatusIndicators={props.mode === "Friends"}
                     >{value._name}</CommunicationEntity>
                 );
-            })}
+            })} */}
         </div>
     );
 }

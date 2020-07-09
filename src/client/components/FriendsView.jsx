@@ -5,6 +5,9 @@ import CommunicationEntityBar from "./CommunicationEntityBar";
 import ChatPane from "./ChatPane"
 
 export default function FriendsView(props){
+
+    const thisUser = JSON.parse(sessionStorage.getItem("thisUser"));
+    
     return(
         <div id="mainWrapper">
 

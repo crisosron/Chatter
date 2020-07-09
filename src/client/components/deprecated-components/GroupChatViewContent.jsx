@@ -1,7 +1,10 @@
+// ################# DEPRECATED (SEE ISSUE #18) FOR DETAILS ################# //
+// Temporarily deprecated since it contains potentially useful logic to be used in FriendsView and GroupsView
+
 import React, {useState, useEffect} from "react";
-import CommunicationEntityBar from "./views-sub-components/CommunicationEntityBar";
-import SearchBar from "./views-sub-components/SearchBar";
-import ChatPane from "./views-sub-components/ChatPane";
+import CommunicationEntityBar from "../CommunicationEntityBar";
+import SearchBar from "../SearchBar";
+import ChatPane from "../ChatPane";
 import "./views-content-css-files/communication-view-styles.css"
 export default function GroupChatViewContent(props){
     let [groupCommEntities, setGroupCommEntities] = useState([]); // TODO: Fetch all groups of thisUser from db

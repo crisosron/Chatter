@@ -1,3 +1,5 @@
+// ################# DEPRECATED (SEE ISSUE #18) FOR DETAILS ################# //
+
 import React, {useState} from "react";
 import "./views-content-css-files/create-group-view-styles.css";
 import NotificationHandler from "../../notification-handler";

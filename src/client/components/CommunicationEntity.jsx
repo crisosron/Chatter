@@ -1,10 +1,10 @@
 import React from "react";
-import "./views-sub-components-css-files/communication-entity-styles.css";
-import singleUserIconPath from "../../../../res/icons/ic_comm_entity_single_user_24px.svg";
+import "../css-files/communication-entity-styles.css"
+import singleUserIconPath from "../../res/icons/ic_comm_entity_single_user_24px.svg";
 
 // TODO: Do some processing of actual indicators at some point
-import statusIndicatorIconPath from "../../../../res/images/indicators/status_online.svg"
-import unreadMessageIndicatorPath from "../../../../res/images/indicators/unread_message_indicator.svg"
+import statusIndicatorIconPath from "../../res/images/indicators/status_online.svg"
+import unreadMessageIndicatorPath from "../../res/images/indicators/unread_message_indicator.svg"
 
 export default function CommunicationEntity(props){
 

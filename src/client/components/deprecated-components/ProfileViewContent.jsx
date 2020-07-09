@@ -1,8 +1,10 @@
+// ################# DEPRECATED (SEE ISSUE #18) FOR DETAILS ################# //
+
 import React, {useState, useEffect}from "react";
 import "./views-content-css-files/profile-view-styles.css";
-import SearchBar from "./views-sub-components/SearchBar";
-import UserInfoForm from "./views-sub-components/UserInfoForm"
-import CommunicationEntityBar from "./views-sub-components/CommunicationEntityBar"
+import SearchBar from "../SearchBar";
+import UserInfoForm from "./UserInfoForm"
+import CommunicationEntityBar from "../CommunicationEntityBar"
 import socket from "../../../index";
 import PROFILE_EVENTS from "../../../events/profile-events";
 export default function ProfileViewContent(props){

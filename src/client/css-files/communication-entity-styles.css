@@ -1,12 +1,3 @@
-.communicationEntitiesBar{
-    overflow-y: auto;
-    overflow-x: hidden;
-    flex: 12;
-    color: var(--secondary-color);
-    /* TODO: TEMP */
-    border: 1px solid var(--grey-border-color);
-}
-
 .communicationEntityDiv{
     width: 100%;
     height: 100px; /* Note that the height does not scale, but the width does */

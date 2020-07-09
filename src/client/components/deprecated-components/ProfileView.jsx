@@ -1,7 +1,8 @@
+// ################# DEPRECATED (SEE ISSUE #18) FOR DETAILS ################# //
 import React from "react";
 import "../css-files/chat-divs.css"
-import SideBar from "./SideBar";
-import ProfileViewContent from "./views-content-components/ProfileViewContent";
+import SideBar from "../SideBar";
+import ProfileViewContent from "./ProfileViewContent";
 export default function ProfileView(props){
     return(
         <div id="mainWrapper">
