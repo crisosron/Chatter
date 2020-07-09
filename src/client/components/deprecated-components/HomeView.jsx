@@ -2,7 +2,7 @@
 
 import React from "react";
 import "../css-files/chat-divs.css";
-import SideBar from "./SideBar";
+import SideBar from "../SideBar";
 import HomeViewContent from "./HomeViewContent";
 
 // HomeView is the entry point
