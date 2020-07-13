@@ -3,11 +3,13 @@
 const SEARCH_EVENTS = require("../constants/events/search-events");
 const USER_ACTION_EVENTS = require("../constants/events/user-action-events");
 const PROFILE_EVENTS = require("../constants/events/profile-events");
+const RENDER_EVENTS = require("../constants/events/render-events");
 
 // Importing search operation functions
 const searchOperations = require("./socket-operations/search-operations");
 const userActionOperations = require("./socket-operations/user-action-operations");
 const profileOperations = require("./socket-operations/profile-operations");
+const renderOperations = require("./socket-operations/render-operations");
 
 module.exports = {
     start: 
@@ -51,6 +53,14 @@ module.exports = {
         
             clientSocket.on(PROFILE_EVENTS.REQUEST_ENABLE_CHANGES, data => {
                 profileOperations.requestEnableChanges(clientSocket, data);
+            });
+
+            clientSocket.on(RENDER_EVENTS.GET_FRIENDS, () => {
+                renderOperations.getFriends(clientSocket);
+            });
+
+            clientSocket.on(RENDER_EVENTS.GET_GROUPS, () => {
+                renderOperations.getGroups(clientSocket);
             });
             
         });

@@ -1,9 +1,10 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import CommunicationEntity from "./CommunicationEntity"
 import "../css-files/view-styles.css";
 import "../css-files/communication-entity-styles.css"
 import SearchBar from "./SearchBar";
 import socket from "../../index";
+import RENDER_EVENT from "../../constants/events/render-events";
 
 // TODO: Assess the neccesity of this
 const COMM_ENTITY_ACTIONS = {
@@ -15,19 +16,9 @@ const COMM_ENTITY_ACTIONS = {
 }
 
 export default function CommunicationEntitiesBar(props){
-    console.log(props.communicationEntityType[0]);
+    const [commEntities, setCommEntities] = useState([]);
     const [selectedCommEntityIndex, setSelectedCommEntityIndex] = useState(-1);
     const [commEntityShowActionsIndex, setCommEntityShowActionsIndex] = useState(-1);
-
-    const friendModeCommEntityActions = [
-        {actionName: COMM_ENTITY_ACTIONS.REMOVE, className: "negative"}, 
-        {actionName: COMM_ENTITY_ACTIONS.DISMISS, className: "neutral"}
-    ];
-
-    const groupModeCommEntityActions = [
-        {actionName: COMM_ENTITY_ACTIONS.LEAVE, className: "negative"}, 
-        {actionName: COMM_ENTITY_ACTIONS.DISMISS, className: "neutral"}
-    ];
 
     function handleCommEntitySelected(selectedIndex, selectedCommEntity){
         setSelectedCommEntityIndex(selectedIndex);
@@ -39,38 +30,24 @@ export default function CommunicationEntitiesBar(props){
         changeChatPane(selectedCommEntity);
     }
 
+    function updateCommEntities(commEntities){
+        setCommEntities(commEntities);
+    }
+
     function changeChatPane(commEntity){
         props.changeChatPane(commEntity)
     }
 
-    function handleContextMenu(e, index){
-        e.preventDefault();
-        setSelectedCommEntityIndex(-1);
-        setCommEntityShowActionsIndex(index);
-    }
+    useEffect(() => {
+        console.log("Called useEffect");
+        socket.addEventListener(RENDER_EVENT.DELIVER_FRIENDS);
 
-    function handleActionClicked(action, commEntityID){
-        switch(action){
-            case COMM_ENTITY_ACTIONS.DISMISS:
-                setSelectedCommEntityIndex(-1);
-                setCommEntityShowActionsIndex(-1);
-                break;
-            case COMM_ENTITY_ACTIONS.REMOVE:
-                alert("HANDLE Remove");
-                break;
-            case COMM_ENTITY_ACTIONS.LEAVE:
-                alert("HANDLE Leave");
-                break;
-            default:
-                // TODO: Throw error
-                console.log("No action recognized")
-        }
-    }
+    }, []);
 
     return(
         <div id={props.id} className="communicationEntitiesBar">
             <div className="searchBarWrapper">
-                <SearchBar />
+                <SearchBar updateCommEntities={updateCommEntities}/>
             </div>
 
             {/* {props.communicationEntities.map((value, index) => {
