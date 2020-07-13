@@ -1,7 +1,11 @@
 import React, {useState} from "react"
 import CommunicationEntity from "./CommunicationEntity"
 import "../css-files/view-styles.css";
+import "../css-files/communication-entity-styles.css"
+import SearchBar from "./SearchBar";
+import socket from "../../index";
 
+// TODO: Assess the neccesity of this
 const COMM_ENTITY_ACTIONS = {
     ADD: "Add",
     REMOVE: "Remove",
@@ -64,6 +68,10 @@ export default function CommunicationEntitiesBar(props){
 
     return(
         <div id={props.id} className="communicationEntitiesBar">
+            <div className="searchBarWrapper">
+                <SearchBar />
+            </div>
+
             {/* {props.communicationEntities.map((value, index) => {
                 return (
                     <CommunicationEntity

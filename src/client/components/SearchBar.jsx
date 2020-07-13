@@ -1,7 +1,7 @@
 import React from "react";
 import SEARCH_EVENTS from "../../events/search-events";
 import socket from "../../index";
-import "./views-sub-components-css-files/search-bar-styles.css";
+import "../css-files/search-bar-styles.css";
 import NotificationHandler from "../notification-handler";
 
 export default class SearchBar extends React.Component{

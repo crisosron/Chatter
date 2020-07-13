@@ -1,6 +1,7 @@
 /* chatTitle and chatView flex values based of ratios between SearchBar and CommunicationEntityBar flex values*/
-#chatBar{
+#topBar{
     flex: 1;
+    background-color: var(--primary-color);
     border-bottom: 1px solid var(--grey-border-color);
 }
 

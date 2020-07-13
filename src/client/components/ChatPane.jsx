@@ -16,7 +16,7 @@ export default function ChatPane(props){
 
     return(
         <div className="chatPane">
-            <div id="chatBar"></div>
+            <div id="topBar"></div>
             <div id="chatView">
                 <div id="messagesDiv">
 

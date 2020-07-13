@@ -65,3 +65,14 @@
 .unreadMessageIndicator{
     margin-left: 5%;
 }
+
+/* Applies to CommunicationEntityBar components - The wrapper dictates the total size of the searchbar (see search-bar-styles.css)*/
+.searchBarWrapper{
+    width: 100%;
+    height: 10%;
+
+    /* Centers the search bar both horizontally and vertically within the wrapper */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
