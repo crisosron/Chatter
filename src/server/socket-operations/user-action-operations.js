@@ -1,6 +1,6 @@
 const {User} = require("../database-document-models/user-model");
 const {Group} = require("../database-document-models/group-model");
-const USER_ACTION_EVENTS = require("../../events/user-action-events");
+const USER_ACTION_EVENTS = require("../../constants/events/user-action-events");
 const mongoose = require("mongoose");
 const shortid = require("shortid");
 /**

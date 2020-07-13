@@ -1,5 +1,5 @@
 import React from "react";
-import SEARCH_EVENTS from "../../events/search-events";
+import SEARCH_EVENTS from "../../constants/events/search-events";
 import socket from "../../index";
 import "../css-files/search-bar-styles.css";
 import NotificationHandler from "../notification-handler";

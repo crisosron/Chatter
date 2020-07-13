@@ -1,4 +1,4 @@
-const PROFILE_EVENTS = require("../../events/profile-events");
+const PROFILE_EVENTS = require("../../constants/events/profile-events");
 const {User} = require("../database-document-models/user-model");
     
 /**

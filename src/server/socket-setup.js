@@ -1,8 +1,8 @@
 // ################### SOCKET RELATED OPERATIONS ################### //
 // Importing event constants
-const SEARCH_EVENTS = require("../events/search-events");
-const USER_ACTION_EVENTS = require("../events/user-action-events");
-const PROFILE_EVENTS = require("../events/profile-events");
+const SEARCH_EVENTS = require("../constants/events/search-events");
+const USER_ACTION_EVENTS = require("../constants/events/user-action-events");
+const PROFILE_EVENTS = require("../constants/events/profile-events");
 
 // Importing search operation functions
 const searchOperations = require("./socket-operations/search-operations");

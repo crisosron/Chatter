@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../css-files/login-register-styles.css";
 import "../css-files/button-styles.css";
 import socket from "../../index";
-import LOGIN_EVENTS from "../../events/login-events";
+import LOGIN_EVENTS from "../../constants/events/login-events";
 import NotificationHandler from "../notification-handler";
 import {Redirect} from "react-router-dom";
 import axios from "axios";
