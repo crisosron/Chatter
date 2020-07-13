@@ -1,7 +1,9 @@
+// ################# DEPRECATED (SEE ISSUE #18) FOR DETAILS ################# //
+
 import React from "react";
 import "../css-files/chat-divs.css";
-import SideBar from "./SideBar";
-import HomeViewContent from "./views-content-components/HomeViewContent";
+import SideBar from "../SideBar";
+import HomeViewContent from "./HomeViewContent";
 
 // HomeView is the entry point
 export default function HomeView(props){

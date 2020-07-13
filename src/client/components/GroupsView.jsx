@@ -13,7 +13,7 @@ export default function FriendsView(props){
 
             <div id="contentWrapper">
                 {/* TODO: Determine appropriate props to pass to CommunicationEntityBar and ChatPane components */}
-                <CommunicationEntityBar />
+                <CommunicationEntityBar communicationEntityType="groups"/>
                 <ChatPane />
             </div>
         </div>

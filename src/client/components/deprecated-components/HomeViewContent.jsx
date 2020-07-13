@@ -1,3 +1,5 @@
+// ################# DEPRECATED (SEE ISSUE #18) FOR DETAILS ################# //
+
 import React from "react";
 export default function HomeViewContent(props){
     const styles = {

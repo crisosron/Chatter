@@ -1,11 +1,8 @@
 import React, {useEffect} from 'react';
 import Login from "./Login";
 import Register from "./Register";
-import HomeView from "./HomeView";
-import CreateGroupView from "./CreateGroupView";
-import GroupChatView from "./GroupChatView";
-import IndividualChatView from "./IndividualChatView";
-import ProfileView from "./ProfileView";
+import FriendsView from "./FriendsView";
+import GroupsView from "./GroupsView"
 import SearchView from "./SearchView";
 import ReactNotification from "react-notifications-component";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
@@ -18,11 +15,10 @@ function Chatter() {
         <Switch>
           <Route path="/" exact component={Login} />
           <Route path="/register" exact component={Register} />
-          <Route path="/home" exact component={HomeView} />
-          <Route path="/create-group" exact component={CreateGroupView} />
-          <Route path="/chat" exact component={IndividualChatView}/>
-          <Route path="/group-chat" exact component={GroupChatView}/>
-          <Route path="/profile" exact component={ProfileView} />
+
+          {/* TODO: Update path names to better reflect the component name for FriendsView and GroupsView */}
+          <Route path="/chat" exact component={FriendsView}/>
+          <Route path="/group-chat" exact component={GroupsView}/>
           <Route path="/search" exact component={SearchView} />
         </Switch>
       </BrowserRouter>

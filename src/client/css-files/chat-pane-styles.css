@@ -1,13 +1,7 @@
-#chatPaneWrapper{
-    flex: 3;
-    border: 1px solid var(--grey-border-color);
-    display: flex;
-    flex-direction: column;
-}
-
 /* chatTitle and chatView flex values based of ratios between SearchBar and CommunicationEntityBar flex values*/
-#chatBar{
+#topBar{
     flex: 1;
+    background-color: var(--primary-color);
     border-bottom: 1px solid var(--grey-border-color);
 }
 
@@ -62,3 +56,4 @@
     transition: 0.2s linear;
     border-radius: 20px;
 }
+

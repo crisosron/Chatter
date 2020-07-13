@@ -1,7 +1,10 @@
+// ################# DEPRECATED (SEE ISSUE #18) FOR DETAILS ################# //
+// Temporarily deprecated since it contains potentially useful logic to be used in SearchView
+
 import React, {useState, useEffect} from "react"
 import "./views-content-css-files/search-view-styles.css";
 import SearchBar from "./views-sub-components/SearchBar";
-import CommunicationEntityBar from "./views-sub-components/CommunicationEntityBar";
+import CommunicationEntityBar from "../CommunicationEntityBar";
 import CommunicationEntityActionBar from "./views-sub-components/CommunicationEntityActionBar";
 import socket from "../../../index";
 import USER_ACTION_EVENTS from "../../../events/user-action-events"

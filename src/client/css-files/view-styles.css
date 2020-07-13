@@ -1,0 +1,38 @@
+/* Contains styling and positioning for elements that compose the top level components (FriendsView, GroupsView, SearchView) */
+
+#mainWrapper{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh;
+}
+
+/* Contains CommunicationEntityBar and ChatPane */
+#contentWrapper{
+    flex: 5;
+    background-color: var(--primary-color);
+    display: flex;
+}
+
+#sideBar{
+    flex: 1;
+    background-color: var(--secondary-color);
+    color: var(--light-text-color);
+}
+
+.communicationEntitiesBar{
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex: 1;
+    color: var(--secondary-color);
+    /* TODO: TEMP */
+    border: 1px solid black;
+}
+
+.chatPane{
+    flex: 3;
+    border: 1px solid var(--grey-border-color);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+}

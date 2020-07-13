@@ -5,6 +5,8 @@ import CommunicationEntityBar from "./CommunicationEntityBar";
 import ChatPane from "./ChatPane"
 
 export default function FriendsView(props){
+    const thisUser = JSON.parse(sessionStorage.getItem("thisUser"));
+    
     return(
         <div id="mainWrapper">
 
@@ -13,7 +15,8 @@ export default function FriendsView(props){
 
             <div id="contentWrapper">
                 {/* TODO: Determine appropriate props to pass to CommunicationEntityBar and ChatPane components */}
-                <CommunicationEntityBar />
+                {/* TODO: Introduce enum for CommunicationEntityType */}
+                <CommunicationEntityBar communicationEntityType="friends"/>
                 <ChatPane />
             </div>
         </div>

@@ -1,7 +1,19 @@
 import React, {useState} from "react"
 import CommunicationEntity from "./CommunicationEntity"
-import "./views-sub-components-css-files/communication-entity-styles.css";
-import COMM_ENTITY_ACTIONS from "./comm-entity-actions";
+import "../css-files/view-styles.css";
+import "../css-files/communication-entity-styles.css"
+import SearchBar from "./SearchBar";
+import socket from "../../index";
+
+// TODO: Assess the neccesity of this
+const COMM_ENTITY_ACTIONS = {
+    ADD: "Add",
+    REMOVE: "Remove",
+    JOIN: "Join",
+    LEAVE: "Leave",
+    DISMISS: "Dismiss"
+}
+
 export default function CommunicationEntitiesBar(props){
     const [selectedCommEntityIndex, setSelectedCommEntityIndex] = useState(-1);
     const [commEntityShowActionsIndex, setCommEntityShowActionsIndex] = useState(-1);
@@ -56,7 +68,11 @@ export default function CommunicationEntitiesBar(props){
 
     return(
         <div id={props.id} className="communicationEntitiesBar">
-            {props.communicationEntities.map((value, index) => {
+            <div className="searchBarWrapper">
+                <SearchBar />
+            </div>
+
+            {/* {props.communicationEntities.map((value, index) => {
                 return (
                     <CommunicationEntity
                     key={"communicationEntity" + value._id}
@@ -71,7 +87,7 @@ export default function CommunicationEntitiesBar(props){
                     displayStatusIndicators={props.mode === "Friends"}
                     >{value._name}</CommunicationEntity>
                 );
-            })}
+            })} */}
         </div>
     );
 }

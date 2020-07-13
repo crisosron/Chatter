@@ -1,13 +1,9 @@
-/* .searchBarWrapper{
-    flex: 1;
-} */
-
 .searchBarInputField{
-    width: 100%;
-    height: 100%;
-    border: none;
-    border-bottom: 3px solid var(--accent-color);
-    background-color: var(--primary-color);
+    width: 80%;
+    height: 35%;
+    border: 0.5px solid black;
+    background-color: #EFEFEF;
+    border-radius: 10px;
     transition: 0.2s linear;
     font-size: 1vmax;
     text-align: center;
@@ -18,5 +14,6 @@
 }
 
 .searchBarInputField:focus{
+    outline: none;
     box-shadow: var(--box-shadow-darken);
 }
