@@ -2,6 +2,7 @@ import React from "react";
 import "../css-files/view-styles.css"
 import SideBar from "./SideBar";
 import CommunicationEntityBar from "./CommunicationEntityBar";
+import COMMUNICATION_ENTITY_TYPE from "../../constants/communication-entity-types.js";
 import ChatPane from "./ChatPane"
 
 export default function FriendsView(props){
@@ -15,8 +16,7 @@ export default function FriendsView(props){
 
             <div id="contentWrapper">
                 {/* TODO: Determine appropriate props to pass to CommunicationEntityBar and ChatPane components */}
-                {/* TODO: Introduce enum for CommunicationEntityType */}
-                <CommunicationEntityBar communicationEntityType="friends"/>
+                <CommunicationEntityBar communicationEntityType={[COMMUNICATION_ENTITY_TYPE.FRIEND]}/>
                 <ChatPane />
             </div>
         </div>
