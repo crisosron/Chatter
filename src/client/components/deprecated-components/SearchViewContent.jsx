@@ -7,7 +7,7 @@ import SearchBar from "./views-sub-components/SearchBar";
 import CommunicationEntityBar from "../CommunicationEntityBar";
 import CommunicationEntityActionBar from "./views-sub-components/CommunicationEntityActionBar";
 import socket from "../../../index";
-import USER_ACTION_EVENTS from "../../../events/user-action-events"
+import USER_ACTION_EVENTS from "../../../constants/events/user-action-events"
 import NotificationHandler from "../../notification-handler";
 export default function SearchViewContent(props){
     const [commEntities, setCommEntities] = useState([]);

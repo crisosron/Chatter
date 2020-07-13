@@ -1,4 +1,4 @@
-const SEARCH_EVENTS = require("../../events/search-events");
+const SEARCH_EVENTS = require("../../constants/events/search-events");
 const CommunicationEntity = require("./communication-entity");
 const {User} = require("../database-document-models/user-model");
 const {Group} = require("../database-document-models/group-model");

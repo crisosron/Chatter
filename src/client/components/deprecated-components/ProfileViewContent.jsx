@@ -6,7 +6,7 @@ import SearchBar from "../SearchBar";
 import UserInfoForm from "./UserInfoForm"
 import CommunicationEntityBar from "../CommunicationEntityBar"
 import socket from "../../../index";
-import PROFILE_EVENTS from "../../../events/profile-events";
+import PROFILE_EVENTS from "../../../constants/events/profile-events";
 export default function ProfileViewContent(props){
     // TODO: Set default comm entities for these arrays
     const [friendCommEntities, setFriendCommEntities] = useState([]);

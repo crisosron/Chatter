@@ -2,7 +2,7 @@
 
 import React, {useState, useEffect} from "react"
 import socket from "../../../index";
-import PROFILE_EVENTS from "../../../events/profile-events";
+import PROFILE_EVENTS from "../../../constants/events/profile-events";
 import NotificationHandler from "../../notification-handler";
 import "./views-sub-components-css-files/user-info-form-styles.css";
 export default function UserInfoForm(props){
