@@ -16,7 +16,7 @@ const COMM_ENTITY_ACTIONS = {
 }
 
 export default function CommunicationEntitiesBar(props){
-    const [commEntities, setCommEntities] = useState([]);
+    const [commEntities, setCommEntities] = useState(props.commEntities);
     const [selectedCommEntityIndex, setSelectedCommEntityIndex] = useState(-1);
     const [commEntityShowActionsIndex, setCommEntityShowActionsIndex] = useState(-1);
 
